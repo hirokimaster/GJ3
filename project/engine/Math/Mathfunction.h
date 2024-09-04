@@ -3,6 +3,7 @@
 #include "Vector3.h"
 #include "Vector4.h"
 #include <cassert>
+#include <limits>
 
 struct AABB {
 	Vector3 min; // 最小点
