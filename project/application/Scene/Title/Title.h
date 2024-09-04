@@ -43,20 +43,6 @@ public: // メンバ関数
 
 private:
 
-	/*uint32_t texHandle_ = 0;
-	uint32_t texHandleUV_ = 0;
-	uint32_t maskTex_ = 0;
-	std::unique_ptr<PostProcess> postProcess_ = nullptr;
-	std::unique_ptr<Sprite> sprite_ = nullptr;
-	std::unique_ptr<Object3DPlacer> object_ = nullptr;
-	Camera camera_{};
-	WorldTransform trans_{};
-	RandomParam param_{};
-	bool dFlag_1 = true;
-	bool dFlag_2 = false;
-	DissolveParam DissolvePram_{};*/
-	std::unique_ptr<Loader> loader_;
-	LevelData* levelData_ = nullptr;
-	uint32_t texHandle_ = 0;
-	Camera camera_;
+	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
+	uint32_t texHandleTitle_ = 0;
 };
