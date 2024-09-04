@@ -2,6 +2,7 @@
 #include "AbstractSceneFactory.h"
 #include "application/Scene/GameScene/GameScene.h"
 #include "application/Scene/Demo/Demo.h"
+#include "application/Scene/Title/Title.h"
 
 class SceneFactory : public AbstractSceneFactory {
 public:

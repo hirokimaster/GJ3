@@ -122,6 +122,9 @@
     <Filter Include="Engine\Model\SkyBox">
       <UniqueIdentifier>{51b046d8-1c8b-489e-bede-f4b667b9360e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Application\Scene\Title">
+      <UniqueIdentifier>{c206e404-c450-48fe-81d3-ad1f89ef9fa2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -252,6 +255,9 @@
     </ClCompile>
     <ClCompile Include="engine\Loader\Loader.cpp">
       <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="application\Scene\Title\Title.cpp">
+      <Filter>Application\Scene\Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -412,6 +418,9 @@
       <Filter>Engine\Model\SkyBox</Filter>
     </ClInclude>
     <ClInclude Include="engine\Loader\Loader.h" />
+    <ClInclude Include="application\Scene\Title\Title.h">
+      <Filter>Application\Scene\Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\Object3d.PS.hlsl">
