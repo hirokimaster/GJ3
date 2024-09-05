@@ -1,5 +1,6 @@
 #include "Input.h"
-
+#include <iostream>
+const float Input::DEADZONE_THRESHOLD = 0.5f;
 Input* Input::GetInstance() {
 
 	static Input instance;
@@ -77,6 +78,51 @@ bool Input::GetJoystickState(XINPUT_STATE& out)
 	}
 
 	return false;
+}
+
+float Input::JoyStickParmLX(float num)
+{
+	// スティックの入力値を取得
+	float lx = (float)state_.Gamepad.sThumbLX / SHRT_MAX;
+
+	// デッドゾーンの適用
+	if (fabs(lx) < DEADZONE_THRESHOLD) lx = 0.0f;
+
+
+	lx = lx * num;
+
+	return lx;
+}
+
+float Input::JoyStickParmLY(float num)
+{
+	float ly = (float)state_.Gamepad.sThumbLY / SHRT_MAX;
+
+	// デッドゾーンの適用
+	if (fabs(ly) < DEADZONE_THRESHOLD) ly = 0.0f;
+
+	ly = ly * num;
+
+	return ly;
+}
+
+float Input::JoyStickParmRX(float num)
+{
+	float rx = (float)state_.Gamepad.sThumbRX / SHRT_MAX;
+
+	if (fabs(rx) < DEADZONE_THRESHOLD) rx = 0.0f;
+	rx = rx * num;
+
+	return rx;
+}
+float Input::JoyStickParmRY(float num)
+{
+	float ry = (float)state_.Gamepad.sThumbRY / SHRT_MAX;
+
+	if (fabs(ry) < DEADZONE_THRESHOLD) ry = 0.0f;
+	ry = ry * num;
+
+	return ry;
 }
 
 bool Input::PressedButton(WORD button)

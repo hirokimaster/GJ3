@@ -8,6 +8,10 @@
 #include "engine/Object3DPlacer/Object3DPlacer.h"
 #include "application/GameManager/GameManager.h"
 
+#include "application/Player/Player.h"
+#include "application/GameCamera/GameCamera.h"
+#include "application/Ground/Ground.h"
+
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -41,4 +45,8 @@ public: // メンバ関数
 	void PostProcessDraw()override;
 
 private:
+	Camera camera_;
+	std::unique_ptr<Player> player_;
+	std::unique_ptr<GameCamera> gameCamera_;
+	std::unique_ptr<Ground> ground_;
 };

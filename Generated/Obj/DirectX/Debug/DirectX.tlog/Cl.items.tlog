@@ -30,6 +30,9 @@ C:\LE3B_First\GJ3\project\Engine\ParticleSystem\ParticleSystem.cpp;C:\LE3B_First
 C:\LE3B_First\GJ3\project\Engine\GraphicsPipeline\GraphicsPipeline.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\GraphicsPipeline.obj
 C:\LE3B_First\GJ3\project\Engine\Utility\ImGuiManager\ImGuiManager.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\ImGuiManager.obj
 C:\LE3B_First\GJ3\project\Engine\Input\Input.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Input.obj
+C:\LE3B_First\GJ3\project\application\GameCamera\GameCamera.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\GameCamera.obj
+C:\LE3B_First\GJ3\project\application\Ground\Ground.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Ground.obj
+C:\LE3B_First\GJ3\project\application\GlovalVariables\GlobalVariables.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\GlobalVariables.obj
 C:\LE3B_First\GJ3\project\main.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\main.obj
 C:\LE3B_First\GJ3\project\Engine\Math\Mathfunction.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Mathfunction.obj
 C:\LE3B_First\GJ3\project\Engine\CreateResource\CreateResource.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\CreateResource.obj
@@ -42,3 +45,4 @@ C:\LE3B_First\GJ3\project\Engine\Camera\Camera.cpp;C:\LE3B_First\GJ3\Generated\O
 C:\LE3B_First\GJ3\project\Engine\Base\WinApp\WinApp.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\WinApp.obj
 C:\LE3B_First\GJ3\project\Engine\Transform\WorldTransform.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\WorldTransform.obj
 C:\LE3B_First\GJ3\project\application\Scene\Title\Title.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Title.obj
+C:\LE3B_First\GJ3\project\application\Player\Player.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Player.obj
