@@ -259,6 +259,18 @@
     <ClCompile Include="application\Scene\Title\Title.cpp">
       <Filter>Application\Scene\Title</Filter>
     </ClCompile>
+    <ClCompile Include="application\Player\Player.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="application\GameCamera\GameCamera.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="application\Ground\Ground.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="application\GlovalVariables\GlobalVariables.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\CreateResource\CreateResource.h">
@@ -421,6 +433,10 @@
     <ClInclude Include="application\Scene\Title\Title.h">
       <Filter>Application\Scene\Title</Filter>
     </ClInclude>
+    <ClInclude Include="application\Player\Player.h" />
+    <ClInclude Include="application\GameCamera\GameCamera.h" />
+    <ClInclude Include="application\Ground\Ground.h" />
+    <ClInclude Include="application\GlovalVariables\GlobalVariables.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\Object3d.PS.hlsl">

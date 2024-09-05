@@ -23,7 +23,10 @@ public:
 	static bool GetJoystickState();
 
 	bool GetJoystickState(XINPUT_STATE& out);
-
+	float JoyStickParmLX(float num);
+	float JoyStickParmLY(float num);
+	float JoyStickParmRX(float num);
+	float JoyStickParmRY(float num);
 	bool PressedButton(WORD button);
 
 private:
@@ -39,6 +42,8 @@ private:
 	XINPUT_STATE state_{};
 	XINPUT_STATE preState_{};
 
+	// デッドゾーンの閾値を定義
+	const static float DEADZONE_THRESHOLD;
 private:
 
 	Input() = default;
