@@ -13,6 +13,7 @@ void GameScene::Initialize()
 {
 	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
+	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	camera_.Initialize();
 	player_ = std::make_unique<Player>();
 	player_->Init();
