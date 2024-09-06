@@ -51,6 +51,7 @@ void GameScene::Initialize()
 
 	timer = std::make_unique<Timer>();
 	timer->Reset();
+	timer->Stop();
 }
 
 void GameScene::Update()
@@ -67,8 +68,7 @@ void GameScene::Update()
 	}*/
 	//CheckAllCollision();
 
-	//タイマーの更新
-	timer->Start();
+	
 
 	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
 	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
@@ -95,6 +95,9 @@ void GameScene::Draw()
 	timerSprite1->Draw();
 	timerSprite10->Draw();
 	timerSprite100->Draw();
+
+	//タイマーの更新
+	timer->Start();
 }
 
 void GameScene::PostProcessDraw()
