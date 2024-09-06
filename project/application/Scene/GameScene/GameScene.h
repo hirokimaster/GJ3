@@ -49,6 +49,8 @@ public: // メンバ関数
 	/// </summary>
 	void PostProcessDraw()override;
 
+public:
+	void Collision();
 	
 private:
 	std::unique_ptr<CollisionManager> collisionManager_;
@@ -57,9 +59,9 @@ private:
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<GameCamera> gameCamera_;
 	std::unique_ptr<Ground> ground_;
-	std::unique_ptr<Obstacles> obstacles;
+	//std::unique_ptr<Obstacles> obstacles;
 	// 障害物
-	std::list<Obstacles*> obstacles_;
+	std::list<std::unique_ptr<Obstacles>> obstacles_;
 
 	//タイマー用
 	std::unique_ptr<Timer>timer;
