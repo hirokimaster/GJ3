@@ -18,7 +18,7 @@ void GameScene::Initialize()
 	camera_.Initialize();
 
 	player_ = std::make_unique<Player>();
-	player_->Init({100.0f,0.0f,0.0f});
+	player_->Init({0.0f,100.0f,0.0f});
 
 	
 	gameCamera_ = std::make_unique<GameCamera>();
@@ -30,11 +30,12 @@ void GameScene::Initialize()
 	skydoem_ = std::make_unique<Skydome>();
 	skydoem_->Init();
 
-	/*std::unique_ptr<Obstacles>*/ obstacles = std::make_unique<Obstacles>();
+	std::unique_ptr<Obstacles> obstacles = std::make_unique<Obstacles>();
 	obstacles->Init({ 0.0f,20.0f,0.0f });
-	/*obstacles_.push_back(obstacles.get());
-	for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-		(*itr)->Init();
+	obstacles->SetPlayer(player_.get());
+	obstacles_.push_back(std::move(obstacles));
+	/*for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Init({ 0.0f,20.0f,0.0f });
 	}*/
 	collisionManager_ = std::make_unique<CollisionManager>(); // コリジョンマネージャ
 
@@ -62,10 +63,10 @@ void GameScene::Update()
 	ground_->Update();
 	player_->Update();
 	gameCamera_->Update();
-	obstacles->Update();
-	/*for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+	//obstacles->Update();
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Update();
-	}*/
+	}
 	//CheckAllCollision();
 
 	
@@ -78,6 +79,7 @@ void GameScene::Update()
 	timerSprite1->SetTexHandle(numberTexture[index1]);
 	timerSprite10->SetTexHandle(numberTexture[index10]);
 	timerSprite100->SetTexHandle(numberTexture[index100]);
+	Collision();
 }
 
 void GameScene::Draw()
@@ -87,10 +89,10 @@ void GameScene::Draw()
 	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
-	obstacles->Draw(camera_);
-	/*for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+	//obstacles->Draw(camera_);
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
-	}*/
+	}
 
 	timerSprite1->Draw();
 	timerSprite10->Draw();
@@ -102,6 +104,24 @@ void GameScene::Draw()
 
 void GameScene::PostProcessDraw()
 {
+}
+
+void GameScene::Collision()
+{
+	collisionManager_->ColliderClear(); // colliderのリストをクリア
+
+	collisionManager_->ColliderPush(player_.get()); // playerをリストに追加
+
+	
+
+	for (auto obstacles = obstacles_.begin();
+		obstacles != obstacles_.end(); ++obstacles) {
+
+		collisionManager_->ColliderPush((*obstacles).get()); // enemyをリストに登録
+
+	}
+
+	collisionManager_->CheckAllCollision(); // 判定
 }
 
 

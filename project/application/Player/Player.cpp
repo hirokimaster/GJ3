@@ -27,13 +27,55 @@ void Player::Init(Vector3 translate)
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
+	fallVelo_ = 0.5f;
+
+	SetCollosionAttribute(0b01);
+	SetCollisionMask(0b10);
 }
 
 void Player::Update()
 {
+	if (behaviorRequest_) {
+		// 振る舞いを変更する
+		behavior_ = behaviorRequest_.value();
+		// 各振る舞いごとの初期化を実行
+		switch (behavior_) {
+		case Behavior::kRoot:
+		default:
+			BehaviorRootInit();
+			break;
+		case Behavior::kDeceleration:
+			BehaviorRootDecelerationInit();
+			break;
+		case Behavior::kElectricShock:
+			BehaviorRootElectricShockInit();
+			break;
+		}
+		// 振る舞いリクエストをリセット
+		behaviorRequest_ = std::nullopt;
+	}
+
+	switch (behavior_) {
+		// 通常行動
+	case Behavior::kRoot:
+
+	default:
+		Move();
+		BehaviorRootUpdate();
+		break;
+	case Behavior::kDeceleration:
+		Move();
+		BehaviorRootDecelerationUpdate();
+		break;
+	case Behavior::kElectricShock:
+		BehaviorRootElectricShockUpdate();
+		break;
+	}
+
+
 	//ApplyGlobalVariables();
 
-	Move();
+	
 	Fall();
 	object_->SetAnimationTime(aniTime_);
 	object_->SetWorldTransform(worldTransform_);
@@ -67,7 +109,7 @@ void Player::Move()
 void Player::Fall()
 {
 	
-	worldTransform_.translate.y -= 0.5f;
+	worldTransform_.translate.y -= fallVelo_;
 	if (worldTransform_.translate.y < 0) {
 		worldTransform_.translate.y = 0;
 	}
@@ -79,4 +121,45 @@ void Player::ApplyGlobalVariables()
 	GlobalVariables* gVes = GlobalVariables::GetInstance();
 	const char* groupName = "Player";
 	worldTransform_.translate = gVes->GetVector3Value(groupName, "main Translation");
+}
+
+Vector3 Player::GetWorldPosition()
+{
+	// ワールド座標を入れる変数
+	Vector3 worldPos;
+	// ワールド行列の平行移動成分を取得（ワールド座標）
+	worldPos.x = worldTransform_.matWorld.m[3][0];
+	worldPos.y = worldTransform_.matWorld.m[3][1];
+	worldPos.z = worldTransform_.matWorld.m[3][2];
+
+	return worldPos;
+}
+
+void Player::OnCollision()
+{
+}
+
+void Player::BehaviorRootInit()
+{
+}
+
+void Player::BehaviorRootUpdate()
+{
+}
+
+void Player::BehaviorRootDecelerationInit()
+{
+	fallVelo_ = 0.2f;
+}
+
+void Player::BehaviorRootDecelerationUpdate()
+{
+}
+
+void Player::BehaviorRootElectricShockInit()
+{
+}
+
+void Player::BehaviorRootElectricShockUpdate()
+{
 }
