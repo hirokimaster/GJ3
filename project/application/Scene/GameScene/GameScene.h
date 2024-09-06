@@ -15,6 +15,8 @@
 #include "application/Obstacles/Obstacles.h"
 #include "application/Skydome/Skydome.h"
 
+#include "application/Object/Timer/Timer.h"
+
 class GameScene : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -58,4 +60,11 @@ private:
 	std::unique_ptr<Obstacles> obstacles;
 	// 障害物
 	std::list<Obstacles*> obstacles_;
+
+	//タイマー用
+	std::unique_ptr<Timer>timer;
+	std::unique_ptr<Sprite>timerSprite1;
+	std::unique_ptr<Sprite>timerSprite10;
+	std::unique_ptr<Sprite>timerSprite100;
+	uint32_t numberTexture[10];
 };
