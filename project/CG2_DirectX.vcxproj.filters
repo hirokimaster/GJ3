@@ -274,6 +274,9 @@
     <ClCompile Include="application\Skydome\Skydome.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="application\Obstacles\Obstacles.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\CreateResource\CreateResource.h">
@@ -441,6 +444,7 @@
     <ClInclude Include="application\Ground\Ground.h" />
     <ClInclude Include="application\GlovalVariables\GlobalVariables.h" />
     <ClInclude Include="application\Skydome\Skydome.h" />
+    <ClInclude Include="application\Obstacles\Obstacles.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\Object3d.PS.hlsl">

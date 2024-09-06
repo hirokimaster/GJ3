@@ -23,6 +23,9 @@ struct LevelData {
 	std::vector<ObjectData>objects;
 };
 
+class Player;
+class Ground;
+class Obstacles;
 class Loader {
 public:
 	/// <summary>
@@ -30,6 +33,8 @@ public:
 	/// </summary>
 	/// <param name="fileName"></param>
 	LevelData* Load(const std::string& fileName);
+
+	void LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<Obstacles*>& obstacl);
 
 	/// <summary>
 	/// ロードしたデータを基に配置

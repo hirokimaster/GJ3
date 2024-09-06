@@ -2,7 +2,7 @@
 #include "engine/TextureManager/TextureManager.h"
 
 
-void Ground::Init()
+void Ground::Init(Vector3 translate)
 {
 	worldTransform_.Initialize();
 	worldTransform_.scale = {100.0f, 10.0f, 1.0f};

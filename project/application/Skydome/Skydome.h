@@ -9,7 +9,7 @@ class Skydome
 public:
 	void Init();
 	void Update();
-	void Draw(Camera* camera);
+	void Draw(Camera& camera);
 
 public: // Setter
 private:
