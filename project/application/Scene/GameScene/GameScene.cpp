@@ -51,7 +51,7 @@ void GameScene::Update()
 	/*for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Update();
 	}*/
-	CheckAllCollision();
+	//CheckAllCollision();
 }
 
 void GameScene::Draw()
