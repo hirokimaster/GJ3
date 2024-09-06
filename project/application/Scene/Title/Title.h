@@ -45,4 +45,5 @@ private:
 
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
 	uint32_t texHandleTitle_ = 0;
+	uint32_t selectNum_ = 0;
 };
