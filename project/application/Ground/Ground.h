@@ -7,7 +7,7 @@
 class Ground
 {
 public:
-	void Init();
+	void Init(Vector3 translate);
 	void Update();
 	void Draw(Camera& camera);
 public: // Setter

@@ -5,7 +5,7 @@
 #include "engine/Utility/ImGuiManager/ImGuiManager.h"
 #include "application/GlovalVariables/GlobalVariables.h"
 
-void Player::Init()
+void Player::Init(Vector3 translate)
 {
 	/*-----------------------あまりよくない感じ-------------------*/
 	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
@@ -16,8 +16,7 @@ void Player::Init()
 	//------------------------------------------------------------//
 
 	worldTransform_.Initialize();
-	worldTransform_.translate.y = 100;
-	worldTransform_.translate.z = 0;
+	worldTransform_.translate = translate;
 
 	skinTex_ = TextureManager::GetInstance()->Load("resources/uvChecker.png");
 

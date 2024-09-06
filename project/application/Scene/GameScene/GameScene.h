@@ -7,10 +7,13 @@
 #include "engine/Model/Animation/ModelAnimation.h"
 #include "engine/Object3DPlacer/Object3DPlacer.h"
 #include "application/GameManager/GameManager.h"
+#include "engine/Utility/CollisionManager/CollisionManager.h"
 
 #include "application/Player/Player.h"
 #include "application/GameCamera/GameCamera.h"
 #include "application/Ground/Ground.h"
+#include "application/Obstacles/Obstacles.h"
+#include "application/Skydome/Skydome.h"
 
 class GameScene : public IScene {
 public: // メンバ関数
@@ -44,9 +47,15 @@ public: // メンバ関数
 	/// </summary>
 	void PostProcessDraw()override;
 
+	
 private:
+	std::unique_ptr<CollisionManager> collisionManager_;
 	Camera camera_;
+	std::unique_ptr<Skydome> skydoem_;
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<GameCamera> gameCamera_;
 	std::unique_ptr<Ground> ground_;
+	std::unique_ptr<Obstacles> obstacles;
+	// 障害物
+	std::list<Obstacles*> obstacles_;
 };

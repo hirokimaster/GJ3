@@ -46,3 +46,5 @@ C:\LE3B_First\GJ3\project\Engine\Base\WinApp\WinApp.cpp;C:\LE3B_First\GJ3\Genera
 C:\LE3B_First\GJ3\project\Engine\Transform\WorldTransform.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\WorldTransform.obj
 C:\LE3B_First\GJ3\project\application\Scene\Title\Title.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Title.obj
 C:\LE3B_First\GJ3\project\application\Player\Player.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Player.obj
+C:\LE3B_First\GJ3\project\application\Skydome\Skydome.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Skydome.obj
+C:\LE3B_First\GJ3\project\application\Obstacles\Obstacles.cpp;C:\LE3B_First\GJ3\Generated\Obj\DirectX\Debug\Obstacles.obj
