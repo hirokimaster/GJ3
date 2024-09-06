@@ -9,6 +9,18 @@
 #include "application/GameManager/GameManager.h"
 #include "engine/Loader/Loader.h"
 
+enum class Level {
+	EASY,
+	NORMAL,
+	HARD
+};
+
+enum class Select {
+	START,
+	OPTION,
+	END
+};
+
 class Title : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -43,7 +55,26 @@ public: // メンバ関数
 
 private:
 
+	void OptionMode();
+
+	void SelectMode();
+
+	void TextureResources();
+
+private:
+
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
 	uint32_t texHandleTitle_ = 0;
+	uint32_t texHandleStart_ = 0;
+	uint32_t texHandleOp_ = 0;
+	uint32_t texHandleEnd_ = 0;
+	uint32_t texHandleLevel_ = 0;
+	uint32_t texHandleEasy_ = 0;
+	uint32_t texHandleNormal_ = 0;
+	uint32_t texHandleHard_ = 0;
 	uint32_t selectNum_ = 0;
+	Level level_ = Level::EASY;
+	Select select_ = Select::START;
+	bool optionMode_ = false;
+	float optionTimer_ = 5.0f;
 };
