@@ -3,7 +3,7 @@
 #include "engine/Transform/WorldTransform.h"
 #include "engine/Object3DPlacer/Object3DPlacer.h"
 #include "engine/Camera/Camera.h"
-#include "engine/Utility/CollisionManager/CollisionManager.h"
+#include "engine/Utility/CollisionManager/Collider/Collider.h"
 
 class Player;
 class Obstacles : public Collider

@@ -27,7 +27,7 @@ void Player::Init(Vector3 translate)
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 
-	fallVelo_ = 0.5f;
+	fallVelo_ = 0.0f;
 
 	SetCollosionAttribute(0b01);
 	SetCollisionMask(0b10);
@@ -104,6 +104,13 @@ void Player::Move()
 			worldTransform_.rotate.y = -1.57f;
 		}
 	}
+
+	if (worldTransform_.translate.x >= 10.0f) {
+		worldTransform_.translate.x = 10.0f;
+	}
+	else if (worldTransform_.translate.x <= -10.0f) {
+		worldTransform_.translate.x = -10.0f;
+	} 
 }
 
 void Player::Fall()
@@ -141,19 +148,30 @@ void Player::OnCollision()
 
 void Player::BehaviorRootInit()
 {
+	fallVelo_ = 0.00f;
 }
 
 void Player::BehaviorRootUpdate()
 {
+
+	fallVelo_ += gravity_;
+	if (fallVelo_ >= 0.3f) {
+		fallVelo_ = 0.3f;
+	}
 }
 
 void Player::BehaviorRootDecelerationInit()
 {
-	fallVelo_ = 0.2f;
+	fallVelo_ = 0.05f;
+	decelerationTimer_ = 0.0f;
 }
 
 void Player::BehaviorRootDecelerationUpdate()
 {
+	decelerationTimer_++;
+	if (decelerationTimer_ >=100.0f) {
+		behaviorRequest_ = Behavior::kRoot;
+	}
 }
 
 void Player::BehaviorRootElectricShockInit()

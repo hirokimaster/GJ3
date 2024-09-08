@@ -103,7 +103,7 @@ LevelData* Loader::Load(const std::string& fileName)
 	return levelData;
 }
 
-void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<Obstacles*>& obstacles)
+void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<std::unique_ptr<Obstacles>>& obstacles)
 {
 
 	// 連結してフルパスを得る
@@ -226,10 +226,11 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 			ground->Init(objectData.translate);
 		}
 		else if (objectData.fileName.compare("obstacles") == 0) {
-			ModelManager::GetInstance()->LoadAnimationModel(objectData.fileName + ".obj");
-			Obstacles* obstacl = new Obstacles();
+			//ModelManager::GetInstance()->LoadObjModel(objectData.fileName + ".obj");
+			std::unique_ptr<Obstacles> obstacl = std::make_unique<Obstacles>();
 			obstacl->Init(objectData.translate);
-			obstacles.push_back(obstacl);
+			obstacl->SetPlayer(player);
+			obstacles.push_back(std::move(obstacl));
 		}
 	}
 }
