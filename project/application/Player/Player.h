@@ -24,6 +24,9 @@ public:
 	void Move();
 	void Fall();
 
+public:	// getter
+	const WorldTransform& GetWorldTransform() { return worldTransform_; }
+
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 
