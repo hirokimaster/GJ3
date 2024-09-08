@@ -280,6 +280,12 @@
     <ClCompile Include="application\Object\Timer\Timer.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="application\Gimmick\Thunder\Thunder.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="application\Gimmick\Gimmick.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\CreateResource\CreateResource.h">
@@ -449,6 +455,8 @@
     <ClInclude Include="application\Skydome\Skydome.h" />
     <ClInclude Include="application\Obstacles\Obstacles.h" />
     <ClInclude Include="application\Object\Timer\Timer.h" />
+    <ClInclude Include="application\Gimmick\Thunder\Thunder.h" />
+    <ClInclude Include="application\Gimmick\Gimmick.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="resources\ShaderFile\Object3d.PS.hlsl">
