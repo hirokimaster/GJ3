@@ -9,6 +9,18 @@
 #include "application/GameManager/GameManager.h"
 #include "engine/Loader/Loader.h"
 
+enum class Level {
+	EASY,
+	NORMAL,
+	HARD
+};
+
+enum class Select {
+	START,
+	OPTION,
+	END
+};
+
 class Title : public IScene {
 public: // メンバ関数
 	/// <summary>
@@ -43,20 +55,26 @@ public: // メンバ関数
 
 private:
 
-	/*uint32_t texHandle_ = 0;
-	uint32_t texHandleUV_ = 0;
-	uint32_t maskTex_ = 0;
-	std::unique_ptr<PostProcess> postProcess_ = nullptr;
-	std::unique_ptr<Sprite> sprite_ = nullptr;
-	std::unique_ptr<Object3DPlacer> object_ = nullptr;
-	Camera camera_{};
-	WorldTransform trans_{};
-	RandomParam param_{};
-	bool dFlag_1 = true;
-	bool dFlag_2 = false;
-	DissolveParam DissolvePram_{};*/
-	std::unique_ptr<Loader> loader_;
-	LevelData* levelData_ = nullptr;
-	uint32_t texHandle_ = 0;
-	Camera camera_;
+	void OptionMode();
+
+	void SelectMode();
+
+	void TextureResources();
+
+private:
+
+	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
+	uint32_t texHandleTitle_ = 0;
+	uint32_t texHandleStart_ = 0;
+	uint32_t texHandleOp_ = 0;
+	uint32_t texHandleEnd_ = 0;
+	uint32_t texHandleLevel_ = 0;
+	uint32_t texHandleEasy_ = 0;
+	uint32_t texHandleNormal_ = 0;
+	uint32_t texHandleHard_ = 0;
+	uint32_t selectNum_ = 0;
+	Level level_ = Level::EASY;
+	Select select_ = Select::START;
+	bool optionMode_ = false;
+	float optionTimer_ = 5.0f;
 };
