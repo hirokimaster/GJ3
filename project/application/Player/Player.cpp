@@ -81,7 +81,7 @@ void Player::Update()
 	object_->SetWorldTransform(worldTransform_);
 	worldTransform_.UpdateMatrix();
 	// カメラのYをプレイヤーに追従
-	camera_->translate.y = worldTransform_.translate.y ;
+	camera_->translate.y = worldTransform_.translate.y;
 }
 
 void Player::Draw(Camera& camera)

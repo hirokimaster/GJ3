@@ -16,6 +16,7 @@
 #include "application/Skydome/Skydome.h"
 
 #include "application/Object/Timer/Timer.h"
+#include "application/Gimmick/Gimmick.h"
 
 class GameScene : public IScene {
 public: // メンバ関数
@@ -69,4 +70,7 @@ private:
 	std::unique_ptr<Sprite>timerSprite10;
 	std::unique_ptr<Sprite>timerSprite100;
 	uint32_t numberTexture[10];
+
+	// ギミック
+	std::unique_ptr<Gimmick> gimmick_;
 };

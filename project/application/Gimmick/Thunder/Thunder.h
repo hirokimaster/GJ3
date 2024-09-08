@@ -1,5 +1,8 @@
 #pragma once
 #include "engine/Object3DPlacer/Object3DPlacer.h"
+#include "engine/TextureManager/TextureManager.h"
+#include "engine/Input/Input.h"
+#include "application/Player/Player.h"
 
 class Thunder {
 public:
@@ -18,9 +21,44 @@ public:
 	/// </summary>
 	void Draw(Camera& camera);
 
+#pragma region getter
+
+	const WorldTransform& GetWorldTransform() { return worldTransform_; }
+
+	const WorldTransform* GetTarget() { return target_; }
+
+	bool GetIsFall() { return isFall_; }
+
+#pragma endregion
+
+#pragma region setter
+
+	void SetTarget(const WorldTransform* target) { target_ = target; }
+
+#pragma endregion
+
 private:
+	/// <summary>
+	/// 動き
+	/// </summary>
+	void Move();
+
+	/// <summary>
+	/// 落ちる
+	/// </summary>
+	void Fall();
+
+private:
+	// 雷
 	std::unique_ptr<Object3DPlacer> object_;
 	WorldTransform worldTransform_{};
-
-
+	uint32_t texHandle_ = 0;
+	bool isFall_ = false;
+	// 予測線
+	std::unique_ptr<Object3DPlacer> preline_;
+	WorldTransform worldTransformPreline_{};
+	uint32_t texHandlePreline_ = 0;
+	uint32_t blinkingTimer_ = 60;
+	bool isBlinking_ = false;
+	const WorldTransform* target_ = nullptr;
 };

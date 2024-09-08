@@ -50,6 +50,11 @@ void GameScene::Initialize()
 	timer = std::make_unique<Timer>();
 	timer->Reset();
 	timer->Stop();
+
+	// ギミック
+	gimmick_ = std::make_unique<Gimmick>();
+	gimmick_->SetPlayer(player_.get());
+	gimmick_->Initialize();
 }
 
 void GameScene::Update()
@@ -66,7 +71,8 @@ void GameScene::Update()
 	}
 	//CheckAllCollision();
 
-	
+	// ギミック
+	gimmick_->Update();
 
 	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
 	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
@@ -90,6 +96,9 @@ void GameScene::Draw()
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
 	}
+
+	// ギミック
+	gimmick_->Draw(camera_);
 
 	timerSprite1->Draw();
 	timerSprite10->Draw();
