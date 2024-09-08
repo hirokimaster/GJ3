@@ -16,6 +16,9 @@ void GameScene::Initialize()
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
+
+	
+
 	camera_.Initialize();
 
 	player_ = std::make_unique<Player>();
@@ -55,12 +58,21 @@ void GameScene::Initialize()
 	gimmick_ = std::make_unique<Gimmick>();
 	gimmick_->SetPlayer(player_.get());
 	gimmick_->Initialize();
+
+	/*-----------------------あまりよくない感じ-------------------*/
+	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+	const char* groupName = "Time";
+	// グループを追加
+	GlobalVariables::GetInstance()->CreateGroup(groupName);
+	globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
+	//------------------------------------------------------------//
+
 }
 
 void GameScene::Update()
 {
 	camera_ = gameCamera_->GetCamera();
-	//GlobalVariables::GetInstance()->Update();
+	GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
 	player_->Update();

@@ -148,7 +148,7 @@ void Player::OnCollision()
 
 void Player::BehaviorRootInit()
 {
-	fallVelo_ = 0.00f;
+	//fallVelo_ ;
 }
 
 void Player::BehaviorRootUpdate()

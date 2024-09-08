@@ -23,6 +23,7 @@ public:
 
 	void Move();
 	void Fall();
+
 public:	// getter
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
 

@@ -162,6 +162,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\Skydome\Skydome.cpp" />
     <ClCompile Include="application\Obstacles\Obstacles.cpp" />
     <ClCompile Include="application\Object\Timer\Timer.cpp" />
+    <ClCompile Include="application\Scene\Result\ResultScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\GameManager\GameManager.h" />
@@ -227,6 +228,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="application\Skydome\Skydome.h" />
     <ClInclude Include="application\Obstacles\Obstacles.h" />
     <ClInclude Include="application\Object\Timer\Timer.h" />
+    <ClInclude Include="application\Scene\Result\ResultScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli">
