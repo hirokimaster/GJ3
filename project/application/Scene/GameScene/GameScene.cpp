@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "engine/ModelManager/ModelManager.h"
 #include "application/GlovalVariables/GlobalVariables.h"
+#include "engine/Loader/Loader.h"
 GameScene::GameScene()
 {
 }
@@ -24,19 +25,15 @@ void GameScene::Initialize()
 	gameCamera_ = std::make_unique<GameCamera>();
 	gameCamera_->Init();
 	player_->SetCamera(&gameCamera_->GetCamera());
+
 	ground_ = std::make_unique<Ground>();
 	ground_->Init({ 0.0f,0.0f,0.0f });
 	
 	skydoem_ = std::make_unique<Skydome>();
 	skydoem_->Init();
-
-	std::unique_ptr<Obstacles> obstacles = std::make_unique<Obstacles>();
-	obstacles->Init({ 0.0f,20.0f,0.0f });
-	obstacles->SetPlayer(player_.get());
-	obstacles_.push_back(std::move(obstacles));
-	/*for (std::list<Obstacles*>::iterator itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-		(*itr)->Init({ 0.0f,20.0f,0.0f });
-	}*/
+	
+	Loader::LoadJsonFile("resources/stage","easy",player_.get(),ground_.get(),obstacles_);
+	
 	collisionManager_ = std::make_unique<CollisionManager>(); // コリジョンマネージャ
 
 	//テクスチャの初期化

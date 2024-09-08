@@ -34,7 +34,7 @@ public:
 	/// <param name="fileName"></param>
 	LevelData* Load(const std::string& fileName);
 
-	void LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<Obstacles*>& obstacl);
+	static void LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<std::unique_ptr<Obstacles>>& obstacl);
 
 	/// <summary>
 	/// ロードしたデータを基に配置

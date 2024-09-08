@@ -4,7 +4,7 @@
 #include "engine/Object3DPlacer/Object3DPlacer.h"
 #include "engine/Transform/WorldTransform.h"
 #include "engine/Camera/Camera.h"
-#include "engine/Utility/CollisionManager/CollisionManager.h"
+#include "engine/Utility/CollisionManager/Collider/Collider.h"
 
 // ふるまい
 enum class Behavior {
@@ -64,6 +64,10 @@ private:
 	float aniTime_ = 0;
 	float duration_ = 0; // アニメ―ション全体の尺（単位は秒）
 
-	float fallVelo_ = 0.5f;
+	float fallVelo_ = 0.0f;
+	float gravity_ = 0.00098f;
+
+	// Decelerationtimer
+	float decelerationTimer_= 0.0f;
 };
 

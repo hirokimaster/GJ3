@@ -5,7 +5,7 @@
 void Obstacles::Init(Vector3 translate)
 {
 	worldTransform_.Initialize();
-	worldTransform_.scale = { 5.0f, 3.0f, 1.0f };
+	worldTransform_.scale = { 1.0f, 0.5f, 1.0f };
 	worldTransform_.translate = translate;
 
 	skinTex_ = TextureManager::GetInstance()->Load("resources/ground/ground.png");
@@ -18,6 +18,7 @@ void Obstacles::Init(Vector3 translate)
 
 	SetCollosionAttribute(0b10);
 	SetCollisionMask(0b01);
+	SetRadious(0.5f);
 }
 
 void Obstacles::Update()
