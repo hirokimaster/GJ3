@@ -23,6 +23,7 @@ public:
 
 	void Move();
 	void Fall();
+
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 

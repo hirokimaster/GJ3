@@ -16,6 +16,9 @@ void GameScene::Initialize()
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
+
+	
+
 	camera_.Initialize();
 
 	player_ = std::make_unique<Player>();
@@ -50,12 +53,20 @@ void GameScene::Initialize()
 	timer = std::make_unique<Timer>();
 	timer->Reset();
 	timer->Stop();
+
+	/*-----------------------あまりよくない感じ-------------------*/
+	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+	const char* groupName = "Time";
+	// グループを追加
+	GlobalVariables::GetInstance()->CreateGroup(groupName);
+	globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
+	//------------------------------------------------------------//
 }
 
 void GameScene::Update()
 {
 	camera_ = gameCamera_->GetCamera();
-	//GlobalVariables::GetInstance()->Update();
+	GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
 	player_->Update();
@@ -66,7 +77,6 @@ void GameScene::Update()
 	}
 	//CheckAllCollision();
 
-	
 
 	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
 	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
