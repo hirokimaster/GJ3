@@ -27,6 +27,8 @@ public:
 public:	// getter
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
 
+	Behavior GetBehavior() { return behavior_; }
+
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 
@@ -37,6 +39,7 @@ public: // Debug
 public: // Collider
 	Vector3 GetWorldPosition() override;
 	void OnCollision() override;
+	const Vector3& GetScale()override { return worldTransform_.scale; }
 
 public: // Behavior関数
 	/*---Behavior用関数---*/
@@ -73,5 +76,9 @@ private:
 
 	// Decelerationtimer
 	float decelerationTimer_= 0.0f;
+
+	// ElectricShockTimer
+	float electricShockTimer_ = 0.0f;
+	bool inoperable_ = false;
 };
 

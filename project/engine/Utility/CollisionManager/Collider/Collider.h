@@ -12,6 +12,7 @@ public:
 
 	virtual Vector3 GetWorldPosition() = 0;
 	virtual void OnCollision() = 0;
+	virtual const Vector3& GetScale() = 0;
 
 	uint32_t GetCollosionAttribute() const { return collisionAttribute_; }
 	void SetCollosionAttribute(uint32_t collisionAttribute) { collisionAttribute_ = collisionAttribute; }

@@ -19,6 +19,8 @@ public: // Setter
 public: // Collider
 	Vector3 GetWorldPosition() override;
 	void OnCollision() override;
+	const Vector3& GetScale()override { return worldTransform_.scale; }
+
 private:
 	Camera camera_;
 	WorldTransform worldTransform_;

@@ -3,8 +3,9 @@
 #include "engine/TextureManager/TextureManager.h"
 #include "engine/Input/Input.h"
 #include "application/Player/Player.h"
+#include "engine/Utility/CollisionManager/Collider/Collider.h"
 
-class Thunder {
+class Thunder : public Collider {
 public:
 	/// <summary>
 	/// 初期化
@@ -29,11 +30,19 @@ public:
 
 	bool GetIsFall() { return isFall_; }
 
+	const Vector3& GetScale()override { return worldTransform_.scale; }
+
+	Vector3 GetWorldPosition()override;
+
+	bool GetIsHit() { return isHit_; }
+
 #pragma endregion
 
 #pragma region setter
 
 	void SetTarget(const WorldTransform* target) { target_ = target; }
+
+	void SetIsHit(bool isHit) { isHit_ = isHit; }
 
 #pragma endregion
 
@@ -48,12 +57,18 @@ private:
 	/// </summary>
 	void Fall();
 
+	/// <summary>
+	/// 衝突判定のとこ
+	/// </summary>
+	void OnCollision()override;
+
 private:
 	// 雷
 	std::unique_ptr<Object3DPlacer> object_;
 	WorldTransform worldTransform_{};
 	uint32_t texHandle_ = 0;
 	bool isFall_ = false;
+	bool isHit_ = false;
 	// 予測線
 	std::unique_ptr<Object3DPlacer> preline_;
 	WorldTransform worldTransformPreline_{};

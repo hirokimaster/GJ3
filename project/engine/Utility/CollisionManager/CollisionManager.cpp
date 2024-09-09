@@ -29,13 +29,22 @@ void CollisionManager::CheckCollisionPair(Collider* cA, Collider* cB) {
 	Vector3 cApos = cA->GetWorldPosition();
 	Vector3 cBpos = cB->GetWorldPosition();
 
-	float cARadious = cA->GetRadious();
-	float cBRadious = cB->GetRadious();
+	Vector3 cAScale = cA->GetScale();
+	Vector3 cBScale = cB->GetScale();
 
-	if (CheckBallCollision(cApos, cARadious, cBpos, cBRadious)) {
+	AABB cAaabb{};
+	cAaabb.min = cApos - cAScale;
+	cAaabb.max = cApos + cAScale;
+
+	AABB cBaabb{};
+	cBaabb.min = cBpos - cBScale;
+	cBaabb.max = cBpos + cBScale;
+
+	if (CheckAABBColision(cAaabb, cBaabb)) {
 		cA->OnCollision();
 		cB->OnCollision();
 	}
+
 }
 
 bool CollisionManager::CheckBallCollision(Vector3 v1, float v1Radious, Vector3 v2, float v2Radious)
@@ -57,4 +66,15 @@ bool CollisionManager::CheckBallCollision(Vector3 v1, float v1Radious, Vector3 v
 	}
 
 
+}
+
+bool CollisionManager::CheckAABBColision(const AABB& a, const AABB& b)
+{
+	if ((a.min.x <= b.max.x && a.max.x >= b.min.x) && (a.min.y <= b.max.y && a.max.y >= b.min.y) &&
+		(a.min.z <= b.max.z && a.max.z >= b.min.z)) {
+
+		return true;
+	}
+
+	return false;
 }

@@ -141,7 +141,7 @@ void GameScene::Collision()
 
 	collisionManager_->ColliderPush(player_.get()); // playerをリストに追加
 
-	
+	gimmick_->ColliderPush(collisionManager_.get());
 
 	for (auto obstacles = obstacles_.begin();
 		obstacles != obstacles_.end(); ++obstacles) {
