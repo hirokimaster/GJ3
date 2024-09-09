@@ -37,6 +37,7 @@ public: // Debug
 public: // Collider
 	Vector3 GetWorldPosition() override;
 	void OnCollision() override;
+	const Vector3& GetScale()override { return worldTransform_.scale; }
 
 public: // Behavior関数
 	/*---Behavior用関数---*/
