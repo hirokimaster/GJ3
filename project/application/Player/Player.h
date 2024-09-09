@@ -27,6 +27,8 @@ public:
 public:	// getter
 	const WorldTransform& GetWorldTransform() { return worldTransform_; }
 
+	Behavior GetBehavior() { return behavior_; }
+
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 
@@ -74,5 +76,9 @@ private:
 
 	// Decelerationtimer
 	float decelerationTimer_= 0.0f;
+
+	// ElectricShockTimer
+	float electricShockTimer_ = 0.0f;
+	bool inoperable_ = false;
 };
 

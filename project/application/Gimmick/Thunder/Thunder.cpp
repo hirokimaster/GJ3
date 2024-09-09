@@ -4,7 +4,7 @@ void Thunder::Initialize()
 {
 	// 雷
 	worldTransform_.Initialize();
-	worldTransform_.translate.y = 100.0f;
+	worldTransform_.translate.y = 140.0f;
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
 	object_->SetModel("cube.obj");
@@ -27,6 +27,11 @@ void Thunder::Initialize()
 
 void Thunder::Update()
 {
+	// 当たったら赤くしとく
+	if (isHit_) {
+		object_->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+	}
+
 	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		isBlinking_ = true;
 	}
@@ -99,6 +104,6 @@ void Thunder::Fall()
 
 void Thunder::OnCollision()
 {
-	object_->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+	isHit_ = true;
 }
 

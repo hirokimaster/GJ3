@@ -14,6 +14,8 @@ void Gimmick::Update()
 		thunder_->SetTarget(&player_->GetWorldTransform());
 		return;
 	}
+
+	Collision();
 }
 
 void Gimmick::Draw(Camera& camera)
@@ -24,4 +26,17 @@ void Gimmick::Draw(Camera& camera)
 void Gimmick::ColliderPush(CollisionManager* collisionManager)
 {
 	collisionManager->ColliderPush(thunder_.get());
+}
+
+void Gimmick::Collision()
+{
+	if (thunder_->GetIsHit()) {
+		player_->SetBehavior(Behavior::kElectricShock);
+	}
+
+	if (player_->GetBehavior() == Behavior::kRoot ||
+		player_->GetBehavior() == Behavior::kDeceleration) {
+
+		thunder_->SetIsHit(false);
+	}
 }

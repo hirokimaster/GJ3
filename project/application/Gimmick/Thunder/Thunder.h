@@ -34,11 +34,15 @@ public:
 
 	Vector3 GetWorldPosition()override;
 
+	bool GetIsHit() { return isHit_; }
+
 #pragma endregion
 
 #pragma region setter
 
 	void SetTarget(const WorldTransform* target) { target_ = target; }
+
+	void SetIsHit(bool isHit) { isHit_ = isHit; }
 
 #pragma endregion
 
@@ -64,6 +68,7 @@ private:
 	WorldTransform worldTransform_{};
 	uint32_t texHandle_ = 0;
 	bool isFall_ = false;
+	bool isHit_ = false;
 	// 予測線
 	std::unique_ptr<Object3DPlacer> preline_;
 	WorldTransform worldTransformPreline_{};

@@ -93,16 +93,19 @@ void Player::Move()
 {
 	if (Input::GetInstance()->GetJoystickState()) {
 		
-		worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
-		if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
-			worldTransform_.rotate.y = 3.14f;
+		if (!inoperable_) {
+			worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
+			if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
+				worldTransform_.rotate.y = 3.14f;
+			}
+			else if (Input::GetInstance()->JoyStickParmLX(0.5f) > 0) {
+				worldTransform_.rotate.y = 1.57f;
+			}
+			else if (Input::GetInstance()->JoyStickParmLX(0.5f) < 0) {
+				worldTransform_.rotate.y = -1.57f;
+			}
 		}
-		else if (Input::GetInstance()->JoyStickParmLX(0.5f) > 0){
-			worldTransform_.rotate.y = 1.57f;
-		}
-		else if (Input::GetInstance()->JoyStickParmLX(0.5f) < 0) {
-			worldTransform_.rotate.y = -1.57f;
-		}
+		
 	}
 
 	if (worldTransform_.translate.x >= 10.0f) {
@@ -149,6 +152,7 @@ void Player::OnCollision()
 void Player::BehaviorRootInit()
 {
 	//fallVelo_ ;
+	inoperable_ = false;
 }
 
 void Player::BehaviorRootUpdate()
@@ -164,6 +168,7 @@ void Player::BehaviorRootDecelerationInit()
 {
 	fallVelo_ = 0.05f;
 	decelerationTimer_ = 0.0f;
+	inoperable_ = false;
 }
 
 void Player::BehaviorRootDecelerationUpdate()
@@ -176,8 +181,17 @@ void Player::BehaviorRootDecelerationUpdate()
 
 void Player::BehaviorRootElectricShockInit()
 {
+	electricShockTimer_ = 0.0f;
+	fallVelo_ = 0.8f; // 仮の速さ
+	inoperable_ = true;
 }
 
 void Player::BehaviorRootElectricShockUpdate()
 {
+	++electricShockTimer_;
+	// とりあえず2秒
+	if (electricShockTimer_ >= 120.0f) {
+		behaviorRequest_ = Behavior::kRoot;
+		inoperable_ = false;
+	}
 }

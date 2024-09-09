@@ -25,11 +25,23 @@ public:
 	/// </summary>
 	void ColliderPush(CollisionManager* collisionManager);
 
+#pragma region getter
+
+
+#pragma endregion
+
 #pragma region setter
 
 	void SetPlayer(Player* player) { player_ = player; }
 
 #pragma endregion
+
+private:
+
+	/// <summary>
+	/// ギミックに当たったら
+	/// </summary>
+	void Collision();
 
 private:
 	std::unique_ptr<Thunder> thunder_;
