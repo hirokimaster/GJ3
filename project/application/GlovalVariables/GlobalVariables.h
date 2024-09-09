@@ -67,6 +67,17 @@ public:
 	int32_t GetIntValue(const std::string& groupName, const std::string& key)const;
 	float GetFloatValue(const std::string& groupName, const std::string& key)const;
 	Vector3 GetVector3Value(const std::string& groupName, const std::string& key)const;
+
+public: // Timer記録関数
+	void AddTime(uint32_t time);
+	/// <summary>
+	/// ファイルに書き出し
+	/// </summary>
+	/// <param name="groupName"></param>
+	void SaveFileTimer();
+
+	void LoadFileTimeScore();
+
 private:
 	GlobalVariables() = default;
 	~GlobalVariables() = default;
@@ -74,6 +85,9 @@ private:
 
 	// 全データ
 	std::map<std::string, Group> datas_;
+
+	// 全データ
+	std::vector< uint32_t> times_;
 	// グローバル変数の保存先ファイルパス
 	const std::string kDirectoryPath = "resources/GlobalVariables/";
 };

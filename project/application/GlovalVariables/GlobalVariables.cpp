@@ -4,6 +4,7 @@
 #include "engine/Utility/ImGuiManager/ImGuiManager.h"
 #include <fstream>
 #include <WinUser.h>
+#include <iostream>
 
 GlobalVariables* GlobalVariables::GetInstance()
 {
@@ -349,5 +350,131 @@ Vector3 GlobalVariables::GetVector3Value(const std::string& groupName, const std
 	}
 	else {
 		throw std::runtime_error("Item is not of type Vector3");
+	}
+}
+
+void GlobalVariables::SaveFileTimer()
+{
+	json j;
+	j["scores"] = times_;
+
+	std::string filePath = kDirectoryPath + "time.json";
+	// JSONファイルに書き出し（上書き）
+	std::ofstream file(filePath);
+	if (file.is_open()) {
+		file << j.dump(4);  // 4はインデントのスペース数
+		file.close();
+		std::cout << "JSONファイルにスコアを書き込みました。" << std::endl;
+	}
+	else {
+		std::cerr << "ファイルを開けませんでした。" << std::endl;
+	}
+	//// グループを検索
+	//std::map<std::string, uint32_t>::iterator itTime = times_.find(groupName);
+
+	//// 未登録チェック
+	//assert(itTime != times_.end());
+
+	//json root;
+	//root = json::object();
+
+	//// jsonオブジェクト登録
+	//root[groupName] = json::object();
+
+	//// 各項目について
+	//for (std::map<std::string, uint32_t>::iterator itItem = times_.begin();
+	//	itItem != times_.end(); ++itItem) {
+
+	//	// 項目名を取得
+	//	const std::string& itemName = "time";
+	//	// 項目の参照を取得
+	//	uint32_t& item = itItem->second;
+	//	// int32_t型の値を保持していれば
+	//	
+	//	// int32_t型の値を登録
+	//	root[groupName][itemName] = item;
+	//	
+	//
+	//}
+	//// ディレクトリがなければ作成する
+	//std::filesystem::path dir(kDirectoryPath);
+	//if (!std::filesystem::exists(groupName)) {
+	//	std::filesystem::create_directories(groupName);
+	//}
+	//// 書き込むJSONファイルのフルパスを合成する
+	//std::string filePath = kDirectoryPath + groupName + ".json";
+	//// 書き込み用ファイルストリーム
+	//std::ofstream ofs;
+	//// ファイルを書き込むように開く
+	//ofs.open(filePath);
+	//// ファイルオープン失敗？
+	//if (ofs.fail()) {
+	//	std::string message = "Failed open data file for write.";
+	//	MessageBoxA(nullptr, message.c_str(), "GlobalVariables", 0);
+	//	assert(0);
+	//	return;
+	//}
+	//// ファイルにjson文字列を書き込む（インデント幅4）
+	//ofs << std::setw(4) << root << std::endl;
+	//// ファイルを閉じる
+	//ofs.close();
+
+}
+
+void GlobalVariables::LoadFileTimeScore()
+{
+	// JSONオブジェクトに新しいスコアを追加
+	//j["scores"] = times_;
+	std::string filePath = kDirectoryPath + "time.json";
+	// JSONファイルを開く
+	std::ifstream file(filePath);
+	if (!file.is_open()) {
+		std::cerr << "ファイルを開けませんでした。" << std::endl;
+		return;
+	}
+
+	// JSONオブジェクトにパース
+	json j;
+	file >> j;
+	file.close();
+
+	// JSONからスコアを読み込む
+	try {
+		if (j.contains("scores") && j["scores"].is_array()) {
+			times_ = j["scores"].get<std::vector<uint32_t>>();
+		}
+		else {
+			std::cerr << "JSONに 'scores' キーが含まれていないか、配列ではありません。" << std::endl;
+			return;
+		}
+	}
+	catch (const json::exception& e) {
+		std::cerr << "JSONのパースエラー: " << e.what() << std::endl;
+		return ;
+	}
+
+	// スコアを表示
+	std::cout << "読み込んだスコア:" << std::endl;
+	for (int score : times_) {
+		std::cout << score << std::endl;
+	}
+}
+
+void GlobalVariables::AddTime(uint32_t time)
+{
+	times_.push_back(time);
+	json j;
+	// JSONオブジェクトに新しいスコアを追加
+	j["scores"] = times_;
+	std::string filePath = kDirectoryPath + "time.json";
+	// JSONファイルに書き出し（上書き）
+	std::ofstream file(filePath);
+	if (file.is_open()) {
+		file << j.dump(4);  // 4はインデントのスペース数
+		file.close();
+		std::cout << "JSONファイルに新しいスコアを書き込みました。" << std::endl;
+	}
+	else {
+		std::cerr << "ファイルを開けませんでした。" << std::endl;
 	}
 }
