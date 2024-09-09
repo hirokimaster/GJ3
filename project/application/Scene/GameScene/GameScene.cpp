@@ -59,12 +59,15 @@ void GameScene::Initialize()
 	gimmick_->SetPlayer(player_.get());
 	gimmick_->Initialize();
 
+	//GlobalVariables::GetInstance()->LoadFiles();
+	GlobalVariables::GetInstance()->LoadFileTimeScore();
 	/*-----------------------あまりよくない感じ-------------------*/
 	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 	const char* groupName = "Time";
 	// グループを追加
-	GlobalVariables::GetInstance()->CreateGroup(groupName);
-	globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
+	//GlobalVariables::GetInstance()->CreateGroup("time");
+	//globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
+	//globalVariables->GetInstance()->SaveFileTimer();
 	//------------------------------------------------------------//
 
 }
@@ -95,6 +98,14 @@ void GameScene::Update()
 	timerSprite10->SetTexHandle(numberTexture[index10]);
 	timerSprite100->SetTexHandle(numberTexture[index100]);
 	Collision();
+
+	if (player_->GetWorldPosition().y <= 0) {
+
+		GameManager::GetInstance()->ChangeScene("RESULT");
+		GlobalVariables::GetInstance()->AddTime(timer->GetElapsedSeconds());
+		//GlobalVariables::GetInstance()->SaveFileTimer();
+	}
+
 }
 
 void GameScene::Draw()

@@ -23,6 +23,7 @@ void Player::Init(Vector3 translate)
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
 	object_->SetAnimModel("sneakWalk.gltf");
+	//object_->SetModel("cube.obj");
 	object_->SetWorldTransform(worldTransform_);
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });

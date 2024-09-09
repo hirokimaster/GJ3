@@ -73,7 +73,7 @@ private:
 	uint32_t texHandleNormal_ = 0;
 	uint32_t texHandleHard_ = 0;
 	uint32_t selectNum_ = 0;
-	Level level_ = Level::EASY;
+	static Level level_;
 	Select select_ = Select::START;
 	bool optionMode_ = false;
 	float optionTimer_ = 5.0f;

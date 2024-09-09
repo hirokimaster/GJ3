@@ -1,5 +1,6 @@
 #include "Title.h"
 #include "engine/ModelManager/ModelManager.h"
+Level Title::level_ = Level::EASY;
 
 Title::Title()
 {
