@@ -14,6 +14,7 @@ void Title::Initialize()
 {
 	TextureResources();
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
+	level_ = Level::EASY;
 }
 
 void Title::Update()

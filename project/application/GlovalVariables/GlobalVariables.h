@@ -69,14 +69,14 @@ public:
 	Vector3 GetVector3Value(const std::string& groupName, const std::string& key)const;
 
 public: // Timer記録関数
-	void AddTime(uint32_t time);
+	void AddTime(const std::string& groupName,uint32_t time);
 	/// <summary>
 	/// ファイルに書き出し
 	/// </summary>
 	/// <param name="groupName"></param>
-	void SaveFileTimer();
+	void SaveFileTimer(const std::string& groupName);
 
-	void LoadFileTimeScore();
+	void LoadFileTimeScore(const std::string& groupName);
 
 private:
 	GlobalVariables() = default;

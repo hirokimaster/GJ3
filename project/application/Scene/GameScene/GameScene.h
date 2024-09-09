@@ -73,4 +73,6 @@ private:
 
 	// ギミック
 	std::unique_ptr<Gimmick> gimmick_;
+
+	const char* groupName_ = nullptr;
 };
