@@ -1,6 +1,7 @@
 #pragma once
 #include "application/Gimmick/Thunder/Thunder.h"
 #include "application/Player/Player.h"
+#include "engine/Utility/CollisionManager/CollisionManager.h"
 
 class Gimmick {
 public:
@@ -18,6 +19,11 @@ public:
 	/// 描画
 	/// </summary>
 	void Draw(Camera& camera);
+
+	/// <summary>
+	/// コリジョンマネージャに登録する
+	/// </summary>
+	void ColliderPush(CollisionManager* collisionManager);
 
 #pragma region setter
 

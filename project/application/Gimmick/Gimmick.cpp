@@ -20,3 +20,8 @@ void Gimmick::Draw(Camera& camera)
 {
 	thunder_->Draw(camera);
 }
+
+void Gimmick::ColliderPush(CollisionManager* collisionManager)
+{
+	collisionManager->ColliderPush(thunder_.get());
+}

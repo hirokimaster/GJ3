@@ -3,8 +3,9 @@
 #include "engine/TextureManager/TextureManager.h"
 #include "engine/Input/Input.h"
 #include "application/Player/Player.h"
+#include "engine/Utility/CollisionManager/Collider/Collider.h"
 
-class Thunder {
+class Thunder : public Collider {
 public:
 	/// <summary>
 	/// 初期化
@@ -29,6 +30,10 @@ public:
 
 	bool GetIsFall() { return isFall_; }
 
+	const Vector3& GetScale()override { return worldTransform_.scale; }
+
+	Vector3 GetWorldPosition()override;
+
 #pragma endregion
 
 #pragma region setter
@@ -47,6 +52,11 @@ private:
 	/// 落ちる
 	/// </summary>
 	void Fall();
+
+	/// <summary>
+	/// 衝突判定のとこ
+	/// </summary>
+	void OnCollision()override;
 
 private:
 	// 雷

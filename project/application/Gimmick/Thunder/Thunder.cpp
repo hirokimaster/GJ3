@@ -45,6 +45,18 @@ void Thunder::Draw(Camera& camera)
 	}
 }
 
+Vector3 Thunder::GetWorldPosition()
+{
+	// ワールド座標を入れる変数
+	Vector3 worldPos;
+	// ワールド行列の平行移動成分を取得（ワールド座標）
+	worldPos.x = worldTransform_.matWorld.m[3][0];
+	worldPos.y = worldTransform_.matWorld.m[3][1];
+	worldPos.z = worldTransform_.matWorld.m[3][2];
+
+	return worldPos;
+}
+
 void Thunder::Move()
 {
 	// 雷
@@ -83,5 +95,10 @@ void Thunder::Fall()
 		isFall_ = false;
 		worldTransform_.translate.y = 100.0f;
 	}
+}
+
+void Thunder::OnCollision()
+{
+	object_->SetColor({ 1.0f,0.0f,0.0f,1.0f });
 }
 
