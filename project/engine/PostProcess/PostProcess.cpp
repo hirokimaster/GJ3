@@ -119,6 +119,7 @@ void PostProcess::CreateBuffer()
 		dissolve_ = CreateResource::CreateBufferResource(sizeof(DissolveParam));
 		dissolve_->Map(0, nullptr, reinterpret_cast<void**>(&dissolveData_));
 		dissolveData_->threshold = 0.5f;
+		dissolveData_->maskColor = { 1.0f,0.0f,0.0f,1.0f };
 	}
 	else if (type_ == Random) {
 		random_ = CreateResource::CreateBufferResource(sizeof(RandomParam));

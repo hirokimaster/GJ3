@@ -62,7 +62,7 @@ private:
 	void TextureResources();
 
 private:
-
+	std::unique_ptr<PostProcess> postProcess_;
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
 	uint32_t texHandleTitle_ = 0;
 	uint32_t texHandleStart_ = 0;
@@ -77,4 +77,7 @@ private:
 	Select select_ = Select::START;
 	bool optionMode_ = false;
 	float optionTimer_ = 5.0f;
+	// postEffect用
+	uint32_t texHandleMask_ = 0;
+	DissolveParam param_{};
 };

@@ -12,23 +12,41 @@ Title::~Title()
 
 void Title::Initialize()
 {
+	postProcess_ = std::make_unique<PostProcess>();
+	postProcess_->Initialize();
+	postProcess_->SetEffect(Dissolve);
 	TextureResources();
+	postProcess_->SetMaskTexture(texHandleMask_);
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
+
+	param_.threshold = 0.0f;
+	param_.maskColor = { 1.0f,0.0f,0.0f,1.0f };
+	postProcess_->SetDissolveParam(param_);
 }
 
 void Title::Update()
 {
+	postProcess_->SetDissolveParam(param_);
+	param_.threshold += 0.01f;
+	if (param_.threshold >= 1.0f) {
+		param_.threshold = 0.0f;
+	}
+
 	SelectMode();
 	OptionMode();
 }
 
 void Title::Draw()
 {
+	postProcess_->Draw();
 	spriteTitle_->Draw();
 }
 
 void Title::PostProcessDraw()
 {
+	postProcess_->PreDraw();
+
+	postProcess_->PostDraw();
 }
 
 void Title::OptionMode()
@@ -144,4 +162,5 @@ void Title::TextureResources()
 	texHandleEasy_ = TextureManager::Load("resources/Title/easy.png");
 	texHandleNormal_ = TextureManager::Load("resources/Title/normal.png");
 	texHandleHard_ = TextureManager::Load("resources/Title/hard.png");
+	texHandleMask_ = TextureManager::Load("resources/noise1.png");
 }

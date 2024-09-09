@@ -95,6 +95,7 @@ struct RadialParam {
 
 struct DissolveParam {
 	float threshold;
+	Vector4 maskColor;
 };
 
 struct RandomParam {
