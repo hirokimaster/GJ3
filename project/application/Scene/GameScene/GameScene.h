@@ -14,7 +14,7 @@
 #include "application/Ground/Ground.h"
 #include "application/Obstacles/Obstacles.h"
 #include "application/Skydome/Skydome.h"
-
+#include "application/Wall/Wall.h"
 #include "application/Object/Timer/Timer.h"
 #include "application/Gimmick/Gimmick.h"
 
@@ -75,6 +75,9 @@ private:
 	std::unique_ptr<Sprite>timerSprite100;
 	uint32_t numberTexture[10];
 
+	std::unique_ptr<Wall>leftWall_;
+	std::unique_ptr<Wall>rightWall_;
+	
 	// ギミック
 	std::unique_ptr<Gimmick> gimmick_;
 
@@ -87,4 +90,5 @@ private:
 	// シーン遷移用
 	bool isTransition_ = false;
 	float sceneTimer_ = 130.0f;
+	const char* groupName_ = nullptr;
 };

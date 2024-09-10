@@ -19,10 +19,17 @@ void Title::Initialize()
 	TextureResources();
 	postProcess_->SetMaskTexture(texHandleMask_);
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
+
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
 	param_.threshold = 0.0f;
 	postProcess_->SetDissolveParam(param_);
+
+	level_ = Level::EASY;
+	select_ = Select::START;
+  optionMode_ = false;
+  optionTimer_ = 5.0f;
+
 }
 
 void Title::Update()

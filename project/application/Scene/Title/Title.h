@@ -63,6 +63,11 @@ private:
 
 	void Transition();
 
+public:
+	static Level GetLevel() { return level_; }
+
+private:
+
 private:
 	std::unique_ptr<PostProcess> postProcess_;
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
