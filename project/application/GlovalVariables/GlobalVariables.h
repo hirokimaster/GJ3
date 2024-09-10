@@ -78,6 +78,8 @@ public: // Timer記録関数
 
 	void LoadFileTimeScore(const std::string& groupName);
 
+	std::vector<uint32_t> GetTimes() { return times_; }
+
 private:
 	GlobalVariables() = default;
 	~GlobalVariables() = default;

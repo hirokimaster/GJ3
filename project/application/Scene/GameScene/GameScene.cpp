@@ -37,7 +37,11 @@ void GameScene::Initialize()
 	skydoem_ = std::make_unique<Skydome>();
 	skydoem_->Init();
 	
-	
+	leftWall_ = std::make_unique<Wall>();
+	leftWall_->Init({ -20.0f ,10.0f,0.0f });
+
+	rightWall_ = std::make_unique<Wall>();
+	rightWall_->Init({ 20.0f ,10.0f,0.0f });
 	
 	collisionManager_ = std::make_unique<CollisionManager>(); // コリジョンマネージャ
 
@@ -100,6 +104,8 @@ void GameScene::Update()
 	GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
+	leftWall_->Update();
+	rightWall_->Update();
 	player_->Update();
 	gameCamera_->Update();
 	//obstacles->Update();
@@ -137,6 +143,9 @@ void GameScene::Draw()
 	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
+	leftWall_->Draw(camera_);
+	rightWall_->Draw(camera_);
+	
 	//obstacles->Draw(camera_);
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);

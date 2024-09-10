@@ -15,6 +15,9 @@ void Title::Initialize()
 	TextureResources();
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
 	level_ = Level::EASY;
+	select_ = Select::START;
+    optionMode_ = false;
+    optionTimer_ = 5.0f;
 }
 
 void Title::Update()

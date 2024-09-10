@@ -15,6 +15,7 @@ void Ground::Init(Vector3 translate)
 	object_->SetModel("ground/ground.obj");
 	object_->SetTexHandle(skinTex_);
 	object_->SetWorldTransform(worldTransform_);
+	object_->SetEnableLight(true);
 }
 
 void Ground::Update()
