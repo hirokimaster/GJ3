@@ -50,6 +50,10 @@ public: // メンバ関数
 	/// </summary>
 	void PostProcessDraw()override;
 
+private:
+
+	void Transition();
+
 public:
 	void Collision();
 	
@@ -77,5 +81,14 @@ private:
 	// ギミック
 	std::unique_ptr<Gimmick> gimmick_;
 
+	// postEffect用
+	uint32_t texHandleMask_ = 0;
+	DissolveParam param_{};
+	std::unique_ptr<Sprite> spriteMask_;
+	uint32_t texHandleWhite_ = 0;
+	std::unique_ptr<PostProcess> postProcess_;
+	// シーン遷移用
+	bool isTransition_ = false;
+	float sceneTimer_ = 130.0f;
 	const char* groupName_ = nullptr;
 };

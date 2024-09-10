@@ -1,8 +1,11 @@
 #pragma once
 #include "application/Scene/IScene/IScene.h"
+#include "engine/Input/Input.h"
+#include "application/GameManager/GameManager.h"
 #include <vector>
 #include <memory>
 #include "engine/Sprite/Sprite.h"
+
 class ResultScene : public IScene
 {
 

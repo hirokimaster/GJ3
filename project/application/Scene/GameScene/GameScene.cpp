@@ -14,12 +14,20 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	// postEffect
+	isTransition_ = true;
+	postProcess_ = std::make_unique<PostProcess>();
+	postProcess_->Initialize();
+	postProcess_->SetEffect(Dissolve);
+	texHandleMask_ = TextureManager::Load("resources/noise9.png");
+	postProcess_->SetMaskTexture(texHandleMask_);
+	param_.threshold = 1.0f;
+	postProcess_->SetDissolveParam(param_);
+
 	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
-
-	
 
 	camera_.Initialize();
 
@@ -51,10 +59,12 @@ void GameScene::Initialize()
 		numberTexture[i] = TextureManager::Load("resources/Timer/num_" + std::to_string(i) + ".png");
 	}
 
+	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
 	//スプライトの初期化
 	timerSprite1.reset(Sprite::Create(numberTexture[0], { 128.0f,0.0f }));
 	timerSprite10.reset(Sprite::Create(numberTexture[0], { 64.0f,0.0f }));
 	timerSprite100.reset(Sprite::Create(numberTexture[0], { 0.0f,0.0f }));
+	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
 	timer = std::make_unique<Timer>();
 	timer->Reset();
@@ -100,6 +110,7 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
+	Transition();
 	camera_ = gameCamera_->GetCamera();
 	GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
@@ -139,7 +150,15 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	
+	spriteMask_->Draw();
+	postProcess_->Draw();
 	
+}
+
+void GameScene::PostProcessDraw()
+{
+	postProcess_->PreDraw();
+
 	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
@@ -160,10 +179,20 @@ void GameScene::Draw()
 
 	//タイマーの更新
 	timer->Start();
+
+	postProcess_->PostDraw();
 }
 
-void GameScene::PostProcessDraw()
+void GameScene::Transition()
 {
+	if (isTransition_) {
+		postProcess_->SetDissolveParam(param_);
+		param_.threshold -= 0.02f;
+		if (param_.threshold <= 0.0f) {
+			isTransition_ = false;
+			param_.threshold = 0.0f;
+		}
+	}
 }
 
 void GameScene::Collision()
