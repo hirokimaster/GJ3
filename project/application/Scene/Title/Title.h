@@ -61,6 +61,9 @@ private:
 
 	void TextureResources();
 
+public:
+	static Level GetLevel() { return level_; }
+
 private:
 
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;

@@ -40,6 +40,7 @@ public:
 	// directionalLightの設定
 	DirectionalLight SetLightingProperty(DirectionalLight directionalLight) { return *directionalLightData_ = directionalLight; }
 
+	void SetEnableLight(bool isLight) { materialData_->enableLighting = isLight; }
 
 private:
 	Model* model_ = nullptr;
