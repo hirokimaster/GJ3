@@ -1,5 +1,7 @@
 #pragma once
 #include "application/Scene/IScene/IScene.h"
+#include "engine/Input/Input.h"
+#include "application/GameManager/GameManager.h"
 
 class ResultScene : public IScene
 {

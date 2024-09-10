@@ -14,6 +14,10 @@ void ResultScene::Initialize()
 
 void ResultScene::Update()
 {
+	// ゲームシーンにいく
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+		GameManager::GetInstance()->ChangeScene("TITLE");
+	}
 }
 
 void ResultScene::Draw()

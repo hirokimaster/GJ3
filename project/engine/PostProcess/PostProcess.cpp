@@ -10,9 +10,6 @@ PostProcess::~PostProcess()
 
 void PostProcess::Initialize()
 {
-	// srvを作るところを今使ってるところの隣にずらす
-	SrvManager::GetInstance()->ShiftIndex();
-	index_ = SrvManager::GetInstance()->GetIndex();
 	CreateSRV();
 	CreateRTV();
 
@@ -77,7 +74,7 @@ void PostProcess::CreateSRV()
 		IID_PPV_ARGS(&texBuff_)); // 作成するResourceポインタへのポインタ
 	assert(SUCCEEDED(hr));
 
-	SrvManager::GetInstance()->CreatePostProcessSrv(texBuff_.Get(), index_);
+	SrvManager::GetInstance()->CreatePostProcessSrv(texBuff_.Get(), 1);
 
 }
 
@@ -119,7 +116,6 @@ void PostProcess::CreateBuffer()
 		dissolve_ = CreateResource::CreateBufferResource(sizeof(DissolveParam));
 		dissolve_->Map(0, nullptr, reinterpret_cast<void**>(&dissolveData_));
 		dissolveData_->threshold = 0.5f;
-		dissolveData_->maskColor = { 1.0f,0.0f,0.0f,1.0f };
 	}
 	else if (type_ == Random) {
 		random_ = CreateResource::CreateBufferResource(sizeof(RandomParam));
@@ -267,7 +263,7 @@ void PostProcess::Draw()
 	// 形状を設定。PSOに設定しているものとはまた別。同じものを設定すると考えておけば良い
 	DirectXCommon::GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	// srvの設定
-	DirectXCommon::GetCommandList()->SetGraphicsRootDescriptorTable(0, SrvManager::GetInstance()->GetGPUHandle(index_));
+	DirectXCommon::GetCommandList()->SetGraphicsRootDescriptorTable(0, SrvManager::GetInstance()->GetGPUHandle(1));
 
 	// effectの種類によって変えてる
 	SetConstantBuffer();
