@@ -17,13 +17,15 @@ void Player::Init(Vector3 translate)
 
 	worldTransform_.Initialize();
 	worldTransform_.translate = translate;
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 
-	skinTex_ = TextureManager::GetInstance()->Load("resources/uvChecker.png");
+	skinTex_ = TextureManager::GetInstance()->Load("resources/Player/player2.png");
+	//ModelManager::GetInstance()->LoadObjModel("walk.gltf");
 
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
-	object_->SetAnimModel("sneakWalk.gltf");
-	//object_->SetModel("cube.obj");
+	object_->SetAnimModel("Player/player2.gltf");
+	//object_->SetModel("Player/player.obj");
 	object_->SetWorldTransform(worldTransform_);
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
@@ -83,6 +85,7 @@ void Player::Update()
 	worldTransform_.UpdateMatrix();
 	// カメラのYをプレイヤーに追従
 	camera_->translate.y = worldTransform_.translate.y;
+	worldTransform_.rotate.y += 0.01f;
 }
 
 void Player::Draw(Camera& camera)
@@ -97,7 +100,7 @@ void Player::Move()
 		if (!inoperable_) {
 			worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
 			if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
-				worldTransform_.rotate.y = 3.14f;
+				//worldTransform_.rotate.y = 3.14f;
 			}
 			else if (Input::GetInstance()->JoyStickParmLX(0.5f) > 0) {
 				worldTransform_.rotate.y = 1.57f;

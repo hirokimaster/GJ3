@@ -16,7 +16,8 @@ void GameScene::Initialize()
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
-
+	ModelManager::GetInstance()->LoadAnimationModel("Player/player2.gltf");
+	//ModelManager::GetInstance()->LoadObjModel("Player/player.obj");
 	
 
 	camera_.Initialize();
