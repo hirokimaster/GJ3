@@ -2,6 +2,8 @@
 #include "engine/ModelManager/ModelManager.h"
 #include "application/GlovalVariables/GlobalVariables.h"
 #include "engine/Loader/Loader.h"
+#include "application/Scene/Title/Title.h"
+
 GameScene::GameScene()
 {
 }
@@ -12,6 +14,16 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	// postEffect
+	isTransition_ = true;
+	postProcess_ = std::make_unique<PostProcess>();
+	postProcess_->Initialize();
+	postProcess_->SetEffect(Dissolve);
+	texHandleMask_ = TextureManager::Load("resources/noise9.png");
+	postProcess_->SetMaskTexture(texHandleMask_);
+	param_.threshold = 1.0f;
+	postProcess_->SetDissolveParam(param_);
+
 	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
@@ -36,7 +48,11 @@ void GameScene::Initialize()
 	skydoem_ = std::make_unique<Skydome>();
 	skydoem_->Init();
 	
-	Loader::LoadJsonFile("resources/stage","easy",player_.get(),ground_.get(),obstacles_);
+	leftWall_ = std::make_unique<Wall>();
+	leftWall_->Init({ -20.0f ,10.0f,0.0f });
+
+	rightWall_ = std::make_unique<Wall>();
+	rightWall_->Init({ 20.0f ,10.0f,0.0f });
 	
 	collisionManager_ = std::make_unique<CollisionManager>(); // コリジョンマネージャ
 
@@ -46,10 +62,12 @@ void GameScene::Initialize()
 		numberTexture[i] = TextureManager::Load("resources/Timer/num_" + std::to_string(i) + ".png");
 	}
 
+	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
 	//スプライトの初期化
 	timerSprite1.reset(Sprite::Create(numberTexture[0], { 128.0f,0.0f }));
 	timerSprite10.reset(Sprite::Create(numberTexture[0], { 64.0f,0.0f }));
 	timerSprite100.reset(Sprite::Create(numberTexture[0], { 0.0f,0.0f }));
+	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
 	timer = std::make_unique<Timer>();
 	timer->Reset();
@@ -59,26 +77,49 @@ void GameScene::Initialize()
 	gimmick_ = std::make_unique<Gimmick>();
 	gimmick_->SetPlayer(player_.get());
 	gimmick_->Initialize();
+	switch (Title::GetLevel()) {
+	case Level::EASY: {
+		Loader::LoadJsonFile("resources/stage", "easy", player_.get(), ground_.get(), obstacles_);
+		//GlobalVariables::GetInstance()->LoadFiles();
 
-	//GlobalVariables::GetInstance()->LoadFiles();
-	GlobalVariables::GetInstance()->LoadFileTimeScore();
-	/*-----------------------あまりよくない感じ-------------------*/
-	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
-	const char* groupName = "Time";
-	// グループを追加
-	//GlobalVariables::GetInstance()->CreateGroup("time");
-	//globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
-	//globalVariables->GetInstance()->SaveFileTimer();
-	//------------------------------------------------------------//
-
+		/*-----------------------あまりよくない感じ-------------------*/
+		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+		groupName_ = "easyTimeScore";
+		GlobalVariables::GetInstance()->LoadFileTimeScore(groupName_);
+		// グループを追加
+		//GlobalVariables::GetInstance()->CreateGroup("time");
+		//globalVariables->AddItme(groupName, "time", timer->GetElapsedSeconds());
+		//globalVariables->GetInstance()->SaveFileTimer();
+		//------------------------------------------------------------//
+		break;
+	}
+	case Level::NORMAL: {
+		/*-----------------------あまりよくない感じ-------------------*/
+		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+		groupName_ = "normalTimeScore";
+		GlobalVariables::GetInstance()->LoadFileTimeScore(groupName_);
+		break;
+	}
+	case Level::HARD: {
+		/*-----------------------あまりよくない感じ-------------------*/
+		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+		groupName_ = "hardTimeScore";
+		GlobalVariables::GetInstance()->LoadFileTimeScore(groupName_);
+		break;
+	}
+		
+	}
 }
 
 void GameScene::Update()
 {
+	Transition();
 	camera_ = gameCamera_->GetCamera();
 	GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
+	leftWall_->Update();
+	rightWall_->Update();
 	player_->Update();
 	gameCamera_->Update();
 	//obstacles->Update();
@@ -103,7 +144,7 @@ void GameScene::Update()
 	if (player_->GetWorldPosition().y <= 0) {
 
 		GameManager::GetInstance()->ChangeScene("RESULT");
-		GlobalVariables::GetInstance()->AddTime(timer->GetElapsedSeconds());
+		GlobalVariables::GetInstance()->AddTime(groupName_,timer->GetElapsedSeconds());
 		//GlobalVariables::GetInstance()->SaveFileTimer();
 	}
 
@@ -112,10 +153,21 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	
+	spriteMask_->Draw();
+	postProcess_->Draw();
 	
+}
+
+void GameScene::PostProcessDraw()
+{
+	postProcess_->PreDraw();
+
 	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
+	leftWall_->Draw(camera_);
+	rightWall_->Draw(camera_);
+	
 	//obstacles->Draw(camera_);
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
@@ -130,10 +182,20 @@ void GameScene::Draw()
 
 	//タイマーの更新
 	timer->Start();
+
+	postProcess_->PostDraw();
 }
 
-void GameScene::PostProcessDraw()
+void GameScene::Transition()
 {
+	if (isTransition_) {
+		postProcess_->SetDissolveParam(param_);
+		param_.threshold -= 0.02f;
+		if (param_.threshold <= 0.0f) {
+			isTransition_ = false;
+			param_.threshold = 0.0f;
+		}
+	}
 }
 
 void GameScene::Collision()

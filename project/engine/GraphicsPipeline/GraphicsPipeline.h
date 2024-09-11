@@ -80,6 +80,11 @@ public:
 	/// <returns></returns>
 	PipelineState GetPSO() { return  pso; }
 
+private:
+	GraphicsPipeline() = default;
+	~GraphicsPipeline() = default;
+	GraphicsPipeline(const GraphicsPipeline&) = delete;
+	GraphicsPipeline& operator=(const GraphicsPipeline&) = delete;
 
 private: 
 	/// <summary>

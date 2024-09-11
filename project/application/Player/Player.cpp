@@ -29,7 +29,7 @@ void Player::Init(Vector3 translate)
 	object_->SetWorldTransform(worldTransform_);
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-
+	object_->SetEnableLight(true);
 	fallVelo_ = 0.0f;
 
 	SetCollosionAttribute(0b01);

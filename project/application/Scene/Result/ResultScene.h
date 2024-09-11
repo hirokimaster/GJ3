@@ -1,5 +1,10 @@
 #pragma once
 #include "application/Scene/IScene/IScene.h"
+#include "engine/Input/Input.h"
+#include "application/GameManager/GameManager.h"
+#include <vector>
+#include <memory>
+#include "engine/Sprite/Sprite.h"
 
 class ResultScene : public IScene
 {
@@ -38,6 +43,13 @@ public: // メンバ関数
 public:
 
 private:
+	const char* groupName_ = nullptr;
 
+	std::vector<uint32_t> timeScores_;
+
+	std::vector<std::unique_ptr<Sprite>> timerSprites1_;
+	std::vector<std::unique_ptr<Sprite>> timerSprites10_;
+	std::vector<std::unique_ptr<Sprite>> timerSprites100_;
+	uint32_t numberTexture[10];
 };
 

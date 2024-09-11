@@ -2,7 +2,7 @@
 #include "engine/DescriptorManager/DescriptorManager.h"
 #include "engine/CreateResource/CreateResource.h"
 #include "engine/Model/Animation/Animation.h"
-#define MAX_SRV 128
+#define MAX_SRV 1024
 
 class SrvManager {
 public:
@@ -81,6 +81,6 @@ private:
 	D3D12_GPU_DESCRIPTOR_HANDLE gpuDescHandleSRV_[MAX_SRV];
 	D3D12_CPU_DESCRIPTOR_HANDLE instancingSrvHandleCPU_[MAX_SRV];
 	D3D12_GPU_DESCRIPTOR_HANDLE instancingSrvHandleGPU_[MAX_SRV];
-	uint32_t index_;
+	uint32_t index_ = 1;
 
 };

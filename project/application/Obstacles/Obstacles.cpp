@@ -15,7 +15,7 @@ void Obstacles::Init(Vector3 translate)
 	object_->SetModel("cube.obj");
 	object_->SetTexHandle(skinTex_);
 	object_->SetWorldTransform(worldTransform_);
-
+	object_->SetEnableLight(true);
 	SetCollosionAttribute(0b10);
 	SetCollisionMask(0b01);
 	SetRadious(0.5f);

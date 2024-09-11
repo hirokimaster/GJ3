@@ -12,23 +12,49 @@ Title::~Title()
 
 void Title::Initialize()
 {
+	isTransition_ = false;
+	postProcess_ = std::make_unique<PostProcess>();
+	postProcess_->Initialize();
+	postProcess_->SetEffect(Dissolve);
 	TextureResources();
+	postProcess_->SetMaskTexture(texHandleMask_);
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
+
+	spriteMask_.reset(Sprite::Create(texHandleWhite_));
+
+	param_.threshold = 0.0f;
+	postProcess_->SetDissolveParam(param_);
+
+	level_ = Level::EASY;
+	select_ = Select::START;
+  optionMode_ = false;
+  optionTimer_ = 5.0f;
+
 }
 
 void Title::Update()
 {
+	Transition();
 	SelectMode();
 	OptionMode();
 }
 
 void Title::Draw()
 {
-	spriteTitle_->Draw();
+
+	spriteMask_->Draw();
+
+	postProcess_->Draw();
+
 }
 
 void Title::PostProcessDraw()
 {
+	postProcess_->PreDraw();
+
+	spriteTitle_->Draw();
+
+	postProcess_->PostDraw();
 }
 
 void Title::OptionMode()
@@ -37,7 +63,7 @@ void Title::OptionMode()
 	if (optionMode_) {
 		spriteTitle_->SetTexHandle(texHandleLevel_);
 		--optionTimer_;
-		
+
 		if (level_ == Level::EASY && optionTimer_ <= 0.0f) {
 			spriteTitle_->SetTexHandle(texHandleEasy_);
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
@@ -105,22 +131,23 @@ void Title::SelectMode()
 		if (level_ == Level::EASY) {
 			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
-				GameManager::GetInstance()->ChangeScene("GAME");
+				isTransition_ = true;
 			}
 		}
 		else if (level_ == Level::NORMAL) {
 			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
-				GameManager::GetInstance()->ChangeScene("GAME");
+				isTransition_ = true;
 			}
 		}
 		else if (level_ == Level::HARD) {
 			// ゲームシーンにいく
+			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
-				GameManager::GetInstance()->ChangeScene("GAME");
+				isTransition_ = true;
 			}
 		}
-		
+
 	}
 	else if (select_ == Select::OPTION && !optionMode_) {
 		spriteTitle_->SetTexHandle(texHandleOp_);
@@ -144,4 +171,19 @@ void Title::TextureResources()
 	texHandleEasy_ = TextureManager::Load("resources/Title/easy.png");
 	texHandleNormal_ = TextureManager::Load("resources/Title/normal.png");
 	texHandleHard_ = TextureManager::Load("resources/Title/hard.png");
+	texHandleMask_ = TextureManager::Load("resources/noise9.png");
+	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
+}
+
+void Title::Transition()
+{
+	if (isTransition_) {
+		postProcess_->SetDissolveParam(param_);
+		param_.threshold += 0.02f;
+		if (param_.threshold >= 1.2f) {
+			isTransition_ = false;
+			GameManager::GetInstance()->ChangeScene("GAME");
+		}
+	}
+
 }

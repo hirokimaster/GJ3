@@ -353,12 +353,12 @@ Vector3 GlobalVariables::GetVector3Value(const std::string& groupName, const std
 	}
 }
 
-void GlobalVariables::SaveFileTimer()
+void GlobalVariables::SaveFileTimer(const std::string& groupName)
 {
 	json j;
 	j["scores"] = times_;
 
-	std::string filePath = kDirectoryPath + "time.json";
+	std::string filePath = kDirectoryPath + groupName +".json";
 	// JSONファイルに書き出し（上書き）
 	std::ofstream file(filePath);
 	if (file.is_open()) {
@@ -421,11 +421,11 @@ void GlobalVariables::SaveFileTimer()
 
 }
 
-void GlobalVariables::LoadFileTimeScore()
+void GlobalVariables::LoadFileTimeScore(const std::string& groupName)
 {
 	// JSONオブジェクトに新しいスコアを追加
 	//j["scores"] = times_;
-	std::string filePath = kDirectoryPath + "time.json";
+	std::string filePath = kDirectoryPath + groupName + ".json";
 	// JSONファイルを開く
 	std::ifstream file(filePath);
 	if (!file.is_open()) {
@@ -460,13 +460,13 @@ void GlobalVariables::LoadFileTimeScore()
 	}
 }
 
-void GlobalVariables::AddTime(uint32_t time)
+void GlobalVariables::AddTime(const std::string& groupName,uint32_t time)
 {
 	times_.push_back(time);
 	json j;
 	// JSONオブジェクトに新しいスコアを追加
 	j["scores"] = times_;
-	std::string filePath = kDirectoryPath + "time.json";
+	std::string filePath = kDirectoryPath + groupName +".json";
 	// JSONファイルに書き出し（上書き）
 	std::ofstream file(filePath);
 	if (file.is_open()) {
