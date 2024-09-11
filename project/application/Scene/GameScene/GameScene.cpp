@@ -115,7 +115,7 @@ void GameScene::Update()
 {
 	Transition();
 	camera_ = gameCamera_->GetCamera();
-	GlobalVariables::GetInstance()->Update();
+	//GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
 	leftWall_->Update();
@@ -142,7 +142,7 @@ void GameScene::Update()
 	Collision();
 
 	if (player_->GetWorldPosition().y <= 0) {
-
+		
 		GameManager::GetInstance()->ChangeScene("RESULT");
 		GlobalVariables::GetInstance()->AddTime(groupName_,timer->GetElapsedSeconds());
 		//GlobalVariables::GetInstance()->SaveFileTimer();
