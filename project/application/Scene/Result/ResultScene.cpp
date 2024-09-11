@@ -69,12 +69,12 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 
-	
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) ) {
+
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 
 		GameManager::GetInstance()->ChangeScene("TITLE");
 	}
-
+}
 void ResultScene::Draw()
 {
 	for (auto itr = timerSprites1_.begin(); itr != timerSprites1_.end(); itr++) {
