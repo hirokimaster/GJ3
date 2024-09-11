@@ -75,6 +75,7 @@ void ResultScene::Update()
 		GameManager::GetInstance()->ChangeScene("TITLE");
 	}
 }
+
 void ResultScene::Draw()
 {
 	for (auto itr = timerSprites1_.begin(); itr != timerSprites1_.end(); itr++) {
