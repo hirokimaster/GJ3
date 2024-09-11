@@ -19,17 +19,17 @@ void Player::Init(Vector3 translate)
 	worldTransform_.translate = translate;
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 
-	skinTex_ = TextureManager::GetInstance()->Load("resources/Player/player2.png");
+	skinTex_ = TextureManager::GetInstance()->Load("resources/Player/player.png");
 	//ModelManager::GetInstance()->LoadObjModel("walk.gltf");
 
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
-	object_->SetAnimModel("Player/player2.gltf");
+	object_->SetAnimModel("Player/player.gltf");
 	//object_->SetModel("Player/player.obj");
 	object_->SetWorldTransform(worldTransform_);
 	object_->SetTexHandle(skinTex_);
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
-	object_->SetEnableLight(true);
+	//object_->SetEnableLight(true);
 	fallVelo_ = 0.0f;
 
 	SetCollosionAttribute(0b01);
