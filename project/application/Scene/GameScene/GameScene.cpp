@@ -191,6 +191,20 @@ void GameScene::Transition()
 	}
 }
 
+void GameScene::Transition2()
+{
+	if (isTransition_) {
+		postProcess_->SetDissolveParam(param_);
+		param_.threshold += 0.02f;
+		if (param_.threshold >= 1.2f) {
+			isTransition_ = false;
+			GameManager::GetInstance()->ChangeScene("RESULT");
+		}
+	}
+
+}
+
+
 
 
 void GameScene::WaitPhase()
@@ -259,7 +273,7 @@ void GameScene::PlayPhase()
 		timer->Stop();
 		//GameManager::GetInstance()->ChangeScene("RESULT");
 		GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
-	
+		isTransition_ = true;
 		//GlobalVariables::GetInstance()->SaveFileTimer();
 	}
 }
@@ -275,6 +289,8 @@ void GameScene::AfterPlayPhase()
 	player_->Update();
 	gameCamera_->Update();
 
+	Transition2();
+
 	int countdown = 4 - (timer->GetElapsedSeconds() % 5);		//一桁目の取得
 	if (timer->GetElapsedSeconds() > 0)
 	{
@@ -283,8 +299,8 @@ void GameScene::AfterPlayPhase()
 
 	if (countdown == 0)
 	{
-		GameManager::GetInstance()->ChangeScene("RESULT");
 		
+		isTransition_ = true;
 		//timer->Reset();
 	}
 

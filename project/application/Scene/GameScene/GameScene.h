@@ -63,6 +63,8 @@ private:
 
 	void Transition();
 
+	void Transition2();
+
 	//待ち
 	void WaitPhase();
 	//プレイフェーズ
