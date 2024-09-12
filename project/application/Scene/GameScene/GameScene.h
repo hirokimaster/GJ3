@@ -50,9 +50,22 @@ public: // メンバ関数
 	/// </summary>
 	void PostProcessDraw()override;
 
+	enum class Phase
+	{
+		kWait,
+		kPlay,
+	};
+
+	void ChangePhase(Phase phase) { phase_ = phase; };
+
 private:
 
 	void Transition();
+
+	//待ち
+	void WaitPhase();
+	//プレイフェーズ
+	void PlayPhase();
 
 public:
 	void Collision();
@@ -73,7 +86,11 @@ private:
 	std::unique_ptr<Sprite>timerSprite1;
 	std::unique_ptr<Sprite>timerSprite10;
 	std::unique_ptr<Sprite>timerSprite100;
+	std::unique_ptr<Sprite>countdownSprite;
 	uint32_t numberTexture[10];
+
+
+
 
 	std::unique_ptr<Wall>leftWall_;
 	std::unique_ptr<Wall>rightWall_;
@@ -91,4 +108,8 @@ private:
 	bool isTransition_ = false;
 	float sceneTimer_ = 130.0f;
 	const char* groupName_ = nullptr;
+
+	//フェーズ用
+	Phase phase_;
+
 };

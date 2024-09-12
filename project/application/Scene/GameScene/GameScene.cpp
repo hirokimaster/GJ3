@@ -68,6 +68,8 @@ void GameScene::Initialize()
 	timerSprite1.reset(Sprite::Create(numberTexture[0], { 128.0f,0.0f }));
 	timerSprite10.reset(Sprite::Create(numberTexture[0], { 64.0f,0.0f }));
 	timerSprite100.reset(Sprite::Create(numberTexture[0], { 0.0f,0.0f }));
+	countdownSprite.reset(Sprite::Create(numberTexture[3], { 640.0f,360.0f }));
+	//countdownSprite->SetTextureSize({ 2.0f,2.0f});
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
 	timer = std::make_unique<Timer>();
@@ -114,41 +116,17 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
-	Transition();
-	camera_ = gameCamera_->GetCamera();
-	//GlobalVariables::GetInstance()->Update();
-	skydoem_->Update();
-	ground_->Update();
-	leftWall_->Update();
-	rightWall_->Update();
-	player_->Update();
-	gameCamera_->Update();
-	//obstacles->Update();
-	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-		(*itr)->Update();
+	switch (phase_)
+	{
+	case GameScene::Phase::kWait:
+		//待機中
+		WaitPhase();
+		break;
+	case GameScene::Phase::kPlay:
+		//ゲームプレイ
+		PlayPhase();
+		break;
 	}
-	//CheckAllCollision();
-
-	// ギミック
-	gimmick_->Update();
-
-	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
-	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
-	int index100 = (timer->GetElapsedSeconds() / 100) % 10;	//二桁目の取得
-
-	//テクスチャをタイマーによって変更
-	timerSprite1->SetTexHandle(numberTexture[index1]);
-	timerSprite10->SetTexHandle(numberTexture[index10]);
-	timerSprite100->SetTexHandle(numberTexture[index100]);
-	Collision();
-
-	if (player_->GetWorldPosition().y <= 0) {
-		
-		GameManager::GetInstance()->ChangeScene("RESULT");
-		GlobalVariables::GetInstance()->AddTime(groupName_,timer->GetElapsedSeconds());
-		//GlobalVariables::GetInstance()->SaveFileTimer();
-	}
-
 }
 
 void GameScene::Draw()
@@ -181,6 +159,11 @@ void GameScene::PostProcessDraw()
 	timerSprite10->Draw();
 	timerSprite100->Draw();
 
+	if (phase_ == Phase::kWait)
+	{
+		countdownSprite->Draw();
+	}
+
 	//タイマーの更新
 	timer->Start();
 
@@ -196,6 +179,76 @@ void GameScene::Transition()
 			isTransition_ = false;
 			param_.threshold = 0.0f;
 		}
+	}
+}
+
+
+
+void GameScene::WaitPhase()
+{
+	Transition();
+	camera_ = gameCamera_->GetCamera();
+	//GlobalVariables::GetInstance()->Update();
+	skydoem_->Update();
+	ground_->Update();
+	leftWall_->Update();
+	rightWall_->Update();
+	player_->Update();
+	gameCamera_->Update();
+
+	int countdown = 4 - (timer->GetElapsedSeconds() % 5);		//一桁目の取得
+	if(timer->GetElapsedSeconds() > 0)
+	{
+		countdownSprite->SetTexHandle(numberTexture[countdown]);
+	}
+	
+	if (countdown == 0)
+	{
+		ChangePhase(Phase::kPlay);
+		timer->Reset();
+	}
+
+
+}
+
+void GameScene::PlayPhase()
+{
+	//Transition();
+	camera_ = gameCamera_->GetCamera();
+	//GlobalVariables::GetInstance()->Update();
+	skydoem_->Update();
+	ground_->Update();
+	leftWall_->Update();
+	rightWall_->Update();
+	player_->Update();
+	player_->SetIsFall(true);
+	gameCamera_->Update();
+	//obstacles->Update();
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	//CheckAllCollision();
+
+	
+
+	// ギミック
+	gimmick_->Update();
+
+	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
+	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
+	int index100 = (timer->GetElapsedSeconds() / 100) % 10;	//二桁目の取得
+
+	//テクスチャをタイマーによって変更
+	timerSprite1->SetTexHandle(numberTexture[index1]);
+	timerSprite10->SetTexHandle(numberTexture[index10]);
+	timerSprite100->SetTexHandle(numberTexture[index100]);
+	Collision();
+
+	if (player_->GetWorldPosition().y <= 0) {
+
+		GameManager::GetInstance()->ChangeScene("RESULT");
+		GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
+		//GlobalVariables::GetInstance()->SaveFileTimer();
 	}
 }
 

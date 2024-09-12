@@ -53,6 +53,9 @@ void Player::Update()
 		case Behavior::kElectricShock:
 			BehaviorRootElectricShockInit();
 			break;
+		case Behavior::kWait:
+			BehaviorRootWaitInit();
+			break;
 		}
 		// 振る舞いリクエストをリセット
 		behaviorRequest_ = std::nullopt;
@@ -65,13 +68,20 @@ void Player::Update()
 	default:
 		Move();
 		BehaviorRootUpdate();
+		Fall();
 		break;
 	case Behavior::kDeceleration:
 		Move();
 		BehaviorRootDecelerationUpdate();
+		Fall();
 		break;
 	case Behavior::kElectricShock:
 		BehaviorRootElectricShockUpdate();
+		Fall();
+		break;
+	case Behavior::kWait:
+		Move();
+		BehaviorRootWaitUpdate();
 		break;
 	}
 
@@ -79,7 +89,7 @@ void Player::Update()
 	//ApplyGlobalVariables();
 
 	
-	Fall();
+	
 	aniTime_ += 1.0f / 60.0f;
 	aniTime_ = std::fmod(aniTime_, duration_);
 	object_->SetAnimationTime(aniTime_);
@@ -198,5 +208,18 @@ void Player::BehaviorRootElectricShockUpdate()
 	if (electricShockTimer_ >= 120.0f) {
 		behaviorRequest_ = Behavior::kRoot;
 		inoperable_ = false;
+	}
+}
+
+void Player::BehaviorRootWaitInit()
+{
+	
+}
+
+void Player::BehaviorRootWaitUpdate()
+{
+	if (isFall_)
+	{
+		behaviorRequest_ = Behavior::kRoot;
 	}
 }
