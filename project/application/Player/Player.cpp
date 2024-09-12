@@ -80,7 +80,8 @@ void Player::Update()
 
 	
 	Fall();
-	aniTime_++;
+	aniTime_ += 1.0f / 60.0f;
+	aniTime_ = std::fmod(aniTime_, duration_);
 	object_->SetAnimationTime(aniTime_);
 	object_->SetWorldTransform(worldTransform_);
 	worldTransform_.UpdateMatrix();

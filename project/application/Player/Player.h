@@ -69,7 +69,7 @@ private:
 	// プレイヤー用テクスチャ
 	uint32_t skinTex_;
 	float aniTime_ = 0;
-	float duration_ = 0; // アニメ―ション全体の尺（単位は秒）
+	float duration_ = 0.6f; // アニメ―ション全体の尺（単位は秒）
 
 	float fallVelo_ = 0.0f;
 	float gravity_ = 0.00098f;
