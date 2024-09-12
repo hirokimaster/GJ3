@@ -256,10 +256,10 @@ void GameScene::PlayPhase()
 	if (player_->GetWorldPosition().y <= 0) {
 
 		phase_ = Phase::kAfterPlay;
-
+		timer->Stop();
 		//GameManager::GetInstance()->ChangeScene("RESULT");
 		GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
-		
+	
 		//GlobalVariables::GetInstance()->SaveFileTimer();
 	}
 }
