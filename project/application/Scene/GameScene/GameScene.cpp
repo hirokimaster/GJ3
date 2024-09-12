@@ -129,6 +129,10 @@ void GameScene::Update()
 		//ゲームプレイ
 		PlayPhase();
 		break;
+	case GameScene::Phase::kAfterPlay:
+		//ゲームプレイ
+		AfterPlayPhase();
+		break;
 	}
 }
 
@@ -251,10 +255,39 @@ void GameScene::PlayPhase()
 
 	if (player_->GetWorldPosition().y <= 0) {
 
-		GameManager::GetInstance()->ChangeScene("RESULT");
+		phase_ = Phase::kAfterPlay;
+
+		//GameManager::GetInstance()->ChangeScene("RESULT");
 		GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
+		
 		//GlobalVariables::GetInstance()->SaveFileTimer();
 	}
+}
+
+void GameScene::AfterPlayPhase()
+{
+	camera_ = gameCamera_->GetCamera();
+	//GlobalVariables::GetInstance()->Update();
+	skydoem_->Update();
+	ground_->Update();
+	leftWall_->Update();
+	rightWall_->Update();
+	player_->Update();
+	gameCamera_->Update();
+
+	int countdown = 4 - (timer->GetElapsedSeconds() % 5);		//一桁目の取得
+	if (timer->GetElapsedSeconds() > 0)
+	{
+		//countdownSprite->SetTexHandle(numberTexture[countdown]);
+	}
+
+	if (countdown == 0)
+	{
+		GameManager::GetInstance()->ChangeScene("RESULT");
+		
+		//timer->Reset();
+	}
+
 }
 
 void GameScene::Collision()

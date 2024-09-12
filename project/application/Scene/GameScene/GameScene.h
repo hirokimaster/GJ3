@@ -54,6 +54,7 @@ public: // メンバ関数
 	{
 		kWait,
 		kPlay,
+		kAfterPlay,
 	};
 
 	void ChangePhase(Phase phase) { phase_ = phase; };
@@ -66,6 +67,8 @@ private:
 	void WaitPhase();
 	//プレイフェーズ
 	void PlayPhase();
+	//プレイ後のフェーズ
+	void AfterPlayPhase();
 
 public:
 	void Collision();
