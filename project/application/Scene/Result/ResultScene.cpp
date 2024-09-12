@@ -40,8 +40,8 @@ void ResultScene::Initialize()
 
 	uint32_t indexNum = 0;
 	std::sort(timeScores_.begin(), timeScores_.end());
-	if (timeScores_.size() > 5) {
-		timeScores_.erase(timeScores_.begin() + 5, timeScores_.end());
+	if (timeScores_.size() > 9) {
+		timeScores_.erase(timeScores_.begin() + 9, timeScores_.end());
 	}
 	for (auto itr = timeScores_.begin(); itr != timeScores_.end(); itr++, ++indexNum) {
 		index1 = (*itr) % 10;
@@ -71,50 +71,63 @@ void ResultScene::Initialize()
 		}
 		else if (indexNum == 1) {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 64.0f }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 128.0f }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
+			timerSprite1->SetTextureSize({ 96.0f,96.0f });
+			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
+
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 64.0f }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 128.0f }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
+			timerSprite10->SetTextureSize({ 96.0f,96.0f });
+			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 64.0f }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 128.0f }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
+			timerSprite100->SetTextureSize({ 96.0f,96.0f });
+			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites100_.push_back(std::move(timerSprite100));
 		}
 		else if (indexNum == 2) {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 64.0f }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,128+ ((indexNum -1) * 96.0f) }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
+			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 64.0f }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,128 + ((indexNum - 1) * 96.0f) }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
+			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 64.0f }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,128 + ((indexNum - 1) * 96.0f) }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
+			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites100_.push_back(std::move(timerSprite100));
 		}
 		else {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 64.0f }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,224.0f + ((indexNum - 2) * 64) }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
+			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 64.0f }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,224.0f + ((indexNum - 2) * 64) }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
+			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 64.0f }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,224.0f + ((indexNum - 2) * 64) }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
+			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites100_.push_back(std::move(timerSprite100));
 		}
 
