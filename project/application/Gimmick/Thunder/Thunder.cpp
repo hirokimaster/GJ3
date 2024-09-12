@@ -11,6 +11,12 @@ void Thunder::Initialize()
 	texHandle_ = TextureManager::Load("resources/uvChecker.png");
 	object_->SetTexHandle(texHandle_);
 	object_->SetWorldTransform(worldTransform_);
+	object_->SetColor({ 1.0f,1.0f,0.0f,0.8f });
+	isFall_ = false;
+	isBlinking_ = false;
+
+	SetCollosionAttribute(0b10);
+	SetCollisionMask(0b01);
 
 	// 予測線
 	worldTransformPreline_.Initialize();
@@ -23,19 +29,16 @@ void Thunder::Initialize()
 	preline_->SetTexHandle(texHandlePreline_);
 	preline_->SetWorldTransform(worldTransformPreline_);
 	preline_->SetColor({ 1.0f,0.0f,0.0f,0.5f });
+
 }
 
 void Thunder::Update()
 {
-	// 当たったら赤くしとく
+	// 当たったら青くしとく
 	if (isHit_) {
-		object_->SetColor({ 1.0f,0.0f,0.0f,1.0f });
+		object_->SetColor({ 0.0f,0.0f,1.0f,0.8f });
 	}
 
-	if (Input::GetInstance()->PressedKey(DIK_SPACE)) {
-		isBlinking_ = true;
-	}
-	
 	Fall();
 	worldTransform_.UpdateMatrix();
 	worldTransformPreline_.UpdateMatrix();
@@ -65,12 +68,22 @@ Vector3 Thunder::GetWorldPosition()
 void Thunder::Move()
 {
 	// 雷
-	object_->SetPosition(worldTransform_.translate);
-	worldTransform_.translate.y -= 1.0f;
+	object_->SetScale(worldTransform_.scale);
+	worldTransform_.scale.y += 4.0f;
 }
 
 void Thunder::Fall()
 {
+	// 落下タイマー
+	if (!isFall_) {
+		--fallTimer_;
+	}
+	
+	if (fallTimer_ <= 0) {
+		isBlinking_ = true;
+		fallTimer_ = kFallInterval_;
+	}
+
 	// playerに追従する
 	if (target_) {
 		preline_->SetPosition(worldTransformPreline_.translate);
@@ -96,9 +109,15 @@ void Thunder::Fall()
 	}
 
 	// 落下が終わったら
-	if (worldTransform_.translate.y <= 0.0f) {
+	if (worldTransform_.scale.y >= 200.0f) {
 		isFall_ = false;
-		worldTransform_.translate.y = 100.0f;
+		worldTransform_.scale.y = 1.0f;
+	}
+
+	// 当たったらすぐ戻す
+	if (isHit_) {
+		isFall_ = false;
+		worldTransform_.scale.y = 1.0f;
 	}
 }
 
