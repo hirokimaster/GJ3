@@ -128,40 +128,41 @@ void GameScene::Update()
 		//ゲームプレイ
 		AfterPlayPhase();
 		break;
-	Transition();
-	camera_ = gameCamera_->GetCamera();
-	//GlobalVariables::GetInstance()->Update();
-	skydoem_->Update();
-	ground_->Update();
-	player_->Update();
-	gameCamera_->Update();
-	//obstacles->Update();
-	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-		(*itr)->Update();
-	}
-	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
-		(*itr)->Update();
-	}
-	//CheckAllCollision();
+		Transition();
+		camera_ = gameCamera_->GetCamera();
+		//GlobalVariables::GetInstance()->Update();
+		skydoem_->Update();
+		ground_->Update();
+		player_->Update();
+		gameCamera_->Update();
+		//obstacles->Update();
+		for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+			(*itr)->Update();
+		}
+		for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+			(*itr)->Update();
+		}
+		//CheckAllCollision();
 
-	// ギミック
-	gimmick_->Update();
+		// ギミック
+		gimmick_->Update();
 
-	int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
-	int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
-	int index100 = (timer->GetElapsedSeconds() / 100) % 10;	//二桁目の取得
+		int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
+		int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
+		int index100 = (timer->GetElapsedSeconds() / 100) % 10;	//二桁目の取得
 
-	//テクスチャをタイマーによって変更
-	timerSprite1->SetTexHandle(numberTexture[index1]);
-	timerSprite10->SetTexHandle(numberTexture[index10]);
-	timerSprite100->SetTexHandle(numberTexture[index100]);
-	Collision();
+		//テクスチャをタイマーによって変更
+		timerSprite1->SetTexHandle(numberTexture[index1]);
+		timerSprite10->SetTexHandle(numberTexture[index10]);
+		timerSprite100->SetTexHandle(numberTexture[index100]);
+		Collision();
 
-	if (player_->GetWorldPosition().y <= 0) {
-		
-		GameManager::GetInstance()->ChangeScene("RESULT");
-		GlobalVariables::GetInstance()->AddTime(groupName_,timer->GetElapsedSeconds());
-		//GlobalVariables::GetInstance()->SaveFileTimer();
+		if (player_->GetWorldPosition().y <= 0) {
+
+			GameManager::GetInstance()->ChangeScene("RESULT");
+			GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
+			//GlobalVariables::GetInstance()->SaveFileTimer();
+		}
 	}
 }
 
