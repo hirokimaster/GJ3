@@ -49,11 +49,6 @@ void GameScene::Initialize()
 	skydoem_ = std::make_unique<Skydome>();
 	skydoem_->Init();
 	
-	leftWall_ = std::make_unique<Wall>();
-	leftWall_->Init({ -20.0f ,10.0f,0.0f });
-
-	rightWall_ = std::make_unique<Wall>();
-	rightWall_->Init({ 20.0f ,10.0f,0.0f });
 	
 	collisionManager_ = std::make_unique<CollisionManager>(); // コリジョンマネージャ
 
@@ -80,7 +75,7 @@ void GameScene::Initialize()
 	gimmick_->Initialize();
 	switch (Title::GetLevel()) {
 	case Level::EASY: {
-		Loader::LoadJsonFile("resources/stage", "easy", player_.get(), ground_.get(), obstacles_);
+		Loader::LoadJsonFile("resources/stage", "easy", player_.get(), ground_.get(), obstacles_,walls_);
 		//GlobalVariables::GetInstance()->LoadFiles();
 
 		/*-----------------------あまりよくない感じ-------------------*/
@@ -119,12 +114,13 @@ void GameScene::Update()
 	//GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
-	leftWall_->Update();
-	rightWall_->Update();
 	player_->Update();
 	gameCamera_->Update();
 	//obstacles->Update();
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
 		(*itr)->Update();
 	}
 	//CheckAllCollision();
@@ -157,23 +153,24 @@ void GameScene::Draw()
 	spriteMask_->Draw();
 	postProcess_->Draw();
 	
+	
 }
 
 void GameScene::PostProcessDraw()
 {
 	postProcess_->PreDraw();
-
 	skydoem_->Draw(camera_);
+	
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
-	leftWall_->Draw(camera_);
-	rightWall_->Draw(camera_);
 	
 	//obstacles->Draw(camera_);
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
 	}
-
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+		(*itr)->Draw(camera_);
+	}
 	// ギミック
 	gimmick_->Draw(camera_);
 
@@ -185,6 +182,7 @@ void GameScene::PostProcessDraw()
 	timer->Start();
 
 	postProcess_->PostDraw();
+	
 }
 
 void GameScene::Transition()

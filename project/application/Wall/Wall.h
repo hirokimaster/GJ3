@@ -7,8 +7,9 @@
 class Wall
 {
 public:
-	void Init(Vector3 translate);
+	void Init(Vector3 translate,Vector3 scale);
 	void Update();
+	void ResultUpdate();
 	void Draw(Camera& camera);
 public: // Setter
 	void SetCamera(Camera& camera) { camera_ = camera; }

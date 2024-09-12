@@ -2,6 +2,7 @@
 #include "application/Player/Player.h"
 #include "application/Ground/Ground.h"
 #include "application/Obstacles/Obstacles.h"
+#include "application/Wall/Wall.h"
 
 LevelData* Loader::Load(const std::string& fileName)
 {
@@ -103,7 +104,7 @@ LevelData* Loader::Load(const std::string& fileName)
 	return levelData;
 }
 
-void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<std::unique_ptr<Obstacles>>& obstacles)
+void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::string fileName, Player* player, Ground* ground, std::list<std::unique_ptr<Obstacles>>& obstacles, std::list<std::unique_ptr<Wall>>& walls)
 {
 
 	// 連結してフルパスを得る
@@ -231,6 +232,13 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 			obstacl->Init(objectData.translate);
 			obstacl->SetPlayer(player);
 			obstacles.push_back(std::move(obstacl));
+		}
+		else if (objectData.fileName.compare("wall") == 0) {
+			//ModelManager::GetInstance()->LoadObjModel(objectData.fileName + ".obj");
+			std::unique_ptr<Wall> wall = std::make_unique<Wall>();
+			wall->Init(objectData.translate, objectData.scale);
+			//obstacl->SetPlayer(player);
+			walls.push_back(std::move(wall));
 		}
 	}
 }

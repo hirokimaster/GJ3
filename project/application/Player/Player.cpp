@@ -93,6 +93,19 @@ void Player::Draw(Camera& camera)
 	object_->Draw(camera,true);
 }
 
+void Player::ResultUpdate()
+{
+	object_->SetAnimationTime(aniTime_);
+	worldTransform_.rotate.y = 1.57f * 2.5f;
+	object_->SetAnimationTime(aniTime_);
+	worldTransform_.UpdateMatrix();
+	object_->SetWorldTransform(worldTransform_);
+	
+	// カメラのYをプレイヤーに追従
+	camera_->translate.y = worldTransform_.translate.y -5.0f;
+	//worldTransform_.rotate.y = 0.01f;
+}
+
 void Player::Move()
 {
 	if (Input::GetInstance()->GetJoystickState()) {
@@ -106,7 +119,7 @@ void Player::Move()
 				worldTransform_.rotate.y = 1.57f;
 			}
 			else if (Input::GetInstance()->JoyStickParmLX(0.5f) < 0) {
-				worldTransform_.rotate.y = -1.57f;
+				worldTransform_.rotate.y = 1.57f * 2.5f;
 			}
 		}
 		

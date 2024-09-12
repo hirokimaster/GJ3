@@ -6,6 +6,16 @@
 #include <memory>
 #include "engine/Sprite/Sprite.h"
 
+#include "application/Player/Player.h"
+#include "application/Wall/Wall.h"
+#include "application/GameCamera/GameCamera.h"
+#include "application/Ground/Ground.h"
+#include "application/Obstacles/Obstacles.h"
+#include "application/Skydome/Skydome.h"
+#include "application/Wall/Wall.h"
+#include "application/Object/Timer/Timer.h"
+#include "application/Gimmick/Gimmick.h"
+
 class ResultScene : public IScene
 {
 
@@ -44,6 +54,14 @@ public:
 
 private:
 	const char* groupName_ = nullptr;
+	Camera camera_;
+	std::unique_ptr<Player> player_;
+	std::unique_ptr<Ground> ground_;
+	// 障害物
+	std::list<std::unique_ptr<Obstacles>> obstacles_;
+	// 雲
+	std::list<std::unique_ptr<Wall>> walls_;
+
 
 	std::vector<uint32_t> timeScores_;
 
