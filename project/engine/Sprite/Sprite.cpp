@@ -61,6 +61,8 @@ void Sprite::Initialize(uint32_t texHandle) {
 
 	textureSize_ = size_;
 
+	CreateVertex();
+
 	worldTransform_.Initialize();
 
 }
