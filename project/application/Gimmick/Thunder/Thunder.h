@@ -44,6 +44,8 @@ public:
 
 	void SetIsHit(bool isHit) { isHit_ = isHit; }
 
+	void SetFallTimer(uint32_t fallTimer) { fallTimer_ = fallTimer, kFallInterval_ = fallTimer; }
+
 #pragma endregion
 
 private:
@@ -69,7 +71,9 @@ private:
 	uint32_t texHandle_ = 0;
 	bool isFall_ = false;
 	bool isHit_ = false;
-	// 予測線
+	uint32_t fallTimer_ = 120;
+	uint32_t kFallInterval_ = 180;
+
 	std::unique_ptr<Object3DPlacer> preline_;
 	WorldTransform worldTransformPreline_{};
 	uint32_t texHandlePreline_ = 0;
