@@ -69,7 +69,10 @@ void GameScene::Initialize()
 	timerSprite10.reset(Sprite::Create(numberTexture[0], { 64.0f,0.0f }));
 	timerSprite100.reset(Sprite::Create(numberTexture[0], { 0.0f,0.0f }));
 	countdownSprite.reset(Sprite::Create(numberTexture[3], { 640.0f,360.0f }));
-	//countdownSprite->SetTextureSize({ 2.0f,2.0f});
+	countdownSprite->SetTextureSize({ 192.0f,192.0f});
+	countdownSprite->SetAnchorPoint({ 0.5f,0.5f });
+	//countdownSprite->CreateVertex();
+
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
 	timer = std::make_unique<Timer>();
@@ -134,7 +137,14 @@ void GameScene::Draw()
 	
 	spriteMask_->Draw();
 	postProcess_->Draw();
-	
+
+
+
+	if (phase_ == Phase::kWait)
+	{
+		countdownSprite->Draw();
+	}
+
 }
 
 void GameScene::PostProcessDraw()
@@ -158,11 +168,6 @@ void GameScene::PostProcessDraw()
 	timerSprite1->Draw();
 	timerSprite10->Draw();
 	timerSprite100->Draw();
-
-	if (phase_ == Phase::kWait)
-	{
-		countdownSprite->Draw();
-	}
 
 	//タイマーの更新
 	timer->Start();

@@ -61,6 +61,8 @@ void Sprite::Initialize(uint32_t texHandle) {
 
 	textureSize_ = size_;
 
+	CreateVertex();
+
 	worldTransform_.Initialize();
 
 }
@@ -71,15 +73,15 @@ void Sprite::Initialize(uint32_t texHandle) {
 void Sprite::CreateVertex()
 {
 
-	float left = (0.0f - anchorPoint_.x) * size_.x;
-	float right = (1.0f - anchorPoint_.x) * size_.x;
-	float top = (0.0f - anchorPoint_.y) * size_.y;
-	float bottom = (1.0f - anchorPoint_.y) * size_.y;
+	float left = (0.0f - anchorPoint_.x) * textureSize_.x;
+	float right = (1.0f - anchorPoint_.x) * textureSize_.x;
+	float top = (0.0f - anchorPoint_.y) * textureSize_.y;
+	float bottom = (1.0f - anchorPoint_.y) * textureSize_.y;
 
-	float tex_left = textureLeftTop_.x / size_.x;
-	float tex_right = (textureLeftTop_.x + textureSize_.x) / size_.x;
-	float tex_top = textureLeftTop_.y / size_.y;
-	float tex_bottom = (textureLeftTop_.y + textureSize_.y) / size_.y;
+	float tex_left = textureLeftTop_.x / textureSize_.x;
+	float tex_right = (textureLeftTop_.x + textureSize_.x) / textureSize_.x;
+	float tex_top = textureLeftTop_.y / textureSize_.y;
+	float tex_bottom = (textureLeftTop_.y + textureSize_.y) / textureSize_.y;
 
 
 	// 1枚目の三角形
