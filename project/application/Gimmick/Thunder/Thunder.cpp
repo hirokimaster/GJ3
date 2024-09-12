@@ -34,11 +34,6 @@ void Thunder::Initialize()
 
 void Thunder::Update()
 {
-	// 当たったら青くしとく
-	if (isHit_) {
-		object_->SetColor({ 0.0f,0.0f,1.0f,0.8f });
-	}
-
 	Fall();
 	worldTransform_.UpdateMatrix();
 	worldTransformPreline_.UpdateMatrix();
@@ -68,6 +63,7 @@ Vector3 Thunder::GetWorldPosition()
 void Thunder::Move()
 {
 	// 雷
+	object_->SetPosition(worldTransform_.translate);
 	object_->SetScale(worldTransform_.scale);
 	worldTransform_.scale.y += 4.0f;
 }
