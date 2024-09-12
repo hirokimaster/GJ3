@@ -18,11 +18,15 @@ void GameScene::Initialize()
 	isTransition_ = true;
 	postProcess_ = std::make_unique<PostProcess>();
 	postProcess_->Initialize();
-	postProcess_->SetEffect(Dissolve);
+	postProcess_->SetEffect(BloomDissolve);
 	texHandleMask_ = TextureManager::Load("resources/noise9.png");
 	postProcess_->SetMaskTexture(texHandleMask_);
 	param_.threshold = 1.0f;
-	postProcess_->SetDissolveParam(param_);
+	param_.stepWidth = 0.001f;
+	param_.sigma = 0.005f;
+	param_.lightStrength = 0.3f;
+	param_.bloomThreshold = 0.2f;
+	postProcess_->SetBloomDissolveParam(param_);
 
 	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
@@ -150,7 +154,7 @@ void GameScene::Update()
 void GameScene::Draw()
 {
 	
-	spriteMask_->Draw();
+	//spriteMask_->Draw();
 	postProcess_->Draw();
 	
 	
@@ -188,13 +192,14 @@ void GameScene::PostProcessDraw()
 void GameScene::Transition()
 {
 	if (isTransition_) {
-		postProcess_->SetDissolveParam(param_);
+		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold -= 0.02f;
 		if (param_.threshold <= 0.0f) {
 			isTransition_ = false;
 			param_.threshold = 0.0f;
 		}
 	}
+
 }
 
 void GameScene::Collision()

@@ -26,6 +26,7 @@
     <FxCompile Include="resources\ShaderFile\Sprite2D.PS.hlsl" />
     <FxCompile Include="resources\ShaderFile\Sprite2D.VS.hlsl" />
     <FxCompile Include="resources\ShaderFile\Vignette.PS.hlsl" />
+    <FxCompile Include="resources\ShaderFile\BloomDissolve.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="application\GameManager\GameManager.cpp" />

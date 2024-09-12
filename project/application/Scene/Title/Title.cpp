@@ -15,20 +15,24 @@ void Title::Initialize()
 	isTransition_ = false;
 	postProcess_ = std::make_unique<PostProcess>();
 	postProcess_->Initialize();
-	postProcess_->SetEffect(Dissolve);
+	postProcess_->SetEffect(BloomDissolve);
 	TextureResources();
 	postProcess_->SetMaskTexture(texHandleMask_);
 	spriteTitle_.reset(Sprite::Create(texHandleStart_));
 
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
+	param_.stepWidth = 0.001f;
+	param_.sigma = 0.005f;
+	param_.lightStrength = 0.3f;
+	param_.bloomThreshold = 0.2f;
 	param_.threshold = 0.0f;
-	postProcess_->SetDissolveParam(param_);
+	postProcess_->SetBloomDissolveParam(param_);
 
 	level_ = Level::EASY;
 	select_ = Select::START;
-  optionMode_ = false;
-  optionTimer_ = 5.0f;
+    optionMode_ = false;
+    optionTimer_ = 5.0f;
 
 }
 
@@ -178,7 +182,7 @@ void Title::TextureResources()
 void Title::Transition()
 {
 	if (isTransition_) {
-		postProcess_->SetDissolveParam(param_);
+		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
 			isTransition_ = false;
