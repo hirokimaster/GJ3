@@ -128,7 +128,7 @@ void PostProcess::CreateBuffer()
 		bloomDissolve_->Map(0, nullptr, reinterpret_cast<void**>(&bloomDissolveData_));
 		bloomDissolveData_->stepWidth = 0.001f;
 		bloomDissolveData_->sigma = 0.005f;
-		bloomDissolveData_->lightStrength = 0.3f;
+		bloomDissolveData_->lightStrength = 1.0f;
 		bloomDissolveData_->bloomThreshold = 0.2f;
 		bloomDissolveData_->threshold = 0.5f;
 	}

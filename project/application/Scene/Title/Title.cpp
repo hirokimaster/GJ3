@@ -25,7 +25,7 @@ void Title::Initialize()
 	param_.stepWidth = 0.001f;
 	param_.sigma = 0.005f;
 	param_.lightStrength = 0.3f;
-	param_.bloomThreshold = 0.2f;
+	param_.bloomThreshold = 0.3f;
 	param_.threshold = 0.0f;
 	postProcess_->SetBloomDissolveParam(param_);
 

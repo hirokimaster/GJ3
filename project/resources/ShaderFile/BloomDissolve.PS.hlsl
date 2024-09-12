@@ -87,7 +87,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         discard;
     }
     
-    output.color = gTexture.Sample(gSampler, input.texcoord) * LuminanceGaussian;
+    output.color = LuminanceGaussian;
     
     return output;
 }

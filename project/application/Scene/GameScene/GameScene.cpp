@@ -25,7 +25,7 @@ void GameScene::Initialize()
 	param_.stepWidth = 0.001f;
 	param_.sigma = 0.005f;
 	param_.lightStrength = 0.3f;
-	param_.bloomThreshold = 0.2f;
+	param_.bloomThreshold = 0.3f;
 	postProcess_->SetBloomDissolveParam(param_);
 
 	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
@@ -153,10 +153,15 @@ void GameScene::Update()
 
 void GameScene::Draw()
 {
-	
-	//spriteMask_->Draw();
+
+	spriteMask_->Draw();
 	postProcess_->Draw();
-	
+
+	timerSprite1->Draw();
+	timerSprite10->Draw();
+	timerSprite100->Draw();
+	//タイマーの更新
+	timer->Start();
 	
 }
 
@@ -177,13 +182,6 @@ void GameScene::PostProcessDraw()
 	}
 	// ギミック
 	gimmick_->Draw(camera_);
-
-	timerSprite1->Draw();
-	timerSprite10->Draw();
-	timerSprite100->Draw();
-
-	//タイマーの更新
-	timer->Start();
 
 	postProcess_->PostDraw();
 	
