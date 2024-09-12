@@ -20,7 +20,7 @@ public:
 	void Init(Vector3 translate);
 	void Update();
 	void Draw(Camera& camera);
-
+	void ResultUpdate();
 	void Move();
 	void Fall();
 

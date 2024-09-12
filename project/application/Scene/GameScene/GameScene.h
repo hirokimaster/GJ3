@@ -10,6 +10,7 @@
 #include "engine/Utility/CollisionManager/CollisionManager.h"
 
 #include "application/Player/Player.h"
+#include "application/Wall/Wall.h"
 #include "application/GameCamera/GameCamera.h"
 #include "application/Ground/Ground.h"
 #include "application/Obstacles/Obstacles.h"
@@ -67,6 +68,8 @@ private:
 	//std::unique_ptr<Obstacles> obstacles;
 	// 障害物
 	std::list<std::unique_ptr<Obstacles>> obstacles_;
+	// 雲
+	std::list<std::unique_ptr<Wall>> walls_;
 
 	//タイマー用
 	std::unique_ptr<Timer>timer;
