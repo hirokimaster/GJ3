@@ -80,12 +80,12 @@ void Player::Update()
 
 	
 	Fall();
+	aniTime_++;
 	object_->SetAnimationTime(aniTime_);
 	object_->SetWorldTransform(worldTransform_);
 	worldTransform_.UpdateMatrix();
 	// カメラのYをプレイヤーに追従
 	camera_->translate.y = worldTransform_.translate.y;
-	worldTransform_.rotate.y += 0.01f;
 }
 
 void Player::Draw(Camera& camera)
@@ -100,7 +100,7 @@ void Player::Move()
 		if (!inoperable_) {
 			worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
 			if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
-				//worldTransform_.rotate.y = 3.14f;
+				worldTransform_.rotate.y = 3.14f;
 			}
 			else if (Input::GetInstance()->JoyStickParmLX(0.5f) > 0) {
 				worldTransform_.rotate.y = 1.57f;
