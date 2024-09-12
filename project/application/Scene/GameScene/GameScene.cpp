@@ -128,41 +128,6 @@ void GameScene::Update()
 		//ゲームプレイ
 		AfterPlayPhase();
 		break;
-		Transition();
-		camera_ = gameCamera_->GetCamera();
-		//GlobalVariables::GetInstance()->Update();
-		skydoem_->Update();
-		ground_->Update();
-		player_->Update();
-		gameCamera_->Update();
-		//obstacles->Update();
-		for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-			(*itr)->Update();
-		}
-		for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
-			(*itr)->Update();
-		}
-		//CheckAllCollision();
-
-		// ギミック
-		gimmick_->Update();
-
-		int index1 = timer->GetElapsedSeconds() % 10;			//一桁目の取得
-		int index10 = (timer->GetElapsedSeconds() / 10) % 10;	//二桁目の取得
-		int index100 = (timer->GetElapsedSeconds() / 100) % 10;	//二桁目の取得
-
-		//テクスチャをタイマーによって変更
-		timerSprite1->SetTexHandle(numberTexture[index1]);
-		timerSprite10->SetTexHandle(numberTexture[index10]);
-		timerSprite100->SetTexHandle(numberTexture[index100]);
-		Collision();
-
-		if (player_->GetWorldPosition().y <= 0) {
-
-			GameManager::GetInstance()->ChangeScene("RESULT");
-			GlobalVariables::GetInstance()->AddTime(groupName_, timer->GetElapsedSeconds());
-			//GlobalVariables::GetInstance()->SaveFileTimer();
-		}
 	}
 }
 
@@ -245,10 +210,16 @@ void GameScene::WaitPhase()
 	//GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
-	leftWall_->Update();
-	rightWall_->Update();
 	player_->Update();
 	gameCamera_->Update();
+
+	//obstacles->Update();
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+		(*itr)->Update();
+	}
 
 	int countdown = 4 - (timer->GetElapsedSeconds() % 5);		//一桁目の取得
 	if(timer->GetElapsedSeconds() > 0)
@@ -272,13 +243,15 @@ void GameScene::PlayPhase()
 	//GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
-	leftWall_->Update();
-	rightWall_->Update();
+
 	player_->Update();
 	player_->SetIsFall(true);
 	gameCamera_->Update();
 	//obstacles->Update();
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
 		(*itr)->Update();
 	}
 	//CheckAllCollision();
@@ -315,10 +288,17 @@ void GameScene::AfterPlayPhase()
 	//GlobalVariables::GetInstance()->Update();
 	skydoem_->Update();
 	ground_->Update();
-	leftWall_->Update();
-	rightWall_->Update();
+	
 	player_->Update();
 	gameCamera_->Update();
+
+	//obstacles->Update();
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+		(*itr)->Update();
+	}
 
 	Transition2();
 
