@@ -65,7 +65,7 @@ void Thunder::Move()
 	// 雷
 	object_->SetPosition(worldTransform_.translate);
 	object_->SetScale(worldTransform_.scale);
-	worldTransform_.scale.y += 4.0f;
+	worldTransform_.scale.y += 1.0f;
 }
 
 void Thunder::Fall()
@@ -82,9 +82,10 @@ void Thunder::Fall()
 
 	// playerに追従する
 	if (target_) {
+		Vector3 offset = { 0.0f,30.0f,0.0f };
 		preline_->SetPosition(worldTransformPreline_.translate);
 		worldTransformPreline_.translate.x = target_->translate.x;
-		worldTransform_.translate.x = target_->translate.x;
+		worldTransform_.translate = target_->translate + offset;
 	}
 
 	// 点滅してるとき
@@ -105,7 +106,12 @@ void Thunder::Fall()
 	}
 
 	// 落下が終わったら
-	if (worldTransform_.scale.y >= 200.0f) {
+	if (worldTransform_.scale.y >= 150.0f) {
+		isFall_ = false;
+		worldTransform_.scale.y = 1.0f;
+	}
+
+	if (isBlinking_) {
 		isFall_ = false;
 		worldTransform_.scale.y = 1.0f;
 	}
