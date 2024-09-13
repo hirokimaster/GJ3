@@ -174,8 +174,8 @@ void ResultScene::Update()
 
 	Transition();
 
-	Transition();
-
+	Transition2();
+			   
 	ground_->Update();
 	player_->ResultUpdate();
 	
@@ -196,8 +196,9 @@ void ResultScene::Update()
 void ResultScene::Draw()
 {
 	
-	ground_->Draw(camera_);
-	player_->Draw(camera_);
+	spriteMask_->Draw();
+	postProcess_->Draw();
+
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
 	}
@@ -214,10 +215,17 @@ void ResultScene::Draw()
 	for (auto itr = timerSprites100_.begin(); itr != timerSprites100_.end(); itr++) {
 		(*itr)->Draw();
 	}
+
 }
 
 void ResultScene::PostProcessDraw()
 {
+	postProcess_->PreDraw();
+
+	ground_->Draw(camera_);
+	player_->Draw(camera_);
+
+	postProcess_->PostDraw();
 }
 
 
