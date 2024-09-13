@@ -84,7 +84,7 @@ void Thunder::Fall()
 	if (target_) {
 		Vector3 offset = { 0.0f,30.0f,0.0f };
 		preline_->SetPosition(worldTransformPreline_.translate);
-		worldTransformPreline_.translate.x = target_->translate.x;
+		worldTransformPreline_.translate = target_->translate + offset;
 		worldTransform_.translate = target_->translate + offset;
 	}
 

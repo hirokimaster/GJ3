@@ -194,7 +194,7 @@ void GameScene::Transition()
 void GameScene::Transition2()
 {
 	if (isTransition_) {
-		postProcess_->SetDissolveParam(param_);
+		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
 			isTransition_ = false;
