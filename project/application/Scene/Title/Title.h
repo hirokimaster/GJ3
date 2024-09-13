@@ -107,6 +107,7 @@ private:
 	uint32_t texHandleHardR_ = 0;
 
 	uint32_t texHandleA_ = 0;
+	uint32_t texHandleSpace_ = 0;
 
 	uint32_t selectNum_ = 0;
 	static Level level_;

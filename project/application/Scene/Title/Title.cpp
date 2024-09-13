@@ -32,12 +32,15 @@ void Title::Initialize()
 	spriteTitle2_.reset(Sprite::Create(texHandleOp_, { 335.0f,481.0f }));
 	spriteTitle3_.reset(Sprite::Create(texHandleEnd_, { 335.0f,574.0f }));
 	spriteTitlename_.reset(Sprite::Create(texHandleTitle_, { 257.0f,132.0f }));
-	spriteA_.reset(Sprite::Create(texHandleA_, { 1100.0f,600.0f }));
+	spriteA_.reset(Sprite::Create(texHandleSpace_, { 1100.0f,600.0f }));
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 
 
-
+	if (Input::GetInstance()->GetJoystickState())
+	{
+		spriteA_->SetTexHandle(texHandleA_);
+	}
 
 
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
@@ -114,6 +117,16 @@ void Title::Update()
 
 	camera_.UpdateMatrix();
 
+	
+
+	if (Input::GetInstance()->GetJoystickState())
+	{
+		spriteA_->SetTexHandle(texHandleA_);
+	}
+	else
+	{
+		spriteA_->SetTexHandle(texHandleSpace_);
+	}
 }
 
 void Title::Draw()
@@ -264,6 +277,9 @@ void Title::SelectMode()
 				isTransition_ = true;
 				gameAudio_->ClickSE();
 			}
+
+			
+
 		}
 		else if (level_ == Level::NORMAL) {
 			// ゲームシーンにいく
@@ -324,7 +340,7 @@ void Title::TextureResources()
 	texHandleHardR_ = TextureManager::Load("resources/Title/hardR.png");
 
 	texHandleA_ = TextureManager::Load("resources/A.png");
-
+	texHandleSpace_ = TextureManager::Load("resources/space.png");
 }
 
 void Title::Transition()

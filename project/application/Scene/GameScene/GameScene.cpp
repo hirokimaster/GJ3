@@ -249,7 +249,7 @@ void GameScene::WaitPhase()
 		(*itr)->Update();
 	}
 
-	int countdown = 4 - (timer->GetElapsedSeconds() % 5);		//一桁目の取得
+	int countdown = 3 - (timer->GetElapsedSeconds() % 4);		//一桁目の取得
 	if(timer->GetElapsedSeconds() > 0)
 	{
 		countdownSprite->SetTexHandle(numberTexture[countdown]);

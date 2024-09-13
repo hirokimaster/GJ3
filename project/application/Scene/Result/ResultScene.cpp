@@ -25,6 +25,7 @@ void ResultScene::Initialize()
 	postProcess_->SetEffect(BloomDissolve);
 	texHandleMask_ = TextureManager::Load("resources/noise9.png");
 	texHandleA_ = TextureManager::Load("resources/A.png");
+	texHandleSpace_ = TextureManager::Load("resources/space.png");
 
 	postProcess_->SetMaskTexture(texHandleMask_);
 	param_.threshold = 1.0f;
@@ -177,6 +178,11 @@ void ResultScene::Initialize()
 
 	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
+
+	if (Input::GetInstance()->GetJoystickState())
+	{
+		spriteA_->SetTexHandle(texHandleA_);
+	}
 }
 
 void ResultScene::Update()
@@ -206,6 +212,16 @@ void ResultScene::Update()
 	}
 
 	camera_.UpdateMatrix();
+
+	if (Input::GetInstance()->GetJoystickState())
+	{
+		spriteA_->SetTexHandle(texHandleA_);
+	}
+	else
+	{
+		spriteA_->SetTexHandle(texHandleSpace_);
+	}
+
 }
 
 void ResultScene::Draw()

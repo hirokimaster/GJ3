@@ -77,6 +77,7 @@ private:
 	std::unique_ptr<Sprite> spriteA_ = nullptr;
 
 	uint32_t texHandleA_ = 0;
+	uint32_t texHandleSpace_ = 0;
 	uint32_t numberTexture[10];
 
 	// BGM,SE
