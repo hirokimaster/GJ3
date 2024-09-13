@@ -179,8 +179,20 @@ void Player::ResultUpdate()
 
 void Player::Move()
 {
-	if (Input::GetInstance()->GetJoystickState()) {
-		
+
+
+	if (Input::GetInstance()->PushKey(DIK_D)) {
+		worldTransform_.translate.x += 0.1f;
+		worldTransform_.rotate.y = 1.57f;
+	}
+	else if (Input::GetInstance()->PushKey(DIK_A)) {
+		worldTransform_.translate.x -= 0.1f;
+		worldTransform_.rotate.y = 1.57f * 2.5f;
+	}
+
+	if(Input::GetInstance()->GetJoystickState() ){
+
+
 		if (!inoperable_) {
 			worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
 			if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
@@ -192,9 +204,16 @@ void Player::Move()
 			else if (Input::GetInstance()->JoyStickParmLX(0.5f) < 0) {
 				worldTransform_.rotate.y = 1.57f * 2.5f;
 			}
+
+
 		}
-		
 	}
+	
+
+	
+
+		
+	
 
 	if (worldTransform_.translate.x >= 10.0f) {
 		worldTransform_.translate.x = 10.0f;
