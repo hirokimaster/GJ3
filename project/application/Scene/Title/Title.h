@@ -9,6 +9,11 @@
 #include "application/GameManager/GameManager.h"
 #include "engine/Loader/Loader.h"
 
+#include "application/Player/Player.h"
+#include "application/Wall/Wall.h"
+#include "application/Ground/Ground.h"
+#include "application/Obstacles/Obstacles.h"
+#include "application/Skydome/Skydome.h"
 enum class Level {
 	EASY,
 	NORMAL,
@@ -92,4 +97,17 @@ private:
 	// シーン遷移用
 	bool isTransition_ = false;
 	float sceneTimer_ = 130.0f;
+
+	const char* groupName_ = nullptr;
+	Camera camera_;
+	std::unique_ptr<Player> player_;
+	std::unique_ptr<Ground> ground_;
+	// 障害物
+	std::list<std::unique_ptr<Obstacles>> obstacles_;
+	// 雲
+	std::list<std::unique_ptr<Wall>> walls_;
+
+	std::unique_ptr<Skydome> skydoem_;
+
+
 };

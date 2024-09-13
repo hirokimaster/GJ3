@@ -106,9 +106,11 @@ void Player::Draw(Camera& camera)
 
 void Player::ResultUpdate()
 {
+	aniTime_ += 1.0f / 60.0f;
+	aniTime_ = std::fmod(aniTime_, duration_);
 	object_->SetAnimationTime(aniTime_);
 	worldTransform_.rotate.y = 1.57f * 2.5f;
-	object_->SetAnimationTime(aniTime_);
+	//object_->SetAnimationTime(aniTime_);
 	worldTransform_.UpdateMatrix();
 	object_->SetWorldTransform(worldTransform_);
 	

@@ -24,11 +24,9 @@ void GameScene::Initialize()
 	param_.threshold = 1.0f;
 	postProcess_->SetDissolveParam(param_);
 
-	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
-	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
-	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
-	ModelManager::GetInstance()->LoadObjModel("cube.obj");
-	ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
+	//ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
+
+
 	//ModelManager::GetInstance()->LoadAnimationModel("Player/player2.gltf");
 	//ModelManager::GetInstance()->LoadObjModel("Player/player.obj");
 	
@@ -36,7 +34,7 @@ void GameScene::Initialize()
 	camera_.Initialize();
 
 	player_ = std::make_unique<Player>();
-	player_->Init({0.0f,100.0f,0.0f});
+	
 
 	
 	gameCamera_ = std::make_unique<GameCamera>();
@@ -82,7 +80,7 @@ void GameScene::Initialize()
 	case Level::EASY: {
 		Loader::LoadJsonFile("resources/stage", "easy", player_.get(), ground_.get(), obstacles_,walls_);
 		//GlobalVariables::GetInstance()->LoadFiles();
-
+		player_->Init({ 0.0f,100.0f,0.0f });
 		/*-----------------------あまりよくない感じ-------------------*/
 		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 		groupName_ = "easyTimeScore";
@@ -95,6 +93,8 @@ void GameScene::Initialize()
 		break;
 	}
 	case Level::NORMAL: {
+		Loader::LoadJsonFile("resources/stage", "normal", player_.get(), ground_.get(), obstacles_, walls_);
+		player_->Init({ 0.0f,200.0f,0.0f });
 		/*-----------------------あまりよくない感じ-------------------*/
 		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 		groupName_ = "normalTimeScore";
@@ -102,6 +102,8 @@ void GameScene::Initialize()
 		break;
 	}
 	case Level::HARD: {
+		Loader::LoadJsonFile("resources/stage", "hard", player_.get(), ground_.get(), obstacles_, walls_);
+		player_->Init({ 0.0f,300.0f,0.0f });
 		/*-----------------------あまりよくない感じ-------------------*/
 		GlobalVariables* globalVariables = GlobalVariables::GetInstance();
 		groupName_ = "hardTimeScore";

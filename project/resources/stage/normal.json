@@ -420,50 +420,6 @@
         },
         {
             "type": "MESH",
-            "name": "球.014",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    215.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    10.0,
-                    10.0,
-                    10.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.015",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    229.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    11.0,
-                    11.0,
-                    11.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
             "name": "球.016",
             "transform": {
                 "translation": [
@@ -530,50 +486,6 @@
         },
         {
             "type": "MESH",
-            "name": "球.019",
-            "transform": {
-                "translation": [
-                    20.0,
-                    0.0,
-                    214.12998962402344
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    11.0,
-                    11.0,
-                    11.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.020",
-            "transform": {
-                "translation": [
-                    20.0,
-                    0.0,
-                    228.3199920654297
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    10.0,
-                    10.0,
-                    10.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
             "name": "球.021",
             "transform": {
                 "translation": [
@@ -612,28 +524,6 @@
                     10.0,
                     10.0,
                     10.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.023",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    244.4499969482422
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -0.0,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    12.0,
-                    12.0,
-                    12.0
                 ]
             },
             "file_name": "wall"
@@ -684,28 +574,6 @@
         },
         {
             "type": "MESH",
-            "name": "球.026",
-            "transform": {
-                "translation": [
-                    20.0,
-                    0.0,
-                    244.4499969482422
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -0.0,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    12.0,
-                    12.0,
-                    12.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
             "name": "球.027",
             "transform": {
                 "translation": [
@@ -744,94 +612,6 @@
                     11.0,
                     11.0,
                     11.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.029",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    215.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    10.0,
-                    10.0,
-                    10.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.030",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    229.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    11.0,
-                    11.0,
-                    11.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.031",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    229.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    11.0,
-                    11.0,
-                    11.0
-                ]
-            },
-            "file_name": "wall"
-        },
-        {
-            "type": "MESH",
-            "name": "球.032",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    0.0,
-                    215.04998779296875
-                ],
-                "rotation": [
-                    1.5707964897155762,
-                    -5.024294934767972e-15,
-                    -3.141592502593994
-                ],
-                "scaling": [
-                    10.0,
-                    10.0,
-                    10.0
                 ]
             },
             "file_name": "wall"
@@ -997,7 +777,7 @@
                 "translation": [
                     0.0,
                     0.0,
-                    83.83000183105469
+                    82.52000427246094
                 ],
                 "rotation": [
                     0.0,
@@ -1017,9 +797,9 @@
             "name": "obstacles_立方体.005",
             "transform": {
                 "translation": [
+                    -9.069999694824219,
                     0.0,
-                    0.0,
-                    96.90999603271484
+                    94.54999542236328
                 ],
                 "rotation": [
                     0.0,
@@ -1130,6 +910,446 @@
                     0.0,
                     0.0,
                     34.529998779296875
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "球.045",
+            "transform": {
+                "translation": [
+                    -20.0,
+                    0.0,
+                    200.85000610351562
+                ],
+                "rotation": [
+                    1.5707964897155762,
+                    -5.024294934767972e-15,
+                    -3.141592502593994
+                ],
+                "scaling": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "file_name": "wall"
+        },
+        {
+            "type": "MESH",
+            "name": "球.047",
+            "transform": {
+                "translation": [
+                    -20.0,
+                    0.0,
+                    200.85000610351562
+                ],
+                "rotation": [
+                    1.5707964897155762,
+                    -5.024294934767972e-15,
+                    -3.141592502593994
+                ],
+                "scaling": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "file_name": "wall"
+        },
+        {
+            "type": "MESH",
+            "name": "球.050",
+            "transform": {
+                "translation": [
+                    -20.0,
+                    0.0,
+                    200.85000610351562
+                ],
+                "rotation": [
+                    1.5707964897155762,
+                    -5.024294934767972e-15,
+                    -3.141592502593994
+                ],
+                "scaling": [
+                    10.0,
+                    10.0,
+                    10.0
+                ]
+            },
+            "file_name": "wall"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.011",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    135.62998962402344
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.012",
+            "transform": {
+                "translation": [
+                    -8.220000267028809,
+                    0.0,
+                    124.68000030517578
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.013",
+            "transform": {
+                "translation": [
+                    -8.519999504089355,
+                    0.0,
+                    155.51998901367188
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.014",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    165.1899871826172
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.015",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    107.25
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.016",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    156.15000915527344
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.017",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    145.70999145507812
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.018",
+            "transform": {
+                "translation": [
+                    8.609999656677246,
+                    0.0,
+                    146.2899932861328
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.019",
+            "transform": {
+                "translation": [
+                    5.440000057220459,
+                    0.0,
+                    135.62998962402344
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.020",
+            "transform": {
+                "translation": [
+                    -7.899999618530273,
+                    0.0,
+                    184.4199981689453
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.021",
+            "transform": {
+                "translation": [
+                    -3.3499999046325684,
+                    0.0,
+                    178.17999267578125
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.022",
+            "transform": {
+                "translation": [
+                    -0.3999999761581421,
+                    0.0,
+                    189.1899871826172
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.023",
+            "transform": {
+                "translation": [
+                    4.660000324249268,
+                    0.0,
+                    174.12998962402344
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.024",
+            "transform": {
+                "translation": [
+                    -4.710000038146973,
+                    0.0,
+                    169.61997985839844
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.025",
+            "transform": {
+                "translation": [
+                    7.899998664855957,
+                    0.0,
+                    115.73999786376953
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.026",
+            "transform": {
+                "translation": [
+                    -5.84999942779541,
+                    0.0,
+                    112.66000366210938
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.027",
+            "transform": {
+                "translation": [
+                    7.799999237060547,
+                    0.0,
+                    97.2699966430664
                 ],
                 "rotation": [
                     0.0,

@@ -2,7 +2,7 @@
 #include "engine/TextureManager/TextureManager.h"
 #include "application/Player/Player.h"
 
-void Obstacles::Init(Vector3 translate)
+void Obstacles::Init(Vector3 translate, bool isMove)
 {
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 1.0f, 0.5f, 1.0f };
@@ -19,16 +19,36 @@ void Obstacles::Init(Vector3 translate)
 	SetCollosionAttribute(0b10);
 	SetCollisionMask(0b01);
 	SetRadious(0.5f);
+	velo_ = 0.2f;
+	isMove_ = isMove;
 }
 
 void Obstacles::Update()
 {
+	Move();
 	worldTransform_.UpdateMatrix();
+	object_->SetWorldTransform(worldTransform_);
+	
 }
 
 void Obstacles::Draw(Camera& camera)
 {
 	object_->Draw(camera);
+}
+
+void Obstacles::Move()
+{
+	if (isMove_) {
+		worldTransform_.translate.x += velo_;
+	}
+	if (worldTransform_.translate.x >= 10.0f) {
+		worldTransform_.translate.x = 10.0f;
+		velo_ *= -1.0f;
+	}
+	else if (worldTransform_.translate.x <= -10.0f) {
+		worldTransform_.translate.x = -10.0f;
+		velo_ *= -1.0f;
+	}
 }
 
 Vector3 Obstacles::GetWorldPosition()
