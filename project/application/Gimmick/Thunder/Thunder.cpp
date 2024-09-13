@@ -41,7 +41,10 @@ void Thunder::Update()
 
 void Thunder::Draw(Camera& camera)
 {
-	object_->Draw(camera);
+	if (!isBlinking_) {
+		object_->Draw(camera);
+	}
+	
 	
 	if (blinkingTimer_ % 40 >= 20 && isBlinking_) {						 
 		preline_->Draw(camera);
