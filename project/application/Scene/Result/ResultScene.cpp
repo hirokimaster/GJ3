@@ -16,6 +16,21 @@ void ResultScene::Initialize()
 	//gameAudio_ = GameAudio::GetInstance();
 	//gameAudio_->ResultBGM(true);
 
+	// postEffect
+	isTransition_ = true;
+	isTransition2_ = false;
+	postProcess_ = std::make_unique<PostProcess>();
+	postProcess_->Initialize();
+	postProcess_->SetEffect(BloomDissolve);
+	texHandleMask_ = TextureManager::Load("resources/noise9.png");
+	postProcess_->SetMaskTexture(texHandleMask_);
+	param_.threshold = 1.0f;
+	param_.stepWidth = 0.001f;
+	param_.sigma = 0.005f;
+	param_.lightStrength = 0.3f;
+	param_.bloomThreshold = 0.3f;
+	postProcess_->SetBloomDissolveParam(param_);
+
 	switch (Title::GetLevel()) {
 	case Level::EASY: {
 		//GlobalVariables::GetInstance()->LoadFiles();
@@ -157,13 +172,16 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 
+	Transition();
+
+	Transition();
 
 	ground_->Update();
 	player_->ResultUpdate();
 	
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 		//gameAudio_->ResultBGM(false);
-		GameManager::GetInstance()->ChangeScene("TITLE");
+		isTransition2_ = true;
 	}
 
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
@@ -200,4 +218,32 @@ void ResultScene::Draw()
 
 void ResultScene::PostProcessDraw()
 {
+}
+
+
+void ResultScene::Transition()
+{
+	if (isTransition_) {
+		postProcess_->SetBloomDissolveParam(param_);
+		param_.threshold -= 0.02f;
+		if (param_.threshold <= 0.0f) {
+			isTransition_ = false;
+			param_.threshold = 0.0f;
+		}
+	}
+
+}
+
+void ResultScene::Transition2()
+{
+	if (isTransition2_) {
+		postProcess_->SetBloomDissolveParam(param_);
+		param_.threshold += 0.02f;
+		if (param_.threshold >= 1.2f) {
+			//gameAudio_->ResultBGM(false);
+			isTransition_ = false;
+			GameManager::GetInstance()->ChangeScene("TITLE");
+		}
+	}
+
 }
