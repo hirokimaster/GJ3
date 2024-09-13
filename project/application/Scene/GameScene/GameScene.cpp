@@ -24,11 +24,12 @@ void GameScene::Initialize()
 	param_.threshold = 1.0f;
 	postProcess_->SetDissolveParam(param_);
 
-	ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
+	//ModelManager::GetInstance()->LoadAnimationModel("sneakWalk.gltf");
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
-	ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
+	//ModelManager::GetInstance()->LoadAnimationModel("Player/jumpPlayer.gltf");
+	//ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
 	//ModelManager::GetInstance()->LoadAnimationModel("Player/player2.gltf");
 	//ModelManager::GetInstance()->LoadObjModel("Player/player.obj");
 	
