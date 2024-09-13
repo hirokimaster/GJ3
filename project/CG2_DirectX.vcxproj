@@ -109,6 +109,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="application\GameAudio\GameAudio.cpp" />
     <ClCompile Include="application\GameManager\GameManager.cpp" />
     <ClCompile Include="application\Gimmick\Gimmick.cpp" />
     <ClCompile Include="application\Gimmick\Thunder\Thunder.cpp" />
@@ -166,6 +167,7 @@ copy "$(WindowsSdkdir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="application\Wall\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="application\GameAudio\GameAudio.h" />
     <ClInclude Include="application\GameManager\GameManager.h" />
     <ClInclude Include="application\Gimmick\Gimmick.h" />
     <ClInclude Include="application\Gimmick\Thunder\Thunder.h" />
