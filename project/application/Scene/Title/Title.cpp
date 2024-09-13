@@ -21,6 +21,13 @@ void Title::Initialize()
 	spriteTitle_.reset(Sprite::Create(texHandleStart_, { 335.0f,388.0f }));
 	spriteTitle2_.reset(Sprite::Create(texHandleOp_, { 335.0f,481.0f }));
 	spriteTitle3_.reset(Sprite::Create(texHandleEnd_, { 335.0f,574.0f }));
+	spriteTitlename_.reset(Sprite::Create(texHandleTitle_, { 288.0f,132.0f }));
+
+	worldTransform_.Initialize();
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
+
+
+
 
 
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
@@ -77,6 +84,8 @@ void Title::Update()
 	player_->ResultUpdate();
 
 
+	
+
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Update();
 	}
@@ -106,9 +115,10 @@ void Title::PostProcessDraw()
 	
 	postProcess_->PreDraw();
 
-
+	
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
+
 
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
@@ -117,6 +127,7 @@ void Title::PostProcessDraw()
 		(*itr)->Draw(camera_);
 	}
 
+	spriteTitlename_->Draw();
 	spriteTitle_->Draw();
 	spriteTitle2_->Draw();
 	spriteTitle3_->Draw();

@@ -82,6 +82,9 @@ private:
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
 	std::unique_ptr<Sprite> spriteTitle2_ = nullptr;
 	std::unique_ptr<Sprite> spriteTitle3_ = nullptr;
+
+	std::unique_ptr<Sprite> spriteTitlename_ = nullptr;
+
 	uint32_t texHandleTitle_ = 0;
 	uint32_t texHandleStart_ = 0;
 	uint32_t texHandleOp_ = 0;
@@ -115,6 +118,10 @@ private:
 	Camera camera_;
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<Ground> ground_;
+
+	WorldTransform worldTransform_;
+
+
 	// 障害物
 	std::list<std::unique_ptr<Obstacles>> obstacles_;
 	// 雲
