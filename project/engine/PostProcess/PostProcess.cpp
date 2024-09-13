@@ -86,7 +86,7 @@ void PostProcess::CreateBuffer()
 		bloom_->Map(0, nullptr, reinterpret_cast<void**>(&bloomData_));
 		bloomData_->stepWidth = 0.001f;
 		bloomData_->sigma = 0.005f;
-		bloomData_->lightStrength = 1.0f;
+		bloomData_->lightStrength = 0.3f;
 		bloomData_->bloomThreshold = 0.2f;
 	}
 	else if (type_ == Vignette) {
@@ -122,6 +122,16 @@ void PostProcess::CreateBuffer()
 		random_->Map(0, nullptr, reinterpret_cast<void**>(&randomData_));
 		randomData_->time = 0.0f;
 	}
+	else if (type_ == BloomDissolve) {
+		// bloom
+		bloomDissolve_ = CreateResource::CreateBufferResource(sizeof(BloomDissolveParam));
+		bloomDissolve_->Map(0, nullptr, reinterpret_cast<void**>(&bloomDissolveData_));
+		bloomDissolveData_->stepWidth = 0.001f;
+		bloomDissolveData_->sigma = 0.005f;
+		bloomDissolveData_->lightStrength = 1.0f;
+		bloomDissolveData_->bloomThreshold = 0.2f;
+		bloomDissolveData_->threshold = 0.5f;
+	}
 }
 
 void PostProcess::CreatePipeLine()
@@ -153,6 +163,9 @@ void PostProcess::CreatePipeLine()
 	else if (type_ == Random) {
 		pipeline_ = GraphicsPipeline::GetInstance()->GetPSO().Random;
 	}
+	else if (type_ == BloomDissolve) {
+		pipeline_ = GraphicsPipeline::GetInstance()->GetPSO().BloomDissolve;
+	}
 }
 
 void PostProcess::SetConstantBuffer()
@@ -179,6 +192,10 @@ void PostProcess::SetConstantBuffer()
 	}
 	else if (type_ == Random) {
 		DirectXCommon::GetCommandList()->SetGraphicsRootConstantBufferView(1, random_->GetGPUVirtualAddress());
+	}
+	else if (type_ == BloomDissolve) {
+		DirectXCommon::GetCommandList()->SetGraphicsRootConstantBufferView(1, bloomDissolve_->GetGPUVirtualAddress());
+		DirectXCommon::GetCommandList()->SetGraphicsRootDescriptorTable(2, SrvManager::GetInstance()->GetGPUHandle(maskTexHandle_));
 	}
 }
 

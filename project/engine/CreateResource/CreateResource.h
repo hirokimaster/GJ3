@@ -101,6 +101,14 @@ struct RandomParam {
 	float time;
 };
 
+struct BloomDissolveParam {
+	float stepWidth;
+	float sigma;
+	float lightStrength;
+	float bloomThreshold;
+	float threshold;
+};
+
 class CreateResource {
 public:
 	// Resource作成

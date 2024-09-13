@@ -48,6 +48,8 @@ public:
 
 	RandomParam SetRandomParam(RandomParam param) {return *randomData_ = param;}
 
+	BloomDissolveParam SetBloomDissolveParam(BloomDissolveParam param) { return *bloomDissolveData_ = param; }
+
 	void SetMaskTexture(uint32_t texHandle) {maskTexHandle_ = texHandle; }
 
 	void SetCamera(Camera camera) { camera = camera_; }
@@ -126,5 +128,8 @@ private:
 	uint32_t maskTexHandle_ = 0;
 	Microsoft::WRL::ComPtr<ID3D12Resource> random_;
 	RandomParam* randomData_ = nullptr;
+	// bloomDissolve
+	Microsoft::WRL::ComPtr<ID3D12Resource> bloomDissolve_;
+	BloomDissolveParam* bloomDissolveData_ = nullptr;
 
 };

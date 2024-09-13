@@ -108,7 +108,7 @@ private:
 
 	// postEffect用
 	uint32_t texHandleMask_ = 0;
-	DissolveParam param_{};
+	BloomDissolveParam param_{};
 	std::unique_ptr<Sprite> spriteMask_;
 	uint32_t texHandleWhite_ = 0;
 	std::unique_ptr<PostProcess> postProcess_;
