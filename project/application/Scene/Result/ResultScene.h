@@ -73,6 +73,10 @@ private:
 	std::vector<std::unique_ptr<Sprite>> timerSprites1_;
 	std::vector<std::unique_ptr<Sprite>> timerSprites10_;
 	std::vector<std::unique_ptr<Sprite>> timerSprites100_;
+
+	std::unique_ptr<Sprite> spriteA_ = nullptr;
+
+	uint32_t texHandleA_ = 0;
 	uint32_t numberTexture[10];
 
 	// BGM,SE

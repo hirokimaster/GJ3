@@ -32,7 +32,7 @@ void Title::Initialize()
 	spriteTitle2_.reset(Sprite::Create(texHandleOp_, { 335.0f,481.0f }));
 	spriteTitle3_.reset(Sprite::Create(texHandleEnd_, { 335.0f,574.0f }));
 	spriteTitlename_.reset(Sprite::Create(texHandleTitle_, { 257.0f,132.0f }));
-
+	spriteA_.reset(Sprite::Create(texHandleA_, { 1100.0f,600.0f }));
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 0.5f,0.5f,0.5f };
 
@@ -117,6 +117,16 @@ void Title::Draw()
 
 	postProcess_->Draw();
 
+	if (!isTransition_ && param_.threshold <= 0.2f) {
+
+		spriteTitlename_->Draw();
+		spriteTitle_->Draw();
+		spriteTitle2_->Draw();
+		spriteTitle3_->Draw();
+
+		spriteA_->Draw();
+	}
+
 }
 
 void Title::PostProcessDraw()
@@ -138,10 +148,7 @@ void Title::PostProcessDraw()
 		(*itr)->Draw(camera_);
 	}
 
-	spriteTitlename_->Draw();
-	spriteTitle_->Draw();
-	spriteTitle2_->Draw();
-	spriteTitle3_->Draw();
+
 
 	postProcess_->PostDraw();
 }
@@ -308,6 +315,9 @@ void Title::TextureResources()
 	texHandleEasyR_ = TextureManager::Load("resources/Title/easyR.png");
 	texHandleNormalR_ = TextureManager::Load("resources/Title/normalR.png");
 	texHandleHardR_ = TextureManager::Load("resources/Title/hardR.png");
+
+	texHandleA_ = TextureManager::Load("resources/A.png");
+
 }
 
 void Title::Transition()

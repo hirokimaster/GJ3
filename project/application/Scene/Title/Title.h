@@ -86,6 +86,8 @@ private:
 
 	std::unique_ptr<Sprite> spriteTitlename_ = nullptr;
 
+	std::unique_ptr<Sprite> spriteA_ = nullptr;
+
 	uint32_t texHandleTitle_ = 0;
 	uint32_t texHandleStart_ = 0;
 	uint32_t texHandleOp_ = 0;
@@ -101,6 +103,8 @@ private:
 	uint32_t texHandleEasyR_ = 0;
 	uint32_t texHandleNormalR_ = 0;
 	uint32_t texHandleHardR_ = 0;
+
+	uint32_t texHandleA_ = 0;
 
 	uint32_t selectNum_ = 0;
 	static Level level_;

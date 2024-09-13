@@ -23,6 +23,8 @@ void ResultScene::Initialize()
 	postProcess_->Initialize();
 	postProcess_->SetEffect(BloomDissolve);
 	texHandleMask_ = TextureManager::Load("resources/noise9.png");
+	texHandleA_ = TextureManager::Load("resources/A.png");
+
 	postProcess_->SetMaskTexture(texHandleMask_);
 	param_.threshold = 1.0f;
 	param_.stepWidth = 0.001f;
@@ -30,6 +32,8 @@ void ResultScene::Initialize()
 	param_.lightStrength = 0.3f;
 	param_.bloomThreshold = 0.3f;
 	postProcess_->SetBloomDissolveParam(param_);
+
+	spriteA_.reset(Sprite::Create(texHandleA_, { 1100.0f,600.0f }));
 
 	switch (Title::GetLevel()) {
 	case Level::EASY: {
@@ -209,6 +213,7 @@ void ResultScene::Draw()
 	spriteMask_->Draw();
 	postProcess_->Draw();
 
+
 	if (!isTransition2_ && param_.threshold <= 0.2f) {
 
 		for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
@@ -227,6 +232,8 @@ void ResultScene::Draw()
 		for (auto itr = timerSprites100_.begin(); itr != timerSprites100_.end(); itr++) {
 			(*itr)->Draw();
 		}
+
+		spriteA_->Draw();
 	}
 }
 
