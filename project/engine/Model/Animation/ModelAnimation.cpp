@@ -197,8 +197,8 @@ SkinCluster ModelAnimation::CreateSkinCluster(const ModelData& modelData, const 
 	//srvIndex_ = SrvManager::GetInstance()->GetIndex();
 	//SrvManager::GetInstance()->ShiftIndex(); // srvのindexの位置を空いてる次にずらす
 	
-	skinCluster.paletteSrvHandle.first = DescriptorManager::GetCPUDescriptorHandle(DescriptorManager::GetInstance()->GetSRV(), DescriptorManager::GetInstance()->GetDescSize().SRV, 300);
-	skinCluster.paletteSrvHandle.second = DescriptorManager::GetGPUDescriptorHandle(DescriptorManager::GetInstance()->GetSRV(), DescriptorManager::GetInstance()->GetDescSize().SRV, 300);
+	skinCluster.paletteSrvHandle.first = DescriptorManager::GetCPUDescriptorHandle(DescriptorManager::GetInstance()->GetSRV(), DescriptorManager::GetInstance()->GetDescSize().SRV, srvIndex_);
+	skinCluster.paletteSrvHandle.second = DescriptorManager::GetGPUDescriptorHandle(DescriptorManager::GetInstance()->GetSRV(), DescriptorManager::GetInstance()->GetDescSize().SRV, srvIndex_);
 
 	// palette用のsrvを作成。structuredBufferでアクセスできるようにする
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};

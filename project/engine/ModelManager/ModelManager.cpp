@@ -31,7 +31,7 @@ void ModelManager::LoadGLTFModel(const std::string& fileName)
 	ModelManager::GetInstance()->models_.insert(std::make_pair(fileName, std::move(model)));
 }
 
-void ModelManager::LoadAnimationModel(const std::string& fileName)
+void ModelManager::LoadAnimationModel(const std::string& fileName, uint32_t srvHandle)
 {
 	// 読み込み済みなら抜ける
 	if (ModelManager::GetInstance()->animModels_.contains(fileName)) {
@@ -39,6 +39,7 @@ void ModelManager::LoadAnimationModel(const std::string& fileName)
 	}
 
 	std::unique_ptr<ModelAnimation> animModel = std::make_unique<ModelAnimation>();
+	animModel->SetSrvHandle(srvHandle);
 	animModel->Initialize(fileName);
 	ModelManager::GetInstance()->animModels_.insert(std::make_pair(fileName, std::move(animModel)));
 }

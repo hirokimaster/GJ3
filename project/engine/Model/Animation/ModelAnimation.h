@@ -22,6 +22,7 @@ public:
 	void SetAnimationTime(float animationTime) { animationTime_ = animationTime; }
 	void SetTexHandle(uint32_t texHandle) { texHandle_ = texHandle; }
 	void SetColor(const Vector4& color) { color_ = color; }
+	void SetSrvHandle(uint32_t srvHandle) { srvIndex_ = srvHandle; }
 
 private: // ここでしか使わない関数
 

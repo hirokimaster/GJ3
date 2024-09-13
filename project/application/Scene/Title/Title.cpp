@@ -15,7 +15,8 @@ void Title::Initialize()
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
 	ModelManager::GetInstance()->LoadObjModel("cube.obj");
-	ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
+	ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf", 200);
+	ModelManager::GetInstance()->LoadAnimationModel("Player/jumpPlayer.gltf", 201);
 	isTransition_ = false;
 	postProcess_ = std::make_unique<PostProcess>();
 	postProcess_->Initialize();
@@ -48,8 +49,6 @@ void Title::Initialize()
     optionMode_ = false;
     optionTimer_ = 5.0f;
 
-
-  ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
 
   switch (Title::GetLevel()) {
   case Level::EASY: {
@@ -107,13 +106,11 @@ void Title::Update()
 void Title::Draw()
 {
 	
-	spriteMask_->Draw();
 	
+	spriteMask_->Draw();
+
 	postProcess_->Draw();
 
-
-	
-	
 }
 
 void Title::PostProcessDraw()

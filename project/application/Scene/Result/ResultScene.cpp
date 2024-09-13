@@ -12,9 +12,6 @@ ResultScene::~ResultScene()
 
 void ResultScene::Initialize()
 {
-
-	//ModelManager::GetInstance()->LoadAnimationModel("Player/jumpPlayer.gltf");
-
 	switch (Title::GetLevel()) {
 	case Level::EASY: {
 		//GlobalVariables::GetInstance()->LoadFiles();
@@ -141,6 +138,7 @@ void ResultScene::Initialize()
 	
 	player_ = std::make_unique<Player>();
 	player_->Init({ 0.0f,100.0f,0.0f });
+	player_->ModelChange("Player/jumpPlayer.gltf");
 	player_->SetCamera(&camera_);
 	ground_ = std::make_unique<Ground>();
 	ground_->Init({ 0.0f,0.0f,0.0f });

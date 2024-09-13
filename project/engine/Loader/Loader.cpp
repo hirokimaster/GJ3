@@ -219,11 +219,11 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 	// レベルデータからオブジェクトを生成、配置
 	for (auto& objectData : levelData->objects) {
 		if (objectData.fileName.compare("player") == 0) {
-			ModelManager::GetInstance()->LoadAnimationModel(objectData.fileName + ".gltf");
+			//ModelManager::GetInstance()->LoadAnimationModel(objectData.fileName + ".gltf");
 			player->Init(objectData.translate);
 		}
 		else if (objectData.fileName.compare("ground") == 0) {
-			ModelManager::GetInstance()->LoadAnimationModel(objectData.fileName + ".obj");
+			//ModelManager::GetInstance()->LoadAnimationModel(objectData.fileName + ".obj");
 			ground->Init(objectData.translate);
 		}
 		else if (objectData.fileName.compare("obstacles") == 0) {

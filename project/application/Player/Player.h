@@ -33,6 +33,7 @@ public:	// getter
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 	void SetIsFall(bool fall) { isFall_ = fall; };	//待機中かどうか（落ちない
+	void ModelChange(const std::string& fileName) { object_->SetAnimModel(fileName); }
 
 public: // Debug
 	// 調整項目の適用

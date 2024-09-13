@@ -36,7 +36,7 @@ public:
 	/// animationを含んだモデルのロード
 	/// </summary>
 	/// <param name="fileName"></param>
-	static void LoadAnimationModel(const std::string& fileName);
+	static void LoadAnimationModel(const std::string& fileName, uint32_t srvHandle);
 
 	/// <summary>
 	/// ロードしたobjモデルで生成
