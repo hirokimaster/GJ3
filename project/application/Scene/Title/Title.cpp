@@ -76,6 +76,9 @@ void Title::Initialize()
   player_->SetCamera(&camera_);
   ground_ = std::make_unique<Ground>();
   ground_->Init({ 0.0f,0.0f,0.0f });
+
+  skydoem_ = std::make_unique<Skydome>();
+  skydoem_->Init();
   Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
 
 }
@@ -123,7 +126,7 @@ void Title::PostProcessDraw()
 	
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
-
+	skydoem_->Draw(camera_);
 
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
