@@ -6,7 +6,6 @@
 class Timer
 {
 public:
-    Timer() : elapsed_seconds_(0), running_(false) {}
 
     // タイマー開始
     void Start();
@@ -19,11 +18,17 @@ public:
     // リセット
     void Reset();
 
+
     // 経過時間取得
     int GetElapsedSeconds();
+
+
+
 
 private:
     std::chrono::steady_clock::time_point startTime_;
     int elapsed_seconds_;
     bool running_;
+
+
 };

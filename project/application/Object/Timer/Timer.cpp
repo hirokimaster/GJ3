@@ -39,3 +39,4 @@ int Timer::GetElapsedSeconds()
     }
     return elapsed_seconds_;
 }
+

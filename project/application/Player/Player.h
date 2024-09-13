@@ -11,6 +11,7 @@ enum class Behavior {
 	kRoot, // 通常状態
 	kDeceleration, // 減速中
 	kElectricShock, // 感電中
+	kWait,	//待機時間中
 };
 
 class Player : public Collider
@@ -31,6 +32,7 @@ public:	// getter
 
 public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
+	void SetIsFall(bool fall) { isFall_ = fall; };	//待機中かどうか（落ちない
 
 public: // Debug
 	// 調整項目の適用
@@ -52,13 +54,16 @@ public: // Behavior関数
 	// 感電中行動
 	void BehaviorRootElectricShockInit();
 	void BehaviorRootElectricShockUpdate();
+	// 待機中行動
+	void BehaviorRootWaitInit();
+	void BehaviorRootWaitUpdate();
 
 public: //BehaviorSetter
 	void SetBehavior(Behavior behavior) { behaviorRequest_ = behavior; }
 
 private: // Behavior変数
 	// 振る舞い
-	Behavior behavior_ = Behavior::kRoot;
+	Behavior behavior_ = Behavior::kWait;
 	// 次の振る舞いリクエスト
 	std::optional<Behavior> behaviorRequest_ = std::nullopt;
 
@@ -69,7 +74,7 @@ private:
 	// プレイヤー用テクスチャ
 	uint32_t skinTex_;
 	float aniTime_ = 0;
-	float duration_ = 0; // アニメ―ション全体の尺（単位は秒）
+	float duration_ = 0.6f; // アニメ―ション全体の尺（単位は秒）
 
 	float fallVelo_ = 0.0f;
 	float gravity_ = 0.00098f;
@@ -80,5 +85,7 @@ private:
 	// ElectricShockTimer
 	float electricShockTimer_ = 0.0f;
 	bool inoperable_ = false;
+
+	bool isFall_ = false;	//落ちるかどうか	true:落ちる
 };
 

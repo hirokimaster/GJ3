@@ -53,6 +53,9 @@ void Player::Update()
 		case Behavior::kElectricShock:
 			BehaviorRootElectricShockInit();
 			break;
+		case Behavior::kWait:
+			BehaviorRootWaitInit();
+			break;
 		}
 		// 振る舞いリクエストをリセット
 		behaviorRequest_ = std::nullopt;
@@ -65,13 +68,20 @@ void Player::Update()
 	default:
 		Move();
 		BehaviorRootUpdate();
+		Fall();
 		break;
 	case Behavior::kDeceleration:
 		Move();
 		BehaviorRootDecelerationUpdate();
+		Fall();
 		break;
 	case Behavior::kElectricShock:
 		BehaviorRootElectricShockUpdate();
+		Fall();
+		break;
+	case Behavior::kWait:
+		Move();
+		BehaviorRootWaitUpdate();
 		break;
 	}
 
@@ -79,13 +89,14 @@ void Player::Update()
 	//ApplyGlobalVariables();
 
 	
-	Fall();
+	
+	aniTime_ += 1.0f / 60.0f;
+	aniTime_ = std::fmod(aniTime_, duration_);
 	object_->SetAnimationTime(aniTime_);
 	object_->SetWorldTransform(worldTransform_);
 	worldTransform_.UpdateMatrix();
 	// カメラのYをプレイヤーに追従
 	camera_->translate.y = worldTransform_.translate.y;
-	worldTransform_.rotate.y += 0.01f;
 }
 
 void Player::Draw(Camera& camera)
@@ -113,7 +124,7 @@ void Player::Move()
 		if (!inoperable_) {
 			worldTransform_.translate.x += Input::GetInstance()->JoyStickParmLX(0.1f);
 			if (Input::GetInstance()->JoyStickParmLX(0.5f) == 0) {
-				//worldTransform_.rotate.y = 3.14f;
+				worldTransform_.rotate.y = 3.14f;
 			}
 			else if (Input::GetInstance()->JoyStickParmLX(0.5f) > 0) {
 				worldTransform_.rotate.y = 1.57f;
@@ -210,5 +221,18 @@ void Player::BehaviorRootElectricShockUpdate()
 	if (electricShockTimer_ >= 120.0f) {
 		behaviorRequest_ = Behavior::kRoot;
 		inoperable_ = false;
+	}
+}
+
+void Player::BehaviorRootWaitInit()
+{
+	
+}
+
+void Player::BehaviorRootWaitUpdate()
+{
+	if (isFall_)
+	{
+		behaviorRequest_ = Behavior::kRoot;
 	}
 }
