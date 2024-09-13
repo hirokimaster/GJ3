@@ -189,7 +189,6 @@ void ResultScene::Update()
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 		gameAudio_->ResultBGM(false);
 		gameAudio_->ClickSE();
-		GameManager::GetInstance()->ChangeScene("TITLE");
 		//gameAudio_->ResultBGM(false);
 		isTransition2_ = true;
 	}
@@ -200,42 +199,45 @@ void ResultScene::Update()
 	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
 		(*itr)->ResultUpdate();
 	}
+
 	camera_.UpdateMatrix();
 }
 
 void ResultScene::Draw()
 {
 	
-	
-	
 	spriteMask_->Draw();
 	postProcess_->Draw();
 
-	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
-		(*itr)->Draw(camera_);
-	}
-	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
-		(*itr)->Draw(camera_);
-	}
+	if (!isTransition2_ && param_.threshold <= 0.2f) {
 
-	for (auto itr = timerSprites1_.begin(); itr != timerSprites1_.end(); itr++) {
-		(*itr)->Draw();
-	}
-	for (auto itr = timerSprites10_.begin(); itr != timerSprites10_.end(); itr++) {
-		(*itr)->Draw();
-	}
-	for (auto itr = timerSprites100_.begin(); itr != timerSprites100_.end(); itr++) {
-		(*itr)->Draw();
-	}
+		for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+			(*itr)->Draw(camera_);
+		}
+		for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+			(*itr)->Draw(camera_);
+		}
 
+		for (auto itr = timerSprites1_.begin(); itr != timerSprites1_.end(); itr++) {
+			(*itr)->Draw();
+		}
+		for (auto itr = timerSprites10_.begin(); itr != timerSprites10_.end(); itr++) {
+			(*itr)->Draw();
+		}
+		for (auto itr = timerSprites100_.begin(); itr != timerSprites100_.end(); itr++) {
+			(*itr)->Draw();
+		}
+	}
 }
 
 void ResultScene::PostProcessDraw()
 {
 	postProcess_->PreDraw();
+
 	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
+
 
 	postProcess_->PostDraw();
 }
@@ -260,7 +262,7 @@ void ResultScene::Transition2()
 		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
-			//gameAudio_->ResultBGM(false);
+			gameAudio_->ResultBGM(false);
 			isTransition_ = false;
 			GameManager::GetInstance()->ChangeScene("TITLE");
 		}

@@ -156,11 +156,14 @@ void GameScene::Draw()
 	spriteMask_->Draw();
 	postProcess_->Draw();
 
-	timerSprite1->Draw();
-	timerSprite10->Draw();
-	timerSprite100->Draw();
-	//タイマーの更新
-	timer->Start();
+	if (!isTransition_ && param_.threshold <= 0.2f) {
+
+		timerSprite1->Draw();
+		timerSprite10->Draw();
+		timerSprite100->Draw();
+		//タイマーの更新
+		timer->Start();
+	}
 	
 	if (phase_ == Phase::kWait)
 	{
