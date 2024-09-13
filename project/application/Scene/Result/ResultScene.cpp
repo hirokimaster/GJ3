@@ -205,9 +205,8 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
-	skydoem_->Draw(camera_);
-	ground_->Draw(camera_);
-	player_->Draw(camera_);
+	
+	
 	
 	spriteMask_->Draw();
 	postProcess_->Draw();
@@ -234,7 +233,7 @@ void ResultScene::Draw()
 void ResultScene::PostProcessDraw()
 {
 	postProcess_->PreDraw();
-
+	skydoem_->Draw(camera_);
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
 
