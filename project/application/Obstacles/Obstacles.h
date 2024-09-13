@@ -9,9 +9,13 @@ class Player;
 class Obstacles : public Collider
 {
 public:
-	void Init(Vector3 translate);
+	void Init(Vector3 translate,bool isMove);
 	void Update();
 	void Draw(Camera& camera);
+
+public:
+	void Move();
+
 public: // Setter
 	void SetCamera(Camera& camera) { camera_ = camera; }
 	void SetPlayer(Player* player) { player_ = player; }
@@ -28,6 +32,7 @@ private:
 	uint32_t skinTex_;
 	Player* player_ = nullptr;
 
-	bool isMove = false;
+	bool isMove_ = false;
+	float velo_ = 0.2f;
 };
 

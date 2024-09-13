@@ -12,6 +12,10 @@ Title::~Title()
 
 void Title::Initialize()
 {
+	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
+	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
+	ModelManager::GetInstance()->LoadObjModel("cube.obj");
+	ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
 	isTransition_ = false;
 	postProcess_ = std::make_unique<PostProcess>();
 	postProcess_->Initialize();
@@ -34,6 +38,21 @@ void Title::Initialize()
     optionMode_ = false;
     optionTimer_ = 5.0f;
 
+
+  camera_.Initialize();
+  camera_.translate = { -18.0f , 96.8f , -24.8f };
+  camera_.rotate = { -0.17f , 0.59f , 0.0f };
+
+  player_ = std::make_unique<Player>();
+  player_->Init({ 0.0f,100.0f,0.0f });
+  player_->SetCamera(&camera_);
+  ground_ = std::make_unique<Ground>();
+  ground_->Init({ 0.0f,0.0f,0.0f });
+
+  skydoem_ = std::make_unique<Skydome>();
+  skydoem_->Init();
+
+  Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
 }
 
 void Title::Update()
@@ -41,11 +60,25 @@ void Title::Update()
 	Transition();
 	SelectMode();
 	OptionMode();
+	ground_->Update();
+	player_->ResultUpdate();
+
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Update();
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+		(*itr)->ResultUpdate();
+	}
+
+	skydoem_->Update();
+
+	camera_.UpdateMatrix();
+
 }
 
 void Title::Draw()
 {
-
+	
 	spriteMask_->Draw();
 
 	postProcess_->Draw();
@@ -54,9 +87,20 @@ void Title::Draw()
 
 void Title::PostProcessDraw()
 {
-	postProcess_->PreDraw();
 
-	spriteTitle_->Draw();
+	
+	
+	postProcess_->PreDraw();
+	skydoem_->Draw(camera_);
+	ground_->Draw(camera_);
+	player_->Draw(camera_);
+	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
+		(*itr)->Draw(camera_);
+	}
+	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
+		(*itr)->Draw(camera_);
+	}
+	//spriteTitle_->Draw();
 
 	postProcess_->PostDraw();
 }

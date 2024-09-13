@@ -229,7 +229,14 @@ void Loader::LoadJsonFile(const std::string kDefaultBaseDirectory, const std::st
 		else if (objectData.fileName.compare("obstacles") == 0) {
 			//ModelManager::GetInstance()->LoadObjModel(objectData.fileName + ".obj");
 			std::unique_ptr<Obstacles> obstacl = std::make_unique<Obstacles>();
-			obstacl->Init(objectData.translate);
+			obstacl->Init(objectData.translate,false);
+			obstacl->SetPlayer(player);
+			obstacles.push_back(std::move(obstacl));
+		}
+		else if (objectData.fileName.compare("obstaclesMove") == 0) {
+			//ModelManager::GetInstance()->LoadObjModel(objectData.fileName + ".obj");
+			std::unique_ptr<Obstacles> obstacl = std::make_unique<Obstacles>();
+			obstacl->Init(objectData.translate, true);
 			obstacl->SetPlayer(player);
 			obstacles.push_back(std::move(obstacl));
 		}
