@@ -12,6 +12,10 @@ ResultScene::~ResultScene()
 
 void ResultScene::Initialize()
 {
+	// BGM,SE
+	//gameAudio_ = GameAudio::GetInstance();
+	//gameAudio_->ResultBGM(true);
+
 	switch (Title::GetLevel()) {
 	case Level::EASY: {
 		//GlobalVariables::GetInstance()->LoadFiles();
@@ -194,7 +198,7 @@ void ResultScene::Update()
 	player_->ResultUpdate();
 	
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
-
+		//gameAudio_->ResultBGM(false);
 		GameManager::GetInstance()->ChangeScene("TITLE");
 	}
 

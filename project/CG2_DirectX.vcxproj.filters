@@ -84,6 +84,7 @@
     <ClCompile Include="application\Object\Timer\Timer.cpp" />
     <ClCompile Include="application\Scene\Result\ResultScene.cpp" />
     <ClCompile Include="application\Wall\Wall.cpp" />
+    <ClCompile Include="application\GameAudio\GameAudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application\GameManager\GameManager.h" />
@@ -151,6 +152,7 @@
     <ClInclude Include="application\Object\Timer\Timer.h" />
     <ClInclude Include="application\Scene\Result\ResultScene.h" />
     <ClInclude Include="application\Wall\Wall.h" />
+    <ClInclude Include="application\GameAudio\GameAudio.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\ShaderFile\Object3d.hlsli" />
