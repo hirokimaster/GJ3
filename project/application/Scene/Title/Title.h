@@ -11,9 +11,13 @@
 
 #include "application/Player/Player.h"
 #include "application/Wall/Wall.h"
+#include "application/GameCamera/GameCamera.h"
 #include "application/Ground/Ground.h"
 #include "application/Obstacles/Obstacles.h"
 #include "application/Skydome/Skydome.h"
+#include "application/Wall/Wall.h"
+
+
 enum class Level {
 	EASY,
 	NORMAL,
@@ -76,6 +80,11 @@ private:
 private:
 	std::unique_ptr<PostProcess> postProcess_;
 	std::unique_ptr<Sprite> spriteTitle_ = nullptr;
+	std::unique_ptr<Sprite> spriteTitle2_ = nullptr;
+	std::unique_ptr<Sprite> spriteTitle3_ = nullptr;
+
+	std::unique_ptr<Sprite> spriteTitlename_ = nullptr;
+
 	uint32_t texHandleTitle_ = 0;
 	uint32_t texHandleStart_ = 0;
 	uint32_t texHandleOp_ = 0;
@@ -84,6 +93,14 @@ private:
 	uint32_t texHandleEasy_ = 0;
 	uint32_t texHandleNormal_ = 0;
 	uint32_t texHandleHard_ = 0;
+
+	uint32_t texHandleStartR_ = 0;
+	uint32_t texHandleOpR_ = 0;
+	uint32_t texHandleEndR_ = 0;
+	uint32_t texHandleEasyR_ = 0;
+	uint32_t texHandleNormalR_ = 0;
+	uint32_t texHandleHardR_ = 0;
+
 	uint32_t selectNum_ = 0;
 	static Level level_;
 	Select select_ = Select::START;
@@ -98,16 +115,19 @@ private:
 	bool isTransition_ = false;
 	float sceneTimer_ = 130.0f;
 
-	const char* groupName_ = nullptr;
 	Camera camera_;
 	std::unique_ptr<Player> player_;
 	std::unique_ptr<Ground> ground_;
+
+	WorldTransform worldTransform_;
+
+
 	// 障害物
 	std::list<std::unique_ptr<Obstacles>> obstacles_;
 	// 雲
 	std::list<std::unique_ptr<Wall>> walls_;
 
 	std::unique_ptr<Skydome> skydoem_;
-
+	std::vector<uint32_t> timeScores_;
 
 };

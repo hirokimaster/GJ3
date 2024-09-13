@@ -24,6 +24,8 @@ void Player::Init(Vector3 translate)
 
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
+
+	
 	object_->SetAnimModel("Player/player.gltf");
 	//object_->SetModel("Player/player.obj");
 	object_->SetWorldTransform(worldTransform_);
@@ -31,6 +33,8 @@ void Player::Init(Vector3 translate)
 	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
 	//object_->SetEnableLight(true);
 	fallVelo_ = 0.0f;
+
+	
 
 	SetCollosionAttribute(0b01);
 	SetCollisionMask(0b10);
@@ -106,6 +110,8 @@ void Player::Draw(Camera& camera)
 
 void Player::ResultUpdate()
 {
+
+
 	aniTime_ += 1.0f / 60.0f;
 	aniTime_ = std::fmod(aniTime_, duration_);
 	object_->SetAnimationTime(aniTime_);
@@ -113,7 +119,7 @@ void Player::ResultUpdate()
 	//object_->SetAnimationTime(aniTime_);
 	worldTransform_.UpdateMatrix();
 	object_->SetWorldTransform(worldTransform_);
-	
+
 	// カメラのYをプレイヤーに追従
 	camera_->translate.y = worldTransform_.translate.y -5.0f;
 	//worldTransform_.rotate.y = 0.01f;

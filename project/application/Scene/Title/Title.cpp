@@ -22,7 +22,17 @@ void Title::Initialize()
 	postProcess_->SetEffect(BloomDissolve);
 	TextureResources();
 	postProcess_->SetMaskTexture(texHandleMask_);
-	spriteTitle_.reset(Sprite::Create(texHandleStart_));
+	spriteTitle_.reset(Sprite::Create(texHandleStart_, { 335.0f,388.0f }));
+	spriteTitle2_.reset(Sprite::Create(texHandleOp_, { 335.0f,481.0f }));
+	spriteTitle3_.reset(Sprite::Create(texHandleEnd_, { 335.0f,574.0f }));
+	spriteTitlename_.reset(Sprite::Create(texHandleTitle_, { 288.0f,132.0f }));
+
+	worldTransform_.Initialize();
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
+
+
+
+
 
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
@@ -39,20 +49,35 @@ void Title::Initialize()
     optionTimer_ = 5.0f;
 
 
+  ModelManager::GetInstance()->LoadAnimationModel("Player/player.gltf");
+
+  switch (Title::GetLevel()) {
+  case Level::EASY: {
+	  //GlobalVariables::GetInstance()->LoadFiles();
+	  break;
+  }
+  case Level::NORMAL: {
+	  break;
+  }
+  case Level::HARD: {
+	  break;
+  }
+
+
+  }
+
   camera_.Initialize();
   camera_.translate = { -18.0f , 96.8f , -24.8f };
   camera_.rotate = { -0.17f , 0.59f , 0.0f };
+
 
   player_ = std::make_unique<Player>();
   player_->Init({ 0.0f,100.0f,0.0f });
   player_->SetCamera(&camera_);
   ground_ = std::make_unique<Ground>();
   ground_->Init({ 0.0f,0.0f,0.0f });
-
-  skydoem_ = std::make_unique<Skydome>();
-  skydoem_->Init();
-
   Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
+
 }
 
 void Title::Update()
@@ -80,9 +105,12 @@ void Title::Draw()
 {
 	
 	spriteMask_->Draw();
-
+	
 	postProcess_->Draw();
 
+
+	
+	
 }
 
 void Title::PostProcessDraw()
@@ -91,16 +119,23 @@ void Title::PostProcessDraw()
 	
 	
 	postProcess_->PreDraw();
-	skydoem_->Draw(camera_);
+
+	
 	ground_->Draw(camera_);
 	player_->Draw(camera_);
+
+
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Draw(camera_);
 	}
 	for (auto itr = walls_.begin(); itr != walls_.end(); itr++) {
 		(*itr)->Draw(camera_);
 	}
-	//spriteTitle_->Draw();
+
+	spriteTitlename_->Draw();
+	spriteTitle_->Draw();
+	spriteTitle2_->Draw();
+	spriteTitle3_->Draw();
 
 	postProcess_->PostDraw();
 }
@@ -109,31 +144,45 @@ void Title::OptionMode()
 {
 	// オプション
 	if (optionMode_) {
-		spriteTitle_->SetTexHandle(texHandleLevel_);
+		spriteTitle_->SetTexHandle(texHandleEasy_);
+		spriteTitle2_->SetTexHandle(texHandleNormal_);
+		spriteTitle3_->SetTexHandle(texHandleHard_);
+
 		--optionTimer_;
 
+		
 		if (level_ == Level::EASY && optionTimer_ <= 0.0f) {
-			spriteTitle_->SetTexHandle(texHandleEasy_);
+			spriteTitle_->SetTexHandle(texHandleEasyR_);
+			
+
+
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
+				spriteTitle2_->SetTexHandle(texHandleOp_);
+				spriteTitle3_->SetTexHandle(texHandleEnd_);
+
 			}
 		}
 		else if (level_ == Level::NORMAL && optionTimer_ <= 0.0f) {
-			spriteTitle_->SetTexHandle(texHandleNormal_);
+			spriteTitle2_->SetTexHandle(texHandleNormalR_);
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
+				spriteTitle2_->SetTexHandle(texHandleOp_);
+				spriteTitle3_->SetTexHandle(texHandleEnd_);
 			}
 		}
 		else if (level_ == Level::HARD && optionTimer_ <= 0.0f) {
-			spriteTitle_->SetTexHandle(texHandleHard_);
+			spriteTitle3_->SetTexHandle(texHandleHardR_);
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
+				spriteTitle2_->SetTexHandle(texHandleOp_);
+				spriteTitle3_->SetTexHandle(texHandleEnd_);
 			}
 		}
 	}
@@ -173,7 +222,9 @@ void Title::SelectMode()
 
 	// 番号によって変える
 	if (select_ == Select::START && !optionMode_) {
-		spriteTitle_->SetTexHandle(texHandleStart_);
+		spriteTitle_->SetTexHandle(texHandleStartR_);
+		spriteTitle2_->SetTexHandle(texHandleOp_);
+		spriteTitle3_->SetTexHandle(texHandleEnd_);
 
 		// 難易度によって変える
 		if (level_ == Level::EASY) {
@@ -198,14 +249,18 @@ void Title::SelectMode()
 
 	}
 	else if (select_ == Select::OPTION && !optionMode_) {
-		spriteTitle_->SetTexHandle(texHandleOp_);
+		spriteTitle_->SetTexHandle(texHandleStart_);
+		spriteTitle2_->SetTexHandle(texHandleOpR_);
+		spriteTitle3_->SetTexHandle(texHandleEnd_);
 		// オプションにいく
 		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 			optionMode_ = true;
 		}
 	}
 	else if (select_ == Select::END && !optionMode_) {
-		spriteTitle_->SetTexHandle(texHandleEnd_);
+		spriteTitle_->SetTexHandle(texHandleStart_);
+		spriteTitle2_->SetTexHandle(texHandleOp_);
+		spriteTitle3_->SetTexHandle(texHandleEndR_);
 	}
 }
 
@@ -221,6 +276,13 @@ void Title::TextureResources()
 	texHandleHard_ = TextureManager::Load("resources/Title/hard.png");
 	texHandleMask_ = TextureManager::Load("resources/noise9.png");
 	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
+
+	texHandleStartR_ = TextureManager::Load("resources/Title/startR.png");
+	texHandleOpR_ = TextureManager::Load("resources/Title/opR.png");
+	texHandleEndR_ = TextureManager::Load("resources/Title/endR.png");
+	texHandleEasyR_ = TextureManager::Load("resources/Title/easyR.png");
+	texHandleNormalR_ = TextureManager::Load("resources/Title/normalR.png");
+	texHandleHardR_ = TextureManager::Load("resources/Title/hardR.png");
 }
 
 void Title::Transition()
