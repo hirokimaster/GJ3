@@ -167,6 +167,9 @@ void ResultScene::Initialize()
 	ground_ = std::make_unique<Ground>();
 	ground_->Init({ 0.0f,0.0f,0.0f });
 	Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
+
+	texHandleWhite_ = TextureManager::Load("resources/Title/white.png");
+	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 }
 
 void ResultScene::Update()
