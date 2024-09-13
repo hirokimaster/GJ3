@@ -73,5 +73,6 @@ private:
 
 	// BGM,SE
 	GameAudio* gameAudio_ = nullptr;
+	uint32_t playerTex;
 };
 

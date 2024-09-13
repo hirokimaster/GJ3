@@ -32,6 +32,8 @@ void ResultScene::Initialize()
 	}
 	timeScores_ = GlobalVariables::GetInstance()->GetTimes();
 
+	playerTex = TextureManager::GetInstance()->Load("resources/Player/jumpPlayer.png");
+
 	//テクスチャの初期化
 	for (int i = 0; i < 10; i++)
 	{
@@ -52,21 +54,21 @@ void ResultScene::Initialize()
 		index100 = ((*itr) / 100) % 10;
 		if (indexNum == 0) {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 64.0f }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 393.0f,indexNum * 64.0f+162.0f }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
 			timerSprite1->SetTextureSize({ 128.0f,128.0f });
 			timerSprite1->SetAnchorPoint({0.5f,0.0f});
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 64.0f }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 329.0f,indexNum * 64.0f + 162.0f }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
 			timerSprite10->SetTextureSize({ 128.0f,128.0f });
 			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 64.0f }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 265.0f,indexNum * 64.0f + 162.0f }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
 			timerSprite100->SetTextureSize({ 128.0f,128.0f });
 			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
@@ -74,7 +76,7 @@ void ResultScene::Initialize()
 		}
 		else if (indexNum == 1) {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,indexNum * 128.0f }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 393.0f,indexNum * 128.0f + 162.0f }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
 			timerSprite1->SetTextureSize({ 96.0f,96.0f });
 			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
@@ -82,14 +84,14 @@ void ResultScene::Initialize()
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,indexNum * 128.0f }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 329.0f,indexNum * 128.0f + 162.0f }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
 			timerSprite10->SetTextureSize({ 96.0f,96.0f });
 			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,indexNum * 128.0f }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 265.0f,indexNum * 128.0f + 162.0f }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
 			timerSprite100->SetTextureSize({ 96.0f,96.0f });
 			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
@@ -97,38 +99,38 @@ void ResultScene::Initialize()
 		}
 		else if (indexNum == 2) {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,128+ ((indexNum -1) * 96.0f) }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 393.0f,128+ ((indexNum -1) * 96.0f) + 162.0f }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
 			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,128 + ((indexNum - 1) * 96.0f) }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 329,128 + ((indexNum - 1) * 96.0f) + 162.0f }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
 			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,128 + ((indexNum - 1) * 96.0f) }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 265.0f,128 + ((indexNum - 1) * 96.0f) + 162.0f }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
 			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites100_.push_back(std::move(timerSprite100));
 		}
 		else {
 			std::unique_ptr<Sprite> timerSprite1;// = std::make_unique<Sprite>();
-			timerSprite1.reset(Sprite::Create(numberTexture[0], { 704.0f,224.0f + ((indexNum - 2) * 64) }));
+			timerSprite1.reset(Sprite::Create(numberTexture[0], { 717.0f, ((indexNum - 2) * 64.0f) + 116.0f }));
 			timerSprite1->SetTexHandle(numberTexture[index1]);
 			timerSprite1->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites1_.push_back(std::move(timerSprite1));
 
 			std::unique_ptr<Sprite> timerSprite10;// = std::make_unique<Sprite>();
-			timerSprite10.reset(Sprite::Create(numberTexture[0], { 640,224.0f + ((indexNum - 2) * 64) }));
+			timerSprite10.reset(Sprite::Create(numberTexture[0], { 653.0f, ((indexNum - 2) * 64.0f) + 116.0f }));
 			timerSprite10->SetTexHandle(numberTexture[index10]);
 			timerSprite10->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites10_.push_back(std::move(timerSprite10));
 
 			std::unique_ptr<Sprite> timerSprite100;// = std::make_unique<Sprite>();
-			timerSprite100.reset(Sprite::Create(numberTexture[0], { 572.0f,224.0f + ((indexNum - 2) * 64) }));
+			timerSprite100.reset(Sprite::Create(numberTexture[0], { 589.0f,  ((indexNum - 2) * 64.0f) + 116.0f }));
 			timerSprite100->SetTexHandle(numberTexture[index100]);
 			timerSprite100->SetAnchorPoint({ 0.5f,0.0f });
 			timerSprites100_.push_back(std::move(timerSprite100));
@@ -136,14 +138,17 @@ void ResultScene::Initialize()
 
 	}
 	camera_.Initialize();
-	camera_.translate = { -18.0f , 96.8f , -24.8f};
-	camera_.rotate = { -0.17f , 0.59f , 0.0f };
+	
+	camera_.translate = {-2.3f , 1.6f , -10.4f};
+	camera_.rotate = { 0.0f , 0.0f , 0.0f };
 	
 	
 	player_ = std::make_unique<Player>();
-	player_->Init({ 0.0f,100.0f,0.0f });
+	player_->Init({ 0.0f,0.0f,0.0f });
 	player_->ModelChange("Player/jumpPlayer.gltf");
+	player_->ModelTextureChange(playerTex);
 	player_->SetCamera(&camera_);
+	player_->SetIsFall(true);
 	ground_ = std::make_unique<Ground>();
 	ground_->Init({ 0.0f,0.0f,0.0f });
 	Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
@@ -151,51 +156,7 @@ void ResultScene::Initialize()
 
 void ResultScene::Update()
 {
-#ifdef DEBUG
-	ImGui::Begin("caemra");
-	ImGui::SliderFloat3("trans", &camera_.translate.x, 0.1f, 10.0f);
-	ImGui::SliderFloat3("rota", &camera_.rotate.x, 0.1f, 10.0f);
-	ImGui::End();
-#endif // DEBUG
 
-	
-	if (Input::GetInstance()->PushKey(DIK_Q)) {
-		camera_.translate.z += 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_W)) {
-		camera_.translate.z -= 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_A)) {
-		camera_.translate.x += 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_S)) {
-		camera_.translate.x -= 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_Z)) {
-		camera_.translate.y += 0.1f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_X)) {
-		camera_.translate.y -= 0.1f;
-	}
-
-	if (Input::GetInstance()->PushKey(DIK_E)) {
-		camera_.rotate.z += 0.01f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_R)) {
-		camera_.rotate.z -= 0.01f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_D)) {
-		camera_.rotate.x += 0.01f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_F)) {
-		camera_.rotate.x -= 0.01f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_C)) {
-		camera_.rotate.y += 0.01f;
-	}
-	if (Input::GetInstance()->PushKey(DIK_V)) {
-		camera_.rotate.y -= 0.01f;
-	}
 
 	ground_->Update();
 	player_->ResultUpdate();
