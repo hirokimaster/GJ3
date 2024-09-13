@@ -300,7 +300,8 @@ void GameScene::PlayPhase()
 	Collision();
 
 	if (player_->GetWorldPosition().y <= 0) {
-
+		gameAudio_->HitObstaclesSE();
+		gameAudio_->HitCloudSE();
 		phase_ = Phase::kAfterPlay;
 		timer->Stop();
 		//GameManager::GetInstance()->ChangeScene("RESULT");
