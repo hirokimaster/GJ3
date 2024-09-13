@@ -188,15 +188,16 @@ void Title::OptionMode()
 			spriteTitle_->SetTexHandle(texHandleEasyR_);
 			
 
+			if (Input::GetInstance()->GetJoystickState()) {
+				if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
+					gameAudio_->ClickSE();
+					optionTimer_ = 5.0f;
+					optionMode_ = false;
+					spriteTitle_->SetTexHandle(texHandleStart_);
+					spriteTitle2_->SetTexHandle(texHandleOp_);
+					spriteTitle3_->SetTexHandle(texHandleEnd_);
 
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
-				gameAudio_->ClickSE();
-				optionTimer_ = 5.0f;
-				optionMode_ = false;
-				spriteTitle_->SetTexHandle(texHandleStart_);
-				spriteTitle2_->SetTexHandle(texHandleOp_);
-				spriteTitle3_->SetTexHandle(texHandleEnd_);
-
+				}
 			}
 		}
 		else if (level_ == Level::NORMAL && optionTimer_ <= 0.0f) {
@@ -224,20 +225,20 @@ void Title::OptionMode()
 	}
 
 	// 選択
-	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN)||Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && level_ == Level::EASY && optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN)||Input::GetInstance()->PressedKey(DIK_S)) && level_ == Level::EASY && optionMode_) {
 		level_ = Level::NORMAL;
 		gameAudio_->SelectSE();
 	}
-	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && level_ == Level::NORMAL && optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_S)) && level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::HARD;
 		gameAudio_->SelectSE();
 	}
 
-	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW))&& level_ == Level::HARD && optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_W))&& level_ == Level::HARD && optionMode_) {
 		level_ = Level::NORMAL;
 		gameAudio_->SelectSE();
 	}
-	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW))&& level_ == Level::NORMAL && optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_W))&& level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::EASY;
 		gameAudio_->SelectSE();
 	}
@@ -246,20 +247,20 @@ void Title::OptionMode()
 void Title::SelectMode()
 {
 	// 選択
-	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && select_ == Select::START && !optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_S)) && select_ == Select::START && !optionMode_) {
 		select_ = Select::OPTION;
 		gameAudio_->SelectSE();
 	}
-	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && select_ == Select::OPTION && !optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_S)) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::END;
 		gameAudio_->SelectSE();
 	}
 
-	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW)) && select_ == Select::OPTION && !optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_W)) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::START;
 		gameAudio_->SelectSE();
 	}
-	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW)) && select_ == Select::END && !optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_W)) && select_ == Select::END && !optionMode_) {
 		select_ = Select::OPTION;
 		gameAudio_->SelectSE();
 	}
