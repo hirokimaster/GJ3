@@ -59,6 +59,7 @@ void WinApp::CreateGameWindow(
 	wc.hInstance = GetModuleHandle(nullptr);  // ウィンドウハンドル
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW); // カーソル指定
 
+
 	RegisterClass(&wc); // ウィンドウクラスをOSに登録
 
 	// ウィンドウサイズ{ X座標 Y座標 横幅 縦幅 }
@@ -80,7 +81,7 @@ void WinApp::CreateGameWindow(
 		nullptr);                // オプション
 
 	// ウィンドウ表示
-	ShowWindow(hwnd_, SW_SHOW);
+	ShowWindow(hwnd_, SHOW_FULLSCREEN);
 }
 
 void WinApp::TerminateGameWindow(){

@@ -15,7 +15,7 @@ public:
 
 public:
 	void Move();
-
+	bool IsDead() { return isDead_; }
 public: // Setter
 	void SetCamera(Camera& camera) { camera_ = camera; }
 	void SetPlayer(Player* player) { player_ = player; }
@@ -34,5 +34,7 @@ private:
 
 	bool isMove_ = false;
 	float velo_ = 0.2f;
+	
+	bool isDead_ = false;
 };
 

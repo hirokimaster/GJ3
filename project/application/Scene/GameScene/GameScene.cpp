@@ -121,6 +121,14 @@ void GameScene::Initialize()
 
 void GameScene::Update()
 {
+	obstacles_.remove_if([](std::unique_ptr< Obstacles>& bullet) {
+		if (bullet->IsDead()) {
+			//bullet.reset();
+			return true;
+		}
+		return false;
+		});
+
 	switch (phase_)
 	{
 	case GameScene::Phase::kWait:
