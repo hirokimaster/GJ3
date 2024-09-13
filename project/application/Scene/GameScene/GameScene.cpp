@@ -14,6 +14,10 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	// BGM,SE
+	// gameAudio_ = GameAudio::GetInstance();
+	// gameAudio_->GameBGM(true);
+
 	// postEffect
 	isTransition_ = true;
 	postProcess_ = std::make_unique<PostProcess>();
@@ -198,6 +202,7 @@ void GameScene::Transition2()
 		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
+			//gameAudio_->GameBGM(false);
 			isTransition_ = false;
 			GameManager::GetInstance()->ChangeScene("RESULT");
 		}
@@ -315,7 +320,7 @@ void GameScene::AfterPlayPhase()
 
 	if (countdown == 0)
 	{
-		
+		//gameAudio_->LandingSE();
 		isTransition_ = true;
 		//timer->Reset();
 	}

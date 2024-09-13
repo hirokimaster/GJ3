@@ -16,6 +16,7 @@
 #include "application/Obstacles/Obstacles.h"
 #include "application/Skydome/Skydome.h"
 #include "application/Wall/Wall.h"
+#include "application/GameAudio/GameAudio.h"
 
 
 enum class Level {
@@ -129,5 +130,8 @@ private:
 
 	std::unique_ptr<Skydome> skydoem_;
 	std::vector<uint32_t> timeScores_;
+	
+	// 音楽
+	GameAudio* gameAudio_ = nullptr;
 
 };

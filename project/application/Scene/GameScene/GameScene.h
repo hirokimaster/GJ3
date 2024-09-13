@@ -18,6 +18,7 @@
 #include "application/Wall/Wall.h"
 #include "application/Object/Timer/Timer.h"
 #include "application/Gimmick/Gimmick.h"
+#include "application/GameAudio/GameAudio.h"
 
 class GameScene : public IScene {
 public: // メンバ関数
@@ -119,5 +120,8 @@ private:
 
 	//フェーズ用
 	Phase phase_;
+
+	// BGM,SE
+	GameAudio* gameAudio_ = nullptr;
 
 };

@@ -15,6 +15,7 @@
 #include "application/Wall/Wall.h"
 #include "application/Object/Timer/Timer.h"
 #include "application/Gimmick/Gimmick.h"
+#include "application/GameAudio/GameAudio.h"
 
 class ResultScene : public IScene
 {
@@ -69,6 +70,9 @@ private:
 	std::vector<std::unique_ptr<Sprite>> timerSprites10_;
 	std::vector<std::unique_ptr<Sprite>> timerSprites100_;
 	uint32_t numberTexture[10];
+
+	// BGM,SE
+	GameAudio* gameAudio_ = nullptr;
 	uint32_t playerTex;
 };
 

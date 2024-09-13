@@ -7,8 +7,13 @@ void Obstacles::Init(Vector3 translate, bool isMove)
 	worldTransform_.Initialize();
 	worldTransform_.scale = { 1.0f, 0.5f, 1.0f };
 	worldTransform_.translate = translate;
-
-	skinTex_ = TextureManager::GetInstance()->Load("resources/ground/ground.png");
+	isMove_ = isMove;
+	if (!isMove_) {
+		skinTex_ = TextureManager::GetInstance()->Load("resources/obstacles/obstacles.png");
+	}
+	else if (isMove_) {
+		skinTex_ = TextureManager::GetInstance()->Load("resources/obstacles/obstaclesMove.png");
+	}
 
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
@@ -20,7 +25,7 @@ void Obstacles::Init(Vector3 translate, bool isMove)
 	SetCollisionMask(0b01);
 	SetRadious(0.5f);
 	velo_ = 0.2f;
-	isMove_ = isMove;
+
 }
 
 void Obstacles::Update()
