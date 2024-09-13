@@ -25,7 +25,7 @@ void Obstacles::Init(Vector3 translate, bool isMove)
 	SetCollisionMask(0b01);
 	SetRadious(0.5f);
 	velo_ = 0.2f;
-
+	bool isDead_ = false;
 }
 
 void Obstacles::Update()
@@ -70,6 +70,7 @@ Vector3 Obstacles::GetWorldPosition()
 
 void Obstacles::OnCollision()
 {
-	
+	isDead_ = true;
 	player_->SetBehavior(Behavior::kDeceleration);
+	
 }
