@@ -13,9 +13,9 @@ Title::~Title()
 void Title::Initialize()
 {
 	// BGM,SE
-	/*gameAudio_ = GameAudio::GetInstance();
+	gameAudio_ = GameAudio::GetInstance();
 	gameAudio_->Initialize();
-	gameAudio_->TitleBGM(true);*/
+	gameAudio_->TitleBGM(true);
 
 	ModelManager::GetInstance()->LoadObjModel("ground/ground.obj");
 	ModelManager::GetInstance()->LoadObjModel("skydome/skydome.obj");
@@ -163,6 +163,7 @@ void Title::OptionMode()
 
 
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
@@ -174,6 +175,7 @@ void Title::OptionMode()
 		else if (level_ == Level::NORMAL && optionTimer_ <= 0.0f) {
 			spriteTitle2_->SetTexHandle(texHandleNormalR_);
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
@@ -184,6 +186,7 @@ void Title::OptionMode()
 		else if (level_ == Level::HARD && optionTimer_ <= 0.0f) {
 			spriteTitle3_->SetTexHandle(texHandleHardR_);
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
 				spriteTitle_->SetTexHandle(texHandleStart_);
@@ -196,20 +199,20 @@ void Title::OptionMode()
 	// 選択
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && level_ == Level::EASY && optionMode_) {
 		level_ = Level::NORMAL;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::HARD;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && level_ == Level::HARD && optionMode_) {
 		level_ = Level::NORMAL;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::EASY;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 }
 
@@ -218,20 +221,20 @@ void Title::SelectMode()
 	// 選択
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && select_ == Select::START && !optionMode_) {
 		select_ = Select::OPTION;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::END;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::START;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && select_ == Select::END && !optionMode_) {
 		select_ = Select::OPTION;
-		//gameAudio_->SelectSE();
+		gameAudio_->SelectSE();
 	}
 
 	// 番号によって変える
@@ -245,14 +248,14 @@ void Title::SelectMode()
 			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				isTransition_ = true;
-				//gameAudio_->ClickSE();
+				gameAudio_->ClickSE();
 			}
 		}
 		else if (level_ == Level::NORMAL) {
 			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				isTransition_ = true;
-				//gameAudio_->ClickSE();
+				gameAudio_->ClickSE();
 			}
 		}
 		else if (level_ == Level::HARD) {
@@ -260,7 +263,7 @@ void Title::SelectMode()
 			// ゲームシーンにいく
 			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 				isTransition_ = true;
-				//gameAudio_->ClickSE();
+				gameAudio_->ClickSE();
 			}
 		}
 
@@ -272,7 +275,7 @@ void Title::SelectMode()
 		// オプションにいく
 		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
 			optionMode_ = true;
-			//gameAudio_->ClickSE();
+			gameAudio_->ClickSE();
 		}
 	}
 	else if (select_ == Select::END && !optionMode_) {
@@ -280,7 +283,7 @@ void Title::SelectMode()
 		spriteTitle2_->SetTexHandle(texHandleOp_);
 		spriteTitle3_->SetTexHandle(texHandleEndR_);
 		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
-			//gameAudio_->ClickSE();
+			gameAudio_->ClickSE();
 			GameManager::GetInstance()->GameEnd();
 		}
 	}
@@ -313,7 +316,7 @@ void Title::Transition()
 		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
-			//gameAudio_->TitleBGM(false);
+			gameAudio_->TitleBGM(false);
 			isTransition_ = false;
 			GameManager::GetInstance()->ChangeScene("GAME");
 		}

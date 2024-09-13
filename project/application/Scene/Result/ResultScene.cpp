@@ -12,9 +12,9 @@ ResultScene::~ResultScene()
 
 void ResultScene::Initialize()
 {
-	// BGM,SE
-	//gameAudio_ = GameAudio::GetInstance();
-	//gameAudio_->ResultBGM(true);
+	 //BGM,SE
+	gameAudio_ = GameAudio::GetInstance();
+	gameAudio_->ResultBGM(true);
 
 	// postEffect
 	isTransition_ = true;
@@ -157,7 +157,9 @@ void ResultScene::Initialize()
 	camera_.translate = {-2.3f , 1.6f , -10.4f};
 	camera_.rotate = { 0.0f , 0.0f , 0.0f };
 	
-	
+	skydoem_ = std::make_unique<Skydome>();
+	skydoem_->Init();
+
 	player_ = std::make_unique<Player>();
 	player_->Init({ 0.0f,0.0f,0.0f });
 	player_->ModelChange("Player/jumpPlayer.gltf");
@@ -175,6 +177,8 @@ void ResultScene::Initialize()
 void ResultScene::Update()
 {
 
+
+	skydoem_->Update();
 	Transition();
 
 	Transition2();
@@ -183,6 +187,9 @@ void ResultScene::Update()
 	player_->ResultUpdate();
 	
 	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+		gameAudio_->ResultBGM(false);
+		gameAudio_->ClickSE();
+		GameManager::GetInstance()->ChangeScene("TITLE");
 		//gameAudio_->ResultBGM(false);
 		isTransition2_ = true;
 	}
@@ -198,6 +205,9 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
+	skydoem_->Draw(camera_);
+	ground_->Draw(camera_);
+	player_->Draw(camera_);
 	
 	spriteMask_->Draw();
 	postProcess_->Draw();
