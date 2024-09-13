@@ -51,7 +51,11 @@ public: // メンバ関数
 	/// </summary>
 	void PostProcessDraw()override;
 
-public:
+private:
+
+	void Transition();
+
+	void Transition2();
 
 private:
 	const char* groupName_ = nullptr;
@@ -74,5 +78,15 @@ private:
 	// BGM,SE
 	GameAudio* gameAudio_ = nullptr;
 	uint32_t playerTex;
+
+	// postEffect用
+	uint32_t texHandleMask_ = 0;
+	BloomDissolveParam param_{};
+	std::unique_ptr<Sprite> spriteMask_;
+	uint32_t texHandleWhite_ = 0;
+	std::unique_ptr<PostProcess> postProcess_;
+	// シーン遷移用
+	bool isTransition_ = false;
+	bool isTransition2_ = false;
 };
 
