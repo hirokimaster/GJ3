@@ -15,8 +15,8 @@ GameScene::~GameScene()
 void GameScene::Initialize()
 {
 	// BGM,SE
-	// gameAudio_ = GameAudio::GetInstance();
-	// gameAudio_->GameBGM(true);
+	 gameAudio_ = GameAudio::GetInstance();
+	 gameAudio_->GameBGM(true);
 
 	// postEffect
 	isTransition_ = true;
@@ -210,7 +210,7 @@ void GameScene::Transition2()
 		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
-			//gameAudio_->GameBGM(false);
+			gameAudio_->GameBGM(false);
 			isTransition_ = false;
 			GameManager::GetInstance()->ChangeScene("RESULT");
 		}

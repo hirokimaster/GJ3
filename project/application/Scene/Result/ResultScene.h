@@ -62,7 +62,7 @@ private:
 	std::list<std::unique_ptr<Obstacles>> obstacles_;
 	// 雲
 	std::list<std::unique_ptr<Wall>> walls_;
-
+	std::unique_ptr<Skydome> skydoem_;
 
 	std::vector<uint32_t> timeScores_;
 

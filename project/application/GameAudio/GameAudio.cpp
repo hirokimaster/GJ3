@@ -8,14 +8,14 @@ GameAudio* GameAudio::GetInstance() {
 void GameAudio::Initialize()
 {
 	// "resources/switch.wav"  この部分だけ変えて
-	gameBGM_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
-	clickSE_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
+	gameBGM_ = Audio::GetInstance()->SoundLoadWave("resources/lovelyflower.wav");
+	clickSE_ = Audio::GetInstance()->SoundLoadWave("resources/pushAudio.wav");
 	hitCloudSE_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
 	hitObstaclesSE_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
-	titleBGM_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
-	resultBGM_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
+	titleBGM_ = Audio::GetInstance()->SoundLoadWave("resources/nagagutsudeodekake.wav");
+	resultBGM_ = Audio::GetInstance()->SoundLoadWave("resources/otenbahime.wav");
 	landingSE_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
-	selectSE_ = Audio::GetInstance()->SoundLoadWave("resources/switch.wav");
+	selectSE_ = Audio::GetInstance()->SoundLoadWave("resources/select.wav");
 }
 
 void GameAudio::GameBGM(bool isLoop)
