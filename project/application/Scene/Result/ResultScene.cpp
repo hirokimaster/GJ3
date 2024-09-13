@@ -197,7 +197,7 @@ void ResultScene::Update()
 	ground_->Update();
 	player_->ResultUpdate();
 	
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)||Input::GetInstance()->PressedKey(DIK_SPACE)) {
 		gameAudio_->ResultBGM(false);
 		gameAudio_->ClickSE();
 		//gameAudio_->ResultBGM(false);

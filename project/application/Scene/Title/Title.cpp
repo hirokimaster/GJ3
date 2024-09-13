@@ -189,7 +189,7 @@ void Title::OptionMode()
 			
 
 
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
@@ -201,7 +201,7 @@ void Title::OptionMode()
 		}
 		else if (level_ == Level::NORMAL && optionTimer_ <= 0.0f) {
 			spriteTitle2_->SetTexHandle(texHandleNormalR_);
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
@@ -212,7 +212,7 @@ void Title::OptionMode()
 		}
 		else if (level_ == Level::HARD && optionTimer_ <= 0.0f) {
 			spriteTitle3_->SetTexHandle(texHandleHardR_);
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				gameAudio_->ClickSE();
 				optionTimer_ = 5.0f;
 				optionMode_ = false;
@@ -224,20 +224,20 @@ void Title::OptionMode()
 	}
 
 	// 選択
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && level_ == Level::EASY && optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN)||Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && level_ == Level::EASY && optionMode_) {
 		level_ = Level::NORMAL;
 		gameAudio_->SelectSE();
 	}
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && level_ == Level::NORMAL && optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::HARD;
 		gameAudio_->SelectSE();
 	}
 
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && level_ == Level::HARD && optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW))&& level_ == Level::HARD && optionMode_) {
 		level_ = Level::NORMAL;
 		gameAudio_->SelectSE();
 	}
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && level_ == Level::NORMAL && optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW))&& level_ == Level::NORMAL && optionMode_) {
 		level_ = Level::EASY;
 		gameAudio_->SelectSE();
 	}
@@ -246,20 +246,20 @@ void Title::OptionMode()
 void Title::SelectMode()
 {
 	// 選択
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && select_ == Select::START && !optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && select_ == Select::START && !optionMode_) {
 		select_ = Select::OPTION;
 		gameAudio_->SelectSE();
 	}
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) && select_ == Select::OPTION && !optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_DOWN) || Input::GetInstance()->PressedKey(DIK_DOWNARROW)) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::END;
 		gameAudio_->SelectSE();
 	}
 
-	if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && select_ == Select::OPTION && !optionMode_) {
+	if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW)) && select_ == Select::OPTION && !optionMode_) {
 		select_ = Select::START;
 		gameAudio_->SelectSE();
 	}
-	else if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) && select_ == Select::END && !optionMode_) {
+	else if ((Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_DPAD_UP) || Input::GetInstance()->PressedKey(DIK_UPARROW)) && select_ == Select::END && !optionMode_) {
 		select_ = Select::OPTION;
 		gameAudio_->SelectSE();
 	}
@@ -273,7 +273,7 @@ void Title::SelectMode()
 		// 難易度によって変える
 		if (level_ == Level::EASY) {
 			// ゲームシーンにいく
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				isTransition_ = true;
 				gameAudio_->ClickSE();
 			}
@@ -283,7 +283,7 @@ void Title::SelectMode()
 		}
 		else if (level_ == Level::NORMAL) {
 			// ゲームシーンにいく
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				isTransition_ = true;
 				gameAudio_->ClickSE();
 			}
@@ -291,7 +291,7 @@ void Title::SelectMode()
 		else if (level_ == Level::HARD) {
 			// ゲームシーンにいく
 			// ゲームシーンにいく
-			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 				isTransition_ = true;
 				gameAudio_->ClickSE();
 			}
@@ -303,7 +303,7 @@ void Title::SelectMode()
 		spriteTitle2_->SetTexHandle(texHandleOpR_);
 		spriteTitle3_->SetTexHandle(texHandleEnd_);
 		// オプションにいく
-		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 			optionMode_ = true;
 			gameAudio_->ClickSE();
 		}
@@ -312,7 +312,7 @@ void Title::SelectMode()
 		spriteTitle_->SetTexHandle(texHandleStart_);
 		spriteTitle2_->SetTexHandle(texHandleOp_);
 		spriteTitle3_->SetTexHandle(texHandleEndR_);
-		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A) || Input::GetInstance()->PressedKey(DIK_SPACE)) {
 			gameAudio_->ClickSE();
 			GameManager::GetInstance()->GameEnd();
 		}
