@@ -80,6 +80,7 @@ void Title::Initialize()
   skydoem_->Init();
   Loader::LoadJsonFile("resources/stage", "result", player_.get(), ground_.get(), obstacles_, walls_);
 
+ 
 }
 
 void Title::Update()
@@ -88,7 +89,7 @@ void Title::Update()
 	SelectMode();
 	OptionMode();
 	ground_->Update();
-	player_->ResultUpdate();
+	player_->TitleUpdate();
 
 	for (auto itr = obstacles_.begin(); itr != obstacles_.end(); itr++) {
 		(*itr)->Update();

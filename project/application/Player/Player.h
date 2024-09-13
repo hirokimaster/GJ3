@@ -19,8 +19,11 @@ class Player : public Collider
 public:
 
 	void Init(Vector3 translate);
+	void ResultInit(Vector3 translate);
+
 	void Update();
 	void Draw(Camera& camera);
+	void TitleUpdate();
 	void ResultUpdate();
 	void Move();
 	void Fall();
@@ -34,6 +37,7 @@ public: // Setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 	void SetIsFall(bool fall) { isFall_ = fall; };	//待機中かどうか（落ちない
 	void ModelChange(const std::string& fileName) { object_->SetAnimModel(fileName); }
+	void ModelTextureChange(uint32_t index) { object_->SetTexHandle(index); }
 
 public: // Debug
 	// 調整項目の適用
@@ -76,6 +80,7 @@ private:
 	uint32_t skinTex_;
 	float aniTime_ = 0;
 	float duration_ = 0.6f; // アニメ―ション全体の尺（単位は秒）
+	float resultDuration_ = 1.4f; // アニメ―ション全体の尺（単位は秒）
 
 	float fallVelo_ = 0.0f;
 	float gravity_ = 0.00098f;

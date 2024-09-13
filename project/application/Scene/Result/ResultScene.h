@@ -69,5 +69,6 @@ private:
 	std::vector<std::unique_ptr<Sprite>> timerSprites10_;
 	std::vector<std::unique_ptr<Sprite>> timerSprites100_;
 	uint32_t numberTexture[10];
+	uint32_t playerTex;
 };
 

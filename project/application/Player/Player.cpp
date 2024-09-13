@@ -40,6 +40,41 @@ void Player::Init(Vector3 translate)
 	SetCollisionMask(0b10);
 }
 
+void Player::ResultInit(Vector3 translate)
+{
+	/*-----------------------あまりよくない感じ-------------------*/
+	GlobalVariables* globalVariables = GlobalVariables::GetInstance();
+	const char* groupName = "Player";
+	// グループを追加
+	GlobalVariables::GetInstance()->CreateGroup(groupName);
+	globalVariables->AddItme(groupName, "main Translation", worldTransform_.translate);
+	//------------------------------------------------------------//
+
+	worldTransform_.Initialize();
+	worldTransform_.translate = translate;
+	worldTransform_.scale = { 0.5f,0.5f,0.5f };
+
+	skinTex_ = TextureManager::GetInstance()->Load("resources/Player/player.png");
+	//ModelManager::GetInstance()->LoadObjModel("walk.gltf");
+
+	object_ = std::make_unique<Object3DPlacer>();
+	object_->Initialize();
+
+	
+	object_->SetAnimModel("Player/player.gltf");
+	//object_->SetModel("Player/player.obj");
+	object_->SetWorldTransform(worldTransform_);
+	object_->SetTexHandle(skinTex_);
+	object_->SetColor({ 1.0f,1.0f,1.0f,1.0f });
+	//object_->SetEnableLight(true);
+	fallVelo_ = 0.0f;
+
+	
+
+	SetCollosionAttribute(0b01);
+	SetCollisionMask(0b10);
+}
+
 void Player::Update()
 {
 	if (behaviorRequest_) {
@@ -108,12 +143,12 @@ void Player::Draw(Camera& camera)
 	object_->Draw(camera,true);
 }
 
-void Player::ResultUpdate()
+void Player::TitleUpdate()
 {
 
 
 	aniTime_ += 1.0f / 60.0f;
-	aniTime_ = std::fmod(aniTime_, duration_);
+	aniTime_ = std::fmod(aniTime_, resultDuration_);
 	object_->SetAnimationTime(aniTime_);
 	worldTransform_.rotate.y = 1.57f * 2.5f;
 	//object_->SetAnimationTime(aniTime_);
@@ -122,6 +157,23 @@ void Player::ResultUpdate()
 
 	// カメラのYをプレイヤーに追従
 	camera_->translate.y = worldTransform_.translate.y -5.0f;
+	//worldTransform_.rotate.y = 0.01f;
+}
+
+void Player::ResultUpdate()
+{
+
+
+	aniTime_ += 1.0f / 60.0f;
+	aniTime_ = std::fmod(aniTime_, resultDuration_);
+	object_->SetAnimationTime(aniTime_);
+	worldTransform_.rotate.y = 1.57f * 2.5f;
+	//object_->SetAnimationTime(aniTime_);
+	worldTransform_.UpdateMatrix();
+	object_->SetWorldTransform(worldTransform_);
+
+	// カメラのYをプレイヤーに追従
+	//camera_->translate.y = worldTransform_.translate.y ;
 	//worldTransform_.rotate.y = 0.01f;
 }
 
