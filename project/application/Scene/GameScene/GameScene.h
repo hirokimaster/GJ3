@@ -96,9 +96,11 @@ private:
 	std::unique_ptr<Sprite>timerSprite10;
 	std::unique_ptr<Sprite>timerSprite100;
 	std::unique_ptr<Sprite>countdownSprite;
+
+	std::unique_ptr<Sprite> string_;
 	uint32_t numberTexture[10];
 
-
+	uint32_t stringTex_;
 
 
 	std::unique_ptr<Wall>leftWall_;

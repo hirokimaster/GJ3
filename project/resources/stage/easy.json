@@ -1061,7 +1061,7 @@
             "name": "obstacles_立方体.007",
             "transform": {
                 "translation": [
-                    -8.069999694824219,
+                    -6.7699995040893555,
                     0.0,
                     45.73999786376953
                 ],
@@ -1129,7 +1129,7 @@
                 "translation": [
                     0.0,
                     0.0,
-                    34.529998779296875
+                    34.4900016784668
                 ],
                 "rotation": [
                     0.0,
@@ -1143,6 +1143,116 @@
                 ]
             },
             "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.011",
+            "transform": {
+                "translation": [
+                    -2.740000009536743,
+                    0.0,
+                    70.16999816894531
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.012",
+            "transform": {
+                "translation": [
+                    -4.679999828338623,
+                    0.0,
+                    39.779998779296875
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstaclesMove"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.013",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    51.959999084472656
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.014",
+            "transform": {
+                "translation": [
+                    -5.340000152587891,
+                    0.0,
+                    93.06999206542969
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstacles"
+        },
+        {
+            "type": "MESH",
+            "name": "obstacles_立方体.015",
+            "transform": {
+                "translation": [
+                    4.489999771118164,
+                    0.0,
+                    90.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    0.5
+                ]
+            },
+            "file_name": "obstaclesMove"
         }
     ]
 }

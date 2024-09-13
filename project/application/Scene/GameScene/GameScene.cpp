@@ -71,6 +71,12 @@ void GameScene::Initialize()
 	timerSprite10.reset(Sprite::Create(numberTexture[0], { 64.0f,0.0f }));
 	timerSprite100.reset(Sprite::Create(numberTexture[0], { 0.0f,0.0f }));
 	countdownSprite.reset(Sprite::Create(numberTexture[3], { 640.0f,360.0f }));
+
+
+	stringTex_ = TextureManager::Load("resources/string.png");
+	string_.reset(Sprite::Create(stringTex_, { 390.0f,150.0f }));
+	string_->SetTextureSize({ 500.0f,100.0f });
+
 	countdownSprite->SetTextureSize({ 192.0f,192.0f});
 	countdownSprite->SetAnchorPoint({ 0.5f,0.5f });
 	//countdownSprite->CreateVertex();
@@ -164,6 +170,7 @@ void GameScene::Draw()
 	
 	if (phase_ == Phase::kWait)
 	{
+		string_->Draw();
 		countdownSprite->Draw();
 	}
 
