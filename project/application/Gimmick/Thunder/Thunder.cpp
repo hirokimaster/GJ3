@@ -8,7 +8,7 @@ void Thunder::Initialize()
 	object_ = std::make_unique<Object3DPlacer>();
 	object_->Initialize();
 	object_->SetModel("cube.obj");
-	texHandle_ = TextureManager::Load("resources/uvChecker.png");
+	texHandle_ = TextureManager::Load("resources/white.png");
 	object_->SetTexHandle(texHandle_);
 	object_->SetWorldTransform(worldTransform_);
 	object_->SetColor({ 1.0f,1.0f,0.0f,0.8f });
