@@ -73,6 +73,8 @@ private:
 
 	void Transition();
 
+	void Transition2();
+
 public:
 	static Level GetLevel() { return level_; }
 

@@ -42,11 +42,17 @@ void Title::Initialize()
 
 	spriteMask_.reset(Sprite::Create(texHandleWhite_));
 
+	if (title_) {
+		param_.threshold = 1.0f;
+	}
+	else {
+		param_.threshold = 0.0f;
+	}
+
 	param_.stepWidth = 0.001f;
 	param_.sigma = 0.005f;
 	param_.lightStrength = 0.3f;
 	param_.bloomThreshold = 0.3f;
-	param_.threshold = 0.0f;
 	postProcess_->SetBloomDissolveParam(param_);
 
 	level_ = Level::EASY;
@@ -91,6 +97,7 @@ void Title::Initialize()
 void Title::Update()
 {
 	Transition();
+	Transition2();
 	SelectMode();
 	OptionMode();
 	ground_->Update();
@@ -332,4 +339,15 @@ void Title::Transition()
 		}
 	}
 
+}
+
+void Title::Transition2()
+{
+	if (title_ && !isTransition_) {
+		postProcess_->SetBloomDissolveParam(param_);
+		param_.threshold -= 0.02f;
+		if (param_.threshold <= 0.0f) {
+			param_.threshold = 0.0f;
+		}
+	}
 }

@@ -15,6 +15,7 @@ void ResultScene::Initialize()
 	 //BGM,SE
 	gameAudio_ = GameAudio::GetInstance();
 	gameAudio_->ResultBGM(true);
+	title_ = false;
 
 	// postEffect
 	isTransition_ = true;
@@ -269,8 +270,8 @@ void ResultScene::Transition2()
 		postProcess_->SetBloomDissolveParam(param_);
 		param_.threshold += 0.02f;
 		if (param_.threshold >= 1.2f) {
-			gameAudio_->ResultBGM(false);
 			isTransition_ = false;
+			title_ = true;
 			GameManager::GetInstance()->ChangeScene("TITLE");
 		}
 	}
