@@ -146,11 +146,14 @@ void ResultScene::Initialize()
 
 void ResultScene::Update()
 {
-
+#ifdef DEBUG
 	ImGui::Begin("caemra");
-	ImGui::SliderFloat3("trans", &camera_.translate.x,0.1f,10.0f);
+	ImGui::SliderFloat3("trans", &camera_.translate.x, 0.1f, 10.0f);
 	ImGui::SliderFloat3("rota", &camera_.rotate.x, 0.1f, 10.0f);
 	ImGui::End();
+#endif // DEBUG
+
+	
 	if (Input::GetInstance()->PushKey(DIK_Q)) {
 		camera_.translate.z += 0.1f;
 	}
