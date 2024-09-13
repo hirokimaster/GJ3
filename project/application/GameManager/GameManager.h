@@ -24,6 +24,10 @@ public:
 
 	void SetPostProcess(PostProcess* postProcess) { postProcess_ = postProcess; }
 
+	void GameEnd();
+
+	bool GetIsEnd() { return isEnd_; }
+
 	PostProcess* GetPostProcess() { return postProcess_; }
 
 private:
@@ -36,5 +40,5 @@ private:
 	std::unique_ptr<IScene> nextScene_ = nullptr; // 次のシーン
 	std::unique_ptr<AbstractSceneFactory> sceneFactory_ = nullptr;
 	PostProcess* postProcess_ = nullptr;
-
+	bool isEnd_ = false;
 };

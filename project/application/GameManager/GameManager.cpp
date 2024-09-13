@@ -50,3 +50,8 @@ void GameManager::ChangeScene(const std::string& sceneName)
 
 	nextScene_ = sceneFactory_->CreateScene(sceneName);
 }
+
+void GameManager::GameEnd()
+{
+	isEnd_ = true;
+}

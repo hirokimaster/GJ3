@@ -83,6 +83,10 @@ void Framework::Run()
 		// 描画後処理
 		dxCommon_->PostDraw();
 
+		if (gameManager_->GetIsEnd()) {
+			break;
+		}
+
 	}
 
 	Finalize();

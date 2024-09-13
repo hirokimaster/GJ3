@@ -278,6 +278,10 @@ void Title::SelectMode()
 		spriteTitle_->SetTexHandle(texHandleStart_);
 		spriteTitle2_->SetTexHandle(texHandleOp_);
 		spriteTitle3_->SetTexHandle(texHandleEndR_);
+		if (Input::GetInstance()->PressedButton(XINPUT_GAMEPAD_A)) {
+			//gameAudio_->ClickSE();
+			GameManager::GetInstance()->GameEnd();
+		}
 	}
 }
 
